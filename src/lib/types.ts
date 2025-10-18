@@ -1,8 +1,12 @@
-export type BlockType = 'frame' | 'block' | 'worm' | 'apple' | 'empty';
+export type BlockType = 'frame' | 'block' | 'worm' | 'apple' | 'empty' | 'floor';
+
+export type Movement = 'horizontal' | 'vertical';
 
 export type GridCell = {
   type: BlockType | 'space';
   color: string;
+  movement?: Movement;
+  floorColor?: string;
 };
 
 export interface Level {
@@ -18,4 +22,5 @@ export interface GameObject {
     type: 'block' | 'worm' | 'apple';
     cells: { row: number, col: number }[];
     color: string;
+    movement?: Movement;
 }

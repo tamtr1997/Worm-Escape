@@ -1,0 +1,469 @@
+'use client';
+
+import { useEffect, useState, useRef, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
+import { useLevels } from '@/hooks/useLevels';
+import type { Level, GridCell, GameObject } from '@/lib/types';
+import { Button } from '@/components/ui/button';
+import { Home, RotateCcw } from 'lucide-react';
+import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '../ui/alert-dialog';
+import { WormIcon } from '../icons/WormIcon';
+import { Apple } from 'lucide-react';
+
+function createRuntimeGrid(levelGrid: GridCell[][]): GridCell[][] {
+    return levelGrid.map(row => row.map(cell => {
+        if (cell.type === 'empty') {
+            return { type: 'space', color: 'hsl(231, 68%, 15%)' };
+        }
+        return cell;
+    }));
+}
+
+function parseLevelToGameObjects(grid: GridCell[][]): GameObject[] {
+  const rows = grid.length;
+  const cols = grid[0].length;
+  const visited = Array(rows).fill(null).map(() => Array(cols).fill(false));
+  const gameObjects: GameObject[] = [];
+
+
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      if (!visited[r][c] && (grid[r][c].type === 'block' || grid[r][c].type === 'worm' || grid[r][c].type === 'apple')) {
+        const type = grid[r][c].type as 'block' | 'worm' | 'apple';
+        const color = grid[r][c].color;
+        const cells: { row: number, col: number }[] = [];
+        const stack: [number, number][] = [[r, c]];
+        visited[r][c] = true;
+
+        while (stack.length > 0) {
+          const [curR, curC] = stack.pop()!;
+          cells.push({ row: curR, col: curC });
+
+          const neighbors = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+          for (const [dr, dc] of neighbors) {
+            const newR = curR + dr;
+            const newC = curC + dc;
+            if (newR >= 0 && newR < rows && newC >= 0 && newC < cols && !visited[newR][newC] && grid[newR][newC].type === type && grid[newR][newC].color === color) {
+              visited[newR][newC] = true;
+              stack.push([newR, newC]);
+            }
+          }
+        }
+        
+        if (cells.length > 0) {
+            gameObjects.push({
+                id: `obj-${r}-${c}`,
+                type,
+                cells,
+                color,
+            });
+        }
+      }
+    }
+  }
+  return gameObjects;
+}
+
+
+
+
+
+
+const CELL_SIZE = 48; // Corresponds to w-12/h-12 in rem (3rem = 48px)
+
+export default function GameBoard({ levelId, isPlaytest = false }: { levelId: string, isPlaytest?: boolean }) {
+  const router = useRouter();
+  const { getLevel, completeLevel, getNextLevel } = useLevels();
+  
+  const [level, setLevel] = useState<Level | null>(null);
+  const [runtimeGrid, setRuntimeGrid] = useState<GridCell[][]>([]);
+  const [gameObjects, setGameObjects] = useState<GameObject[]>([]);
+  const [selectedObjectId, setSelectedObjectId] = useState<string | null>(null);
+  const [win, setWin] = useState(false);
+  const [nextLevelId, setNextLevelId] = useState<string | null>(null);
+
+
+  // State for drag and drop
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStartPos = useRef<{ x: number, y: number }>({ x: 0, y: 0 });
+  const lastMoveTimestamp = useRef(0);
+
+  useEffect(() => {
+    const levelData = getLevel(levelId);
+    if (levelData) {
+      setLevel(levelData);
+      const newRuntimeGrid = createRuntimeGrid(levelData.grid);
+      setRuntimeGrid(newRuntimeGrid);
+      setGameObjects(parseLevelToGameObjects(newRuntimeGrid));
+      const nextLevel = getNextLevel(levelData.order);
+      setNextLevelId(nextLevel ? nextLevel.id : null);
+    } else if (levelId) {
+      // Handle case where level not found
+    }
+  }, [levelId, getLevel, getNextLevel]);
+
+  const resetGame = useCallback(() => {
+    if (level) {
+        const newRuntimeGrid = createRuntimeGrid(level.grid);
+        setRuntimeGrid(newRuntimeGrid);
+        setGameObjects(parseLevelToGameObjects(newRuntimeGrid));
+        setSelectedObjectId(null);
+        setWin(false);
+    }
+  }, [level]);
+
+  const handleWin = useCallback(() => {
+    if (level && !isPlaytest) {
+        completeLevel(level.order);
+    }
+    setWin(true);
+  }, [level, isPlaytest, completeLevel]);
+  
+  const handleMove = useCallback((dr: number, dc: number) => {
+    if (!selectedObjectId || !level || runtimeGrid.length === 0) return;
+
+    setGameObjects(prevObjects => {
+        const newObjects = JSON.parse(JSON.stringify(prevObjects)) as GameObject[];
+        const objectToMove = newObjects.find(o => o.id === selectedObjectId);
+        if (!objectToMove) return prevObjects;
+        
+        if (objectToMove.type === 'apple') return prevObjects;
+
+        const objectsToMove = new Set<string>([selectedObjectId]);
+        const objectsToCheck = [objectToMove];
+        let canMove = true;
+        let hasWon = false;
+
+        const appleObject = newObjects.find(o => o.type === 'apple');
+        const applePos = appleObject?.cells[0];
+
+        while (objectsToCheck.length > 0) {
+            const currentObject = objectsToCheck.shift()!;
+            
+            for (const cell of currentObject.cells) {
+                const newR = cell.row + dr;
+                const newC = cell.col + dc;
+
+                if (currentObject.type === 'worm' && applePos && newR === applePos.row && newC === applePos.col) {
+                    hasWon = true;
+                    continue; 
+                }
+
+                if (newR < 0 || newR >= level.rows || newC < 0 || newC >= level.cols) {
+                    canMove = false;
+                    break;
+                }
+                
+                const gridCell = runtimeGrid[newR][newC];
+                if (gridCell.type === 'frame') {
+                    canMove = false;
+                    break;
+                }
+
+                const occupyingObject = newObjects.find(obj => 
+                    !objectsToMove.has(obj.id) && obj.cells.some(c => c.row === newR && c.col === newC)
+                );
+                
+                if (occupyingObject) {
+                    if (occupyingObject.type === 'apple') {
+                        canMove = false;
+                        break;
+                    }
+                    objectsToMove.add(occupyingObject.id);
+                    objectsToCheck.push(occupyingObject);
+                }
+            }
+            if (!canMove) break;
+        }
+
+        if (canMove) {
+            const finalObjects = newObjects.map(obj => {
+                if (objectsToMove.has(obj.id)) {
+                    return {
+                        ...obj,
+                        cells: obj.cells.map(c => ({ row: c.row + dr, col: c.col + dc }))
+                    };
+                }
+                return obj;
+            });
+
+            if (hasWon) {
+              const apple = finalObjects.find(o => o.type === 'apple');
+              if (apple) {
+                  apple.cells = [];
+              }
+              setTimeout(() => handleWin(), 300);
+            }
+            return finalObjects;
+        }
+
+        return prevObjects;
+    });
+}, [selectedObjectId, level, runtimeGrid, handleWin]);
+
+    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>, objectId: string) => {
+        
+        e.stopPropagation();
+        e.preventDefault();
+        setSelectedObjectId(objectId);
+        setIsDragging(true);
+        let clientX: number;
+        let clientY: number;
+        if ('touches' in e) {
+          clientX = e.touches[0].clientX;
+          clientY = e.touches[0].clientY;
+        }
+        else{
+          clientX = e.clientX;
+          clientY = e.clientY;
+
+        }
+        dragStartPos.current = { x: clientX, y: clientY };
+        lastMoveTimestamp.current = 0;
+        e.stopPropagation();
+    };
+
+    const handleMouseMove = useCallback((e: MouseEvent) => {
+        if (!isDragging || !selectedObjectId) return;
+
+        const now = Date.now();
+        if (now - lastMoveTimestamp.current < 150) { 
+            return;
+        }
+
+        const dx = e.clientX - dragStartPos.current.x;
+        const dy = e.clientY - dragStartPos.current.y;
+        
+        let dr = 0;
+        let dc = 0;
+
+        if (Math.abs(dx) > Math.abs(dy)) {
+            if (Math.abs(dx) > CELL_SIZE / 2) {
+                dc = dx > 0 ? 1 : -1;
+            }
+        } else {
+            if (Math.abs(dy) > CELL_SIZE / 2) {
+                dr = dy > 0 ? 1 : -1;
+            }
+        }
+
+        if (dr !== 0 || dc !== 0) {
+            handleMove(dr, dc);
+            dragStartPos.current = { x: e.clientX, y: e.clientY };
+            lastMoveTimestamp.current = now;
+        }
+    }, [isDragging, selectedObjectId, handleMove]);
+
+    const handleMouseUp = useCallback(() => {
+        if (isDragging) {
+            setIsDragging(false);
+            setSelectedObjectId(null);
+        }
+    }, [isDragging]);
+
+    useEffect(() => {
+        if (isDragging) {
+            window.addEventListener('mousemove', handleMouseMove);
+            window.addEventListener('mouseup', handleMouseUp);
+        }
+
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('mouseup', handleMouseUp);
+        };
+    }, [isDragging, handleMouseMove, handleMouseUp]);
+
+  if (!level || runtimeGrid.length === 0) {
+    return <main className="flex items-center justify-center min-h-screen"><p>Level not found or still loading...</p></main>;
+  }
+  
+  const wormObject = gameObjects.find(o => o.type === 'worm');
+
+  const goToNextLevel = () => {
+    if (nextLevelId) {
+      router.push(`/play/${nextLevelId}`);
+    } else {
+      router.push('/');
+    }
+  };
+
+  return (
+    <main className="flex flex-col items-center justify-center min-h-screen bg-slate-900 p-6 select-none">
+      {/* Khung điện thoại */}
+      <div className="relative bg-[#0f172a] w-[390px] h-[844px] rounded-[2rem] shadow-2xl overflow-hidden border border-gray-700 flex flex-col items-center gap-4 py-10">
+
+        {/* Nút ở góc trên */}
+        <div className="absolute top-4 left-4 flex gap-2">
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => router.push(isPlaytest ? '/create' : '/')}
+            className="bg-white/20 text-white hover:bg-white/30"
+          >
+            <Home className="h-4 w-4" />
+          </Button>
+
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={resetGame}
+            className="bg-white/20 text-white hover:bg-white/30"
+          >
+            <RotateCcw className="h-4 w-4" />
+          </Button>
+        </div>
+
+        {/* Tiêu đề */}
+        <h1 className="text-3xl font-bold text-white font-headline drop-shadow-md mt-10">
+          Level {level.order} {isPlaytest && '(Playtest)'}
+        </h1>
+
+        {/* Lưới game (350 × 600) */}
+        <div
+          className="relative border-4 border-black/20 bg-card p-1 rounded-lg shadow-2xl"
+          style={{ width: '375px', height: '600px' }}
+        >
+          <div
+            className="relative grid w-full h-full"
+            style={{
+              gridTemplateColumns: `repeat(${level.cols}, 1fr)`,
+              gridTemplateRows: `repeat(${level.rows}, 1fr)`,
+            }}
+          >
+            {runtimeGrid.map((row, r) =>
+              row.map((cell, c) => (
+                <div
+                  key={`${r}-${c}`}
+                  className="flex items-center justify-center border border-black/20"
+                  style={{
+                    backgroundColor:
+                      cell.type === 'space' ? cell.color : 'transparent',
+                  }}
+                >
+                  {cell.type === 'frame' && (
+                    <div
+                      className="w-full h-full"
+                      style={{ backgroundColor: cell.color }}
+                    />
+                  )}
+                </div>
+              ))
+            )}
+
+            {gameObjects.map((obj) => {
+              if (obj.type === 'worm') return null; // render worm riêng
+              return (
+                <div key={obj.id} onMouseDown={(e) => handleMouseDown(e, obj.id)} onTouchStart={(e) => handleMouseDown(e, obj.id)}
+                style={{
+                  touchAction: 'none', // 👈 Cực kỳ quan trọng
+                }}
+                >
+                  {obj.cells.map(({ row, col }, index) => (
+                    <div
+                      key={`${obj.id}-${index}`}
+                      className={`absolute rounded-md cursor-pointer transition-all duration-150 ease-in-out border-2 ${
+                        selectedObjectId === obj.id
+                          ? 'border-accent ring-4 ring-accent/50'
+                          : 'border-black/50'
+                      }`}
+                      style={{
+                        top: `${(row / level.rows) * 100}%`,
+                        left: `${(col / level.cols) * 100}%`,
+                        width: `${100 / level.cols}%`,
+                        height: `${100 / level.rows}%`,
+                        backgroundColor: obj.color,
+                        boxShadow:
+                          'inset 3px 3px 6px rgba(255,255,255,0.25), inset -3px -3px 6px rgba(0,0,0,0.4)',
+                        zIndex: selectedObjectId === obj.id ? 10 : 5,
+                      }}
+                    >
+                      {obj.type === 'apple' && (
+                        <Apple className="w-full h-full p-1.5 text-white" fill="#fff" />
+                      )}
+                    </div>
+                  ))}
+                </div>
+              );
+            })}
+
+            {wormObject && (
+              <div
+                key={wormObject.id}
+                onMouseDown={(e) => handleMouseDown(e, wormObject.id)}
+                onTouchStart={(e) => handleMouseDown(e, wormObject.id)} 
+                className={`absolute cursor-pointer transition-all duration-150 ease-in-out group`}
+                style={{
+                  top: `${(wormObject.cells[0].row / level.rows) * 100}%`,
+                  left: `${(Math.min(...wormObject.cells.map((c) => c.col)) / level.cols) * 100}%`,
+                  width: `${(wormObject.cells.length / level.cols) * 100}%`,
+                  height: `${100 / level.rows}%`,
+                  zIndex: selectedObjectId === wormObject.id ? 10 : 5,
+                }}
+              >
+                <WormIcon
+                  className={`w-full h-full ${
+                    selectedObjectId === wormObject.id
+                      ? 'drop-shadow-[0_0_8px_hsl(var(--accent))]'
+                      : ''
+                  }`}
+                  style={{ color: wormObject.color }}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Popup chiến thắng */}
+        <AlertDialog open={win} onOpenChange={setWin}>
+          <AlertDialogContent className="bg-primary/80 backdrop-blur-sm border-accent">
+            <AlertDialogHeader>
+              <AlertDialogTitle className="flex flex-col items-center gap-4 text-2xl text-white">
+                <WormIcon className="w-20 h-auto text-accent" />
+                You Win!
+              </AlertDialogTitle>
+              <AlertDialogDescription className="text-center text-white/80">
+                {isPlaytest
+                  ? 'Playtest successful!'
+                  : `You passed Level ${level.order}! Great job!`}
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter className="sm:justify-center gap-2">
+              {isPlaytest ? (
+                <Button
+                  onClick={() => router.push('/create')}
+                  variant="outline"
+                  className="bg-white/10 text-white hover:bg-white/20"
+                >
+                  Back to Editor
+                </Button>
+              ) : (
+                <>
+                  <Button
+                    onClick={() => router.push('/')}
+                    variant="outline"
+                    className="bg-white/10 text-white hover:bg-white/20"
+                  >
+                    Back to Menu
+                  </Button>
+                  {nextLevelId ? (
+                    <Button
+                      onClick={goToNextLevel}
+                      className="bg-accent text-accent-foreground hover:bg-accent/90"
+                    >
+                      Next Level
+                    </Button>
+                  ) : (
+                    <p className="text-sm text-white/70">
+                      You have completed all levels!
+                    </p>
+                  )}
+                </>
+              )}
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
+    </main>
+
+  );
+}

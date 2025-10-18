@@ -59,48 +59,6 @@
           "color": "transparent"
         },
         {
-          "type": "block",
-          "color": "#F9C600"
-        },
-        {
-          "type": "block",
-          "color": "#F9C600"
-        },
-        {
-          "type": "block",
-          "color": "#F9C600"
-        },
-        {
-          "type": "block",
-          "color": "#F9C600"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
           "type": "empty",
           "color": "transparent"
         },
@@ -130,52 +88,6 @@
         }
       ],
       [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
         {
           "type": "empty",
           "color": "transparent"
@@ -186,15 +98,153 @@
         },
         {
           "type": "worm",
-          "color": "#52B848"
+          "color": "hsl(120, 60%, 50%)"
         },
         {
           "type": "worm",
-          "color": "#52B848"
+          "color": "hsl(120, 60%, 50%)"
         },
         {
           "type": "worm",
-          "color": "#52B848"
+          "color": "hsl(120, 60%, 50%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        }
+      ],
+      [
+        {
+          "type": "block",
+          "color": "#eab308"
+        },
+        {
+          "type": "block",
+          "color": "#eab308"
+        },
+        {
+          "type": "block",
+          "color": "#eab308"
+        },
+        {
+          "type": "block",
+          "color": "#eab308"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#eab308",
+          "movement": "vertical"
+        },
+        {
+          "type": "block",
+          "color": "#eab308",
+          "movement": "vertical"
+        },
+        {
+          "type": "block",
+          "color": "#eab308",
+          "movement": "vertical"
+        },
+        {
+          "type": "block",
+          "color": "#eab308",
+          "movement": "vertical"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        }
+      ],
+      [
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        }
+      ],
+      [
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#3b82f6",
+          "movement": "vertical"
+        },
+        {
+          "type": "block",
+          "color": "#3b82f6",
+          "movement": "vertical"
+        },
+        {
+          "type": "block",
+          "color": "#3b82f6",
+          "movement": "vertical"
+        },
+        {
+          "type": "block",
+          "color": "#3b82f6",
+          "movement": "vertical"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
         },
         {
           "type": "empty",
@@ -343,6 +393,21 @@
         {
           "type": "empty",
           "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent",
+          "floorColor": "#3b82f6"
+        },
+        {
+          "type": "empty",
+          "color": "transparent",
+          "floorColor": "#3b82f6"
+        },
+        {
+          "type": "empty",
+          "color": "transparent",
+          "floorColor": "#3b82f6"
         },
         {
           "type": "empty",
@@ -362,61 +427,7 @@
         },
         {
           "type": "apple",
-          "color": "#E74C3C"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
+          "color": "hsl(0, 84%, 60%)"
         },
         {
           "type": "empty",
@@ -676,366 +687,14 @@
         }
       ]
     ],
-    "id": "level-1760795150972",
+    "id": "level-1760804786603",
     "order": 1
   },
   {
-    "rows": 16,
-    "cols": 10,
+    "rows": 8,
+    "cols": 5,
     "grid": [
       [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "worm",
-          "color": "#52B848"
-        },
-        {
-          "type": "worm",
-          "color": "#52B848"
-        },
-        {
-          "type": "worm",
-          "color": "#52B848"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "block",
-          "color": "#F9C600"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
         {
           "type": "empty",
           "color": "transparent"
@@ -1050,53 +709,7 @@
         },
         {
           "type": "apple",
-          "color": "#E74C3C"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
+          "color": "hsl(0, 84%, 60%)"
         },
         {
           "type": "empty",
@@ -1123,339 +736,9 @@
         {
           "type": "empty",
           "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
         }
       ],
       [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ]
-    ],
-    "id": "level-1760795192086",
-    "order": 2
-  },
-  {
-    "rows": 16,
-    "cols": 10,
-    "grid": [
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
         {
           "type": "empty",
           "color": "transparent"
@@ -1466,7 +749,7 @@
         },
         {
           "type": "frame",
-          "color": "hsl(231, 30%, 30%)"
+          "color": "hsl(240, 10%, 40%)"
         },
         {
           "type": "empty",
@@ -1475,6 +758,38 @@
         {
           "type": "empty",
           "color": "transparent"
+        }
+      ],
+      [
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        }
+      ],
+      [
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
         },
         {
           "type": "empty",
@@ -1509,148 +824,24 @@
         {
           "type": "empty",
           "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
         }
       ],
       [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
         {
           "type": "empty",
           "color": "transparent"
         },
         {
           "type": "worm",
-          "color": "#52B848"
+          "color": "hsl(120, 60%, 50%)"
         },
         {
           "type": "worm",
-          "color": "#52B848"
+          "color": "hsl(120, 60%, 50%)"
         },
         {
           "type": "worm",
-          "color": "#52B848"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "block",
-          "color": "#F9C600"
+          "color": "hsl(120, 60%, 50%)"
         },
         {
           "type": "empty",
@@ -1658,362 +849,6 @@
         }
       ],
       [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "apple",
-          "color": "#E74C3C"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
         {
           "type": "empty",
           "color": "transparent"
@@ -2036,7 +871,7 @@
         }
       ]
     ],
-    "id": "level-1760796458601",
-    "order": 3
+    "id": "level-1760808919718",
+    "order": 2
   }
 ]
