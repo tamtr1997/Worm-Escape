@@ -16,7 +16,7 @@ import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Label } from '../ui/label';
 import { Skeleton } from '../ui/skeleton';
 
-const ROWS = 14;
+const ROWS = 16;
 const COLS = 10;
 
 const BLOCK_COLORS = [

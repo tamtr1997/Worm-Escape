@@ -195,10 +195,24 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
     });
 }, [selectedObjectId, level, runtimeGrid, handleWin]);
 
-    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>, objectId: string) => {
+    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>, objectId: string) => {
+        
+        e.stopPropagation();
+        e.preventDefault();
         setSelectedObjectId(objectId);
         setIsDragging(true);
-        dragStartPos.current = { x: e.clientX, y: e.clientY };
+        let clientX: number;
+        let clientY: number;
+        if ('touches' in e) {
+          clientX = e.touches[0].clientX;
+          clientY = e.touches[0].clientY;
+        }
+        else{
+          clientX = e.clientX;
+          clientY = e.clientY;
+
+        }
+        dragStartPos.current = { x: clientX, y: clientY };
         lastMoveTimestamp.current = 0;
         e.stopPropagation();
     };
@@ -268,96 +282,178 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
   };
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-4 gap-6 select-none">
-      <div className="absolute top-4 left-4 flex gap-2">
-        <Button variant="outline" size="icon" onClick={() => router.push(isPlaytest ? '/create' : '/')} className="bg-white/20 text-white hover:bg-white/30"><Home className="h-4 w-4" /></Button>
-        <Button variant="outline" size="icon" onClick={resetGame} className="bg-white/20 text-white hover:bg-white/30"><RotateCcw className="h-4 w-4" /></Button>
-      </div>
-      <h1 className="text-3xl font-bold text-white font-headline drop-shadow-md">Level {level.order} {isPlaytest && '(Playtest)'}</h1>
-      <div 
-        className="relative border-4 border-black/20 bg-card p-1 rounded-lg shadow-2xl" 
-        style={{ aspectRatio: `${level.cols} / ${level.rows}` }}
-      >
-        <div className="relative grid" style={{ gridTemplateColumns: `repeat(${level.cols}, 3rem)`, gridTemplateRows: `repeat(${level.rows}, 3rem)`}}>
-          {runtimeGrid.map((row, r) => row.map((cell, c) => (
-            <div key={`${r}-${c}`} className="w-12 h-12 flex items-center justify-center border border-black/20" style={{ backgroundColor: cell.type === 'space' ? cell.color : 'transparent' }}>
-              {cell.type === 'frame' && <div className="w-full h-full" style={{backgroundColor: cell.color}}/>}
-            </div>
-          )))}
-          
-          {gameObjects.map(obj => {
-              if (obj.type === 'worm') return null; // Render worm separately
-              return (
-                <div key={obj.id} onMouseDown={(e) => handleMouseDown(e, obj.id)}>
-                {obj.cells.map(({ row, col }, index) => (
-                    <div
-                    key={`${obj.id}-${index}`}
-                    className={`absolute w-12 h-12 rounded-md cursor-pointer transition-all duration-150 ease-in-out border-2 ${selectedObjectId === obj.id ? 'border-accent ring-4 ring-accent/50' : 'border-black/50'}`}
-                    style={{
-                        top: `${row * 3}rem`,
-                        left: `${col * 3}rem`,
-                        backgroundColor: obj.color,
-                        boxShadow: 'inset 3px 3px 6px rgba(255,255,255,0.25), inset -3px -3px 6px rgba(0,0,0,0.4)',
-                        zIndex: selectedObjectId === obj.id ? 10 : 5,
-                    }}
-                    >
-                    {obj.type === 'apple' && <Apple className="w-full h-full p-1.5 text-white" fill="#fff" />}
-                    </div>
-                ))}
-                </div>
-              )
-          })}
-          {wormObject && (
-            <div key={wormObject.id} onMouseDown={(e) => handleMouseDown(e, wormObject.id)}
-              className={`absolute cursor-pointer transition-all duration-150 ease-in-out group`}
-              style={{
-                top: `${wormObject.cells[0].row * 3}rem`,
-                left: `${Math.min(...wormObject.cells.map(c => c.col)) * 3}rem`,
-                width: `${wormObject.cells.length * 3}rem`,
-                height: `3rem`,
-                zIndex: selectedObjectId === wormObject.id ? 10 : 5,
-              }}
-            >
-              <WormIcon className={`w-full h-full ${selectedObjectId === wormObject.id ? 'drop-shadow-[0_0_8px_hsl(var(--accent))]' : ''}`} style={{color: wormObject.color}}/>
-            </div>
-          )}
-        </div>
-      </div>
-      
-      <AlertDialog open={win} onOpenChange={setWin}>
-        <AlertDialogContent className="bg-primary/80 backdrop-blur-sm border-accent">
-          <AlertDialogHeader>
-            <AlertDialogTitle className="flex flex-col items-center gap-4 text-2xl text-white">
-                <WormIcon className="w-20 h-auto text-accent"/>
-                You Win!
-            </AlertDialogTitle>
-            <AlertDialogDescription className="text-center text-white/80">
-              {isPlaytest ? "Playtest successful!" : `You passed Level ${level.order}! Great job!`}
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter className="sm:justify-center gap-2">
-            {isPlaytest ? (
-              <Button onClick={() => router.push('/create')} variant="outline" className="bg-white/10 text-white hover:bg-white/20">
-                Back to Editor
-              </Button>
-            ) : (
-               <>
-                <Button onClick={() => router.push('/')} variant="outline" className="bg-white/10 text-white hover:bg-white/20">
-                  Back to Menu
-                </Button>
-                {nextLevelId ? (
-                  <Button onClick={goToNextLevel} className="bg-accent text-accent-foreground hover:bg-accent/90">
-                    Next Level
-                  </Button>
-                ) : (
-                     <p className="text-sm text-white/70">You have completed all levels!</p>
-                )}
-               </>
-            )}
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+    <main className="flex flex-col items-center justify-center min-h-screen bg-slate-900 p-6 select-none">
+      {/* Khung điện thoại */}
+      <div className="relative bg-[#0f172a] w-[390px] h-[844px] rounded-[2rem] shadow-2xl overflow-hidden border border-gray-700 flex flex-col items-center gap-4 py-10">
 
+        {/* Nút ở góc trên */}
+        <div className="absolute top-4 left-4 flex gap-2">
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => router.push(isPlaytest ? '/create' : '/')}
+            className="bg-white/20 text-white hover:bg-white/30"
+          >
+            <Home className="h-4 w-4" />
+          </Button>
+
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={resetGame}
+            className="bg-white/20 text-white hover:bg-white/30"
+          >
+            <RotateCcw className="h-4 w-4" />
+          </Button>
+        </div>
+
+        {/* Tiêu đề */}
+        <h1 className="text-3xl font-bold text-white font-headline drop-shadow-md mt-10">
+          Level {level.order} {isPlaytest && '(Playtest)'}
+        </h1>
+
+        {/* Lưới game (350 × 600) */}
+        <div
+          className="relative border-4 border-black/20 bg-card p-1 rounded-lg shadow-2xl"
+          style={{ width: '375px', height: '600px' }}
+        >
+          <div
+            className="relative grid w-full h-full"
+            style={{
+              gridTemplateColumns: `repeat(${level.cols}, 1fr)`,
+              gridTemplateRows: `repeat(${level.rows}, 1fr)`,
+            }}
+          >
+            {runtimeGrid.map((row, r) =>
+              row.map((cell, c) => (
+                <div
+                  key={`${r}-${c}`}
+                  className="flex items-center justify-center border border-black/20"
+                  style={{
+                    backgroundColor:
+                      cell.type === 'space' ? cell.color : 'transparent',
+                  }}
+                >
+                  {cell.type === 'frame' && (
+                    <div
+                      className="w-full h-full"
+                      style={{ backgroundColor: cell.color }}
+                    />
+                  )}
+                </div>
+              ))
+            )}
+
+            {gameObjects.map((obj) => {
+              if (obj.type === 'worm') return null; // render worm riêng
+              return (
+                <div key={obj.id} onMouseDown={(e) => handleMouseDown(e, obj.id)} onTouchStart={(e) => handleMouseDown(e, obj.id)} >
+                  {obj.cells.map(({ row, col }, index) => (
+                    <div
+                      key={`${obj.id}-${index}`}
+                      className={`absolute rounded-md cursor-pointer transition-all duration-150 ease-in-out border-2 ${
+                        selectedObjectId === obj.id
+                          ? 'border-accent ring-4 ring-accent/50'
+                          : 'border-black/50'
+                      }`}
+                      style={{
+                        top: `${(row / level.rows) * 100}%`,
+                        left: `${(col / level.cols) * 100}%`,
+                        width: `${100 / level.cols}%`,
+                        height: `${100 / level.rows}%`,
+                        backgroundColor: obj.color,
+                        boxShadow:
+                          'inset 3px 3px 6px rgba(255,255,255,0.25), inset -3px -3px 6px rgba(0,0,0,0.4)',
+                        zIndex: selectedObjectId === obj.id ? 10 : 5,
+                      }}
+                    >
+                      {obj.type === 'apple' && (
+                        <Apple className="w-full h-full p-1.5 text-white" fill="#fff" />
+                      )}
+                    </div>
+                  ))}
+                </div>
+              );
+            })}
+
+            {wormObject && (
+              <div
+                key={wormObject.id}
+                onMouseDown={(e) => handleMouseDown(e, wormObject.id)}
+                onTouchStart={(e) => handleMouseDown(e, wormObject.id)} 
+                className={`absolute cursor-pointer transition-all duration-150 ease-in-out group`}
+                style={{
+                  top: `${(wormObject.cells[0].row / level.rows) * 100}%`,
+                  left: `${(Math.min(...wormObject.cells.map((c) => c.col)) / level.cols) * 100}%`,
+                  width: `${(wormObject.cells.length / level.cols) * 100}%`,
+                  height: `${100 / level.rows}%`,
+                  zIndex: selectedObjectId === wormObject.id ? 10 : 5,
+                }}
+              >
+                <WormIcon
+                  className={`w-full h-full ${
+                    selectedObjectId === wormObject.id
+                      ? 'drop-shadow-[0_0_8px_hsl(var(--accent))]'
+                      : ''
+                  }`}
+                  style={{ color: wormObject.color }}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Popup chiến thắng */}
+        <AlertDialog open={win} onOpenChange={setWin}>
+          <AlertDialogContent className="bg-primary/80 backdrop-blur-sm border-accent">
+            <AlertDialogHeader>
+              <AlertDialogTitle className="flex flex-col items-center gap-4 text-2xl text-white">
+                <WormIcon className="w-20 h-auto text-accent" />
+                You Win!
+              </AlertDialogTitle>
+              <AlertDialogDescription className="text-center text-white/80">
+                {isPlaytest
+                  ? 'Playtest successful!'
+                  : `You passed Level ${level.order}! Great job!`}
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter className="sm:justify-center gap-2">
+              {isPlaytest ? (
+                <Button
+                  onClick={() => router.push('/create')}
+                  variant="outline"
+                  className="bg-white/10 text-white hover:bg-white/20"
+                >
+                  Back to Editor
+                </Button>
+              ) : (
+                <>
+                  <Button
+                    onClick={() => router.push('/')}
+                    variant="outline"
+                    className="bg-white/10 text-white hover:bg-white/20"
+                  >
+                    Back to Menu
+                  </Button>
+                  {nextLevelId ? (
+                    <Button
+                      onClick={goToNextLevel}
+                      className="bg-accent text-accent-foreground hover:bg-accent/90"
+                    >
+                      Next Level
+                    </Button>
+                  ) : (
+                    <p className="text-sm text-white/70">
+                      You have completed all levels!
+                    </p>
+                  )}
+                </>
+              )}
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
     </main>
+
   );
 }

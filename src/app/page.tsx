@@ -8,6 +8,9 @@ import { PlusCircle, Play, Trash2, Lock, Unlock } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { WormIcon } from '@/components/icons/WormIcon';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Settings, Heart, Coins, Store, HomeIcon} from 'lucide-react';
+import Image from 'next/image';
+
 
 export default function Home() {
   const { levels, highestLevelUnlocked, resetProgress, isLoading } = useLevels();
@@ -17,79 +20,128 @@ export default function Home() {
     router.push(`/play/${levelId}`);
   };
 
+
   return (
     <main className="flex min-h-screen flex-col items-center p-4 sm:p-8 md:p-12 font-body">
-      <div className="w-full max-w-5xl">
-        <header className="text-center mb-12 flex flex-col items-center">
-          <WormIcon className="w-24 h-auto text-accent mb-4" />
-          <h1 className="text-5xl md:text-7xl font-bold text-white font-headline drop-shadow-lg">Worm Escape</h1>
-          <p className="text-lg text-white/80 mt-4 max-w-2xl">A slippery puzzle game. Slide the blocks to free the worm!</p>
-        </header>
-        
-        <div className="flex justify-center mb-10 gap-4">
-          <Link href="/create" passHref>
-            <Button size="lg" variant="secondary" className="shadow-md hover:shadow-lg transition-shadow bg-white/90 text-primary hover:bg-white">
-              <PlusCircle className="mr-2 h-5 w-5" />
-              Level Editor
-            </Button>
-          </Link>
-           <Button size="lg" variant="destructive" onClick={resetProgress} className="shadow-md hover:shadow-lg transition-shadow">
-              <Trash2 className="mr-2 h-5 w-5" />
-              Reset Progress
-            </Button>
-        </div>
+  
 
-        <section>
-          <h2 className="text-3xl font-semibold mb-6 text-center text-white/90">Levels</h2>
-          {isLoading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[...Array(3)].map((_, i) => (
-                <Card key={i} className="bg-primary/50 border-primary/70">
-                  <CardHeader>
-                    <Skeleton className="h-6 w-24 bg-white/10" />
-                  </CardHeader>
-                  <CardContent>
-                    <Skeleton className="h-4 w-32 bg-white/10" />
-                  </CardContent>
-                  <CardFooter>
-                    <Skeleton className="h-10 w-24 bg-white/10" />
-                  </CardFooter>
-                </Card>
-              ))}
+    {/* Khung điện thoại */}
+    <div className="relative bg-[#0f172a] w-[390px] h-[844px] rounded-[2rem] shadow-2xl overflow-hidden border border-gray-700 flex flex-col"
+    style={{
+            backgroundImage: "url('/backgroup.png')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+    >
+      
+      <header className="flex items-center justify-between p-4">
+        {/* App Icon */}
+        {/* <div className="w-10 h-10 rounded-xl overflow-hidden border-2 border-white/50">
+          <Image src="/backgroup.png" alt="App Icon" width={40} height={40} />
+        </div> */}
+
+        {/* Stats */}
+        <div className="absolute top-2 right-2 flex items-center gap-3 text-gray-700">
+          <div className="flex items-center bg-white/60 rounded-full px-2 py-1 gap-1 text-sm font-medium">
+            <Coins className="w-4 h-4" />
+            123
+          </div>
+          <div className="flex items-center bg-white/60 rounded-full px-2 py-1 gap-1 text-sm font-medium">
+            <Heart className="w-4 h-4" />
+            12
+          </div>
+          <button className="p-2 rounded-full hover:bg-white/40 transition">
+            <Settings className="w-5 h-5" />
+          </button>
+        </div>
+      </header>
+
+
+     <section className="flex flex-col items-center justify-center flex-1 pb-24">
+  {isLoading ? (
+    <div className="flex flex-col gap-6 items-center">
+      {[...Array(4)].map((_, i) => (
+        <Skeleton key={i} className="h-16 w-16 rounded-full bg-white/20" />
+      ))}
+    </div>
+  ) : (
+    <div className="flex flex-col items-center justify-center gap-6">
+      {(() => {
+        // ✅ Xác định 4 level bắt đầu từ level unlock cao nhất
+        const startIndex = Math.max(0, highestLevelUnlocked - 1);
+        const visibleLevels = levels.slice(startIndex, startIndex + 4).reverse();
+
+        return visibleLevels.map((level, index) => {
+          const isUnlocked = level.order <= highestLevelUnlocked;
+          const appleSrc = isUnlocked ? '/apple_unlock.png' : '/apple_locked.png';
+          return (
+            <div
+              key={level.id}
+              className="flex flex-col items-center transition-transform hover:scale-105"
+            >
+              {/* Ảnh quả táo — clickable nếu unlocked */}
+              <button
+                onClick={() => isUnlocked && handlePlay(level.id)}
+                disabled={!isUnlocked}
+                className={`focus:outline-none transition-all ${
+                  isUnlocked
+                    ? 'hover:brightness-110 active:scale-95'
+                    : 'opacity-60 cursor-not-allowed'
+                }`}
+              >
+                <Image
+                  src={appleSrc}
+                  alt={`Level ${level.order}`}
+                  width={70}
+                  height={70}
+                  style={{ transform: `scale(${1 + index * 0.1})` }}
+                />
+              </button>
+
+              {/* Số level */}
+              <span className="text-gray-700 font-semibold mt-1 text-lg">
+                {level.order}
+              </span>
             </div>
-          ) : levels.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {levels.map((level) => {
-                const isUnlocked = level.order <= highestLevelUnlocked;
-                return (
-                <Card key={level.id} className={`flex flex-col justify-between transition-all hover:shadow-xl hover:-translate-y-1 bg-primary/40 border-primary/60 ${!isUnlocked ? 'bg-primary/20 brightness-75' : ''}`}>
-                  <CardHeader>
-                    <CardTitle className="truncate flex items-center justify-between text-white/90">
-                      <span>Level {level.order}</span>
-                      {isUnlocked ? <Unlock className="h-4 w-4 text-green-400" /> : <Lock className="h-4 w-4 text-white/50" />}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-sm text-white/60">
-                      A {level.cols}x{level.rows} puzzle.
-                    </div>
-                  </CardContent>
-                  <CardFooter className="flex justify-between items-center">
-                    <Button onClick={() => handlePlay(level.id)} className="bg-accent text-accent-foreground hover:bg-accent/90" disabled={!isUnlocked}>
-                      <Play className="mr-2 h-4 w-4" /> Play
-                    </Button>
-                  </CardFooter>
-                </Card>
-              )})}
+          );
+        });
+      })()}
+
+      {/* Nút Play */}
+      <Button
+        onClick={() => handlePlay(levels[highestLevelUnlocked - 1]?.id)}
+        className="mt-4 bg-green-600 text-white px-10 py-6 text-lg rounded-xl hover:bg-green-700 transition-all"
+      >
+        Play
+      </Button>
+    </div>
+  )}
+</section>
+
+        
+        {/* Bottom Navigation */}
+        <nav className="absolute bottom-0 left-0 right-0 flex justify-around bg-green-900/90 text-white py-3 rounded-t-2xl">
+          <Link href="/create" className="flex flex-col items-center text-sm opacity-80 hover:opacity-100 transition">
+            <Store className="w-6 h-6" />
+            <span>Store</span>
+          </Link>
+
+          <Link href="/" className="flex flex-col items-center text-sm opacity-100">
+            <div className="bg-green-700 p-2 rounded-full shadow-lg">
+              <HomeIcon className="w-6 h-6" />
             </div>
-          ) : (
-             <div className="text-center py-10 px-4 border-2 border-dashed rounded-lg border-white/20">
-                <h3 className="text-xl font-medium text-white/70">No levels yet!</h3>
-                <p className="text-white/60 mt-2">Go to the Level Editor to create your first level.</p>
-            </div>
-          )}
-        </section>
+            <span className="mt-1 font-semibold">Home</span>
+          </Link>
+
+          <Link href="/create" className="flex flex-col items-center text-sm opacity-80 hover:opacity-100 transition">
+            <Store className="w-6 h-6" />
+            <span>Shop</span>
+          </Link>
+        </nav>
+
+
       </div>
+      
     </main>
   );
 }
