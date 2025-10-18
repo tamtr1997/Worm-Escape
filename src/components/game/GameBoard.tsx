@@ -13,7 +13,7 @@ import { Apple } from 'lucide-react';
 function createRuntimeGrid(levelGrid: GridCell[][]): GridCell[][] {
     return levelGrid.map(row => row.map(cell => {
         if (cell.type === 'empty') {
-            return { type: 'space', color: 'hsl(240, 20%, 96%)' };
+            return { type: 'space', color: 'hsl(231, 68%, 15%)' };
         }
         return cell;
     }));
@@ -268,19 +268,19 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
   };
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen bg-background p-4 gap-6 select-none">
+    <main className="flex flex-col items-center justify-center min-h-screen p-4 gap-6 select-none">
       <div className="absolute top-4 left-4 flex gap-2">
-        <Button variant="outline" size="icon" onClick={() => router.push(isPlaytest ? '/create' : '/')}><Home className="h-4 w-4" /></Button>
-        <Button variant="outline" size="icon" onClick={resetGame}><RotateCcw className="h-4 w-4" /></Button>
+        <Button variant="outline" size="icon" onClick={() => router.push(isPlaytest ? '/create' : '/')} className="bg-white/20 text-white hover:bg-white/30"><Home className="h-4 w-4" /></Button>
+        <Button variant="outline" size="icon" onClick={resetGame} className="bg-white/20 text-white hover:bg-white/30"><RotateCcw className="h-4 w-4" /></Button>
       </div>
-      <h1 className="text-3xl font-bold text-primary font-headline">Level {level.order} {isPlaytest && '(Playtest)'}</h1>
+      <h1 className="text-3xl font-bold text-white font-headline drop-shadow-md">Level {level.order} {isPlaytest && '(Playtest)'}</h1>
       <div 
-        className="relative border-4 border-primary/20 bg-card p-1 rounded-lg shadow-2xl" 
+        className="relative border-4 border-black/20 bg-card p-1 rounded-lg shadow-2xl" 
         style={{ aspectRatio: `${level.cols} / ${level.rows}` }}
       >
         <div className="relative grid" style={{ gridTemplateColumns: `repeat(${level.cols}, 3rem)`, gridTemplateRows: `repeat(${level.rows}, 3rem)`}}>
           {runtimeGrid.map((row, r) => row.map((cell, c) => (
-            <div key={`${r}-${c}`} className="w-12 h-12 flex items-center justify-center" style={{ backgroundColor: cell.type === 'space' ? cell.color : 'transparent' }}>
+            <div key={`${r}-${c}`} className="w-12 h-12 flex items-center justify-center border border-black/20" style={{ backgroundColor: cell.type === 'space' ? cell.color : 'transparent' }}>
               {cell.type === 'frame' && <div className="w-full h-full" style={{backgroundColor: cell.color}}/>}
             </div>
           )))}
@@ -292,16 +292,16 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                 {obj.cells.map(({ row, col }, index) => (
                     <div
                     key={`${obj.id}-${index}`}
-                    className={`absolute w-12 h-12 rounded-md cursor-pointer transition-all duration-150 ease-in-out border-2 ${selectedObjectId === obj.id ? 'border-accent ring-4 ring-accent/50' : 'border-black/20'}`}
+                    className={`absolute w-12 h-12 rounded-md cursor-pointer transition-all duration-150 ease-in-out border-2 ${selectedObjectId === obj.id ? 'border-accent ring-4 ring-accent/50' : 'border-black/50'}`}
                     style={{
                         top: `${row * 3}rem`,
                         left: `${col * 3}rem`,
                         backgroundColor: obj.color,
-                        boxShadow: 'inset 2px 2px 4px rgba(255,255,255,0.3), inset -2px -2px 4px rgba(0,0,0,0.3)',
+                        boxShadow: 'inset 3px 3px 6px rgba(255,255,255,0.25), inset -3px -3px 6px rgba(0,0,0,0.4)',
                         zIndex: selectedObjectId === obj.id ? 10 : 5,
                     }}
                     >
-                    {obj.type === 'apple' && <Apple className="w-full h-full p-1 text-white" fill="white" />}
+                    {obj.type === 'apple' && <Apple className="w-full h-full p-1.5 text-white" fill="#fff" />}
                     </div>
                 ))}
                 </div>
@@ -318,31 +318,31 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                 zIndex: selectedObjectId === wormObject.id ? 10 : 5,
               }}
             >
-              <WormIcon className={`w-full h-full text-white ${selectedObjectId === wormObject.id ? 'drop-shadow-[0_0_8px_hsl(var(--accent))]' : ''}`} style={{color: wormObject.color}}/>
+              <WormIcon className={`w-full h-full ${selectedObjectId === wormObject.id ? 'drop-shadow-[0_0_8px_hsl(var(--accent))]' : ''}`} style={{color: wormObject.color}}/>
             </div>
           )}
         </div>
       </div>
       
       <AlertDialog open={win} onOpenChange={setWin}>
-        <AlertDialogContent>
+        <AlertDialogContent className="bg-primary/80 backdrop-blur-sm border-accent">
           <AlertDialogHeader>
-            <AlertDialogTitle className="flex flex-col items-center gap-4 text-2xl">
-                <WormIcon className="w-20 h-auto text-green-500"/>
+            <AlertDialogTitle className="flex flex-col items-center gap-4 text-2xl text-white">
+                <WormIcon className="w-20 h-auto text-accent"/>
                 You Win!
             </AlertDialogTitle>
-            <AlertDialogDescription className="text-center">
+            <AlertDialogDescription className="text-center text-white/80">
               {isPlaytest ? "Playtest successful!" : `You passed Level ${level.order}! Great job!`}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter className="sm:justify-center gap-2">
             {isPlaytest ? (
-              <Button onClick={() => router.push('/create')} variant="outline">
+              <Button onClick={() => router.push('/create')} variant="outline" className="bg-white/10 text-white hover:bg-white/20">
                 Back to Editor
               </Button>
             ) : (
                <>
-                <Button onClick={() => router.push('/')} variant="outline">
+                <Button onClick={() => router.push('/')} variant="outline" className="bg-white/10 text-white hover:bg-white/20">
                   Back to Menu
                 </Button>
                 {nextLevelId ? (
@@ -350,7 +350,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                     Next Level
                   </Button>
                 ) : (
-                     <p className="text-sm text-muted-foreground">You have completed all levels!</p>
+                     <p className="text-sm text-white/70">You have completed all levels!</p>
                 )}
                </>
             )}

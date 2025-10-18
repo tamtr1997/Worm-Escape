@@ -1,4 +1,3 @@
-
 [
   {
     "id": "level-demo-1",
@@ -7,172 +6,592 @@
     "cols": 10,
     "grid": [
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "worm", "color": "hsl(120, 60%, 50%)" },
-        { "type": "worm", "color": "hsl(120, 60%, 50%)" },
-        { "type": "worm", "color": "hsl(120, 60%, 50%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#3b82f6" },
-        { "type": "block", "color": "#3b82f6" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "apple", "color": "hsl(0, 84%, 60%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "worm",
+          "color": "hsl(120, 60%, 50%)"
+        },
+        {
+          "type": "worm",
+          "color": "hsl(120, 60%, 50%)"
+        },
+        {
+          "type": "worm",
+          "color": "hsl(120, 60%, 50%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#3b82f6"
+        },
+        {
+          "type": "block",
+          "color": "#3b82f6"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "apple",
+          "color": "hsl(0, 84%, 60%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ]
     ]
   },
@@ -183,172 +602,592 @@
     "cols": 10,
     "grid": [
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "worm", "color": "hsl(120, 60%, 50%)" },
-        { "type": "worm", "color": "hsl(120, 60%, 50%)" },
-        { "type": "worm", "color": "hsl(120, 60%, 50%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "worm",
+          "color": "hsl(120, 60%, 50%)"
+        },
+        {
+          "type": "worm",
+          "color": "hsl(120, 60%, 50%)"
+        },
+        {
+          "type": "worm",
+          "color": "hsl(120, 60%, 50%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#ef4444" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#22c55e" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#ef4444"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#22c55e"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#ef4444" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#22c55e" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#ef4444"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#22c55e"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#ef4444" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#22c55e" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#ef4444"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#22c55e"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#ef4444" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#22c55e" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#ef4444"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#22c55e"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#ef4444" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#22c55e" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#ef4444"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#22c55e"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#ef4444" },
-        { "type": "block", "color": "#eab308" },
-        { "type": "block", "color": "#eab308" },
-        { "type": "block", "color": "#22c55e" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#ef4444"
+        },
+        {
+          "type": "block",
+          "color": "#eab308"
+        },
+        {
+          "type": "block",
+          "color": "#eab308"
+        },
+        {
+          "type": "block",
+          "color": "#22c55e"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "apple", "color": "hsl(0, 84%, 60%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "apple",
+          "color": "hsl(0, 84%, 60%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ]
     ]
   },
@@ -359,172 +1198,592 @@
     "cols": 10,
     "grid": [
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "worm", "color": "hsl(120, 60%, 50%)" },
-        { "type": "worm", "color": "hsl(120, 60%, 50%)" },
-        { "type": "worm", "color": "hsl(120, 60%, 50%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "worm",
+          "color": "hsl(120, 60%, 50%)"
+        },
+        {
+          "type": "worm",
+          "color": "hsl(120, 60%, 50%)"
+        },
+        {
+          "type": "worm",
+          "color": "hsl(120, 60%, 50%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#3b82f6" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#3b82f6" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#3b82f6"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#3b82f6"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#3b82f6" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#3b82f6" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#3b82f6"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#3b82f6"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#3b82f6" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#22c55e" },
-        { "type": "block", "color": "#22c55e" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#3b82f6" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#3b82f6"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#22c55e"
+        },
+        {
+          "type": "block",
+          "color": "#22c55e"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#3b82f6"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#ef4444" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#ef4444" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#ef4444"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#ef4444"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#ef4444" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#ef4444" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#ef4444"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#ef4444"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#ef4444" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#eab308" },
-        { "type": "block", "color": "#eab308" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "block", "color": "#ef4444" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#ef4444"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#eab308"
+        },
+        {
+          "type": "block",
+          "color": "#eab308"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "block",
+          "color": "#ef4444"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "apple", "color": "hsl(0, 84%, 60%)" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "empty", "color": "transparent" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "apple",
+          "color": "hsl(0, 84%, 60%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ],
       [
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" },
-        { "type": "frame", "color": "hsl(240, 10%, 40%)" }
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "frame",
+          "color": "hsl(240, 10%, 40%)"
+        }
       ]
     ]
   }

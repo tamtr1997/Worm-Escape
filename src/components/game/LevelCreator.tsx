@@ -20,13 +20,18 @@ const ROWS = 14;
 const COLS = 10;
 
 const BLOCK_COLORS = [
-  '#3b82f6', '#ef4444', '#22c55e', '#eab308', '#8b5cf6', '#f97316'
+  '#F9C600', // accentYellow
+  '#F36B2D', // accentOrange
+  '#52B848', // accentGreen
+  '#9B5DE5', // accentPurple
+  '#3498DB', // accentBlue
+  '#E74C3C', // accentRed
 ];
 
 const TOOL_CONFIG: Record<BlockType, { color: string; name: string; icon: React.ReactNode }> = {
-  frame: { color: 'hsl(240, 10%, 40%)', name: 'Frame', icon: <Frame className="h-5 w-5"/> },
-  worm: { color: 'hsl(120, 60%, 50%)', name: 'Worm', icon: <WormIcon className="h-5 w-5" /> },
-  apple: { color: 'hsl(0, 84%, 60%)', name: 'Apple', icon: <Apple className="h-5 w-5" /> },
+  frame: { color: 'hsl(231, 30%, 30%)', name: 'Frame', icon: <Frame className="h-5 w-5"/> },
+  worm: { color: '#52B848', name: 'Worm', icon: <WormIcon className="h-5 w-5" /> },
+  apple: { color: '#E74C3C', name: 'Apple', icon: <Apple className="h-5 w-5" /> },
   block: { color: BLOCK_COLORS[0], name: 'Block', icon: <Pipette className="h-5 w-5"/> },
   empty: { color: 'transparent', name: 'Eraser', icon: <Eraser className="h-5 w-5"/> },
 };
@@ -150,43 +155,43 @@ export default function LevelCreator() {
   return (
     <TooltipProvider>
     <div className="flex flex-col xl:flex-row gap-4 max-w-screen-2xl mx-auto p-4 h-[calc(100vh-2rem)]">
-        <Card className="w-full xl:w-96 flex-shrink-0">
+        <Card className="w-full xl:w-96 flex-shrink-0 bg-primary/30 border-primary/50">
             <CardHeader>
-                <CardTitle className='flex justify-between items-center'>
+                <CardTitle className='flex justify-between items-center text-foreground'>
                     <span>Level Management</span>
-                     <Button onClick={() => router.push('/')} variant="ghost" size="icon" className="h-8 w-8">
+                     <Button onClick={() => router.push('/')} variant="ghost" size="icon" className="h-8 w-8 text-foreground hover:bg-white/10 hover:text-white">
                         <Home className="h-5 w-5" />
                         <span className="sr-only">Back to Home</span>
                     </Button>
                 </CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col gap-4">
-                 <Button onClick={startNewLevel} className="w-full">
+                 <Button onClick={startNewLevel} className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
                     <PlusCircle className="mr-2 h-4 w-4" /> Create New Level
                 </Button>
-                <ScrollArea className="h-[calc(100vh-16rem)] border rounded-lg p-2">
+                <ScrollArea className="h-[calc(100vh-16rem)] border rounded-lg p-2 border-primary/50 bg-primary/20">
                     {isLoading ? (
                       <div className="space-y-2">
-                        {[...Array(5)].map((_, i) => <Skeleton key={i} className="h-12 w-full" />)}
+                        {[...Array(5)].map((_, i) => <Skeleton key={i} className="h-12 w-full bg-white/10" />)}
                       </div>
                     ) : levels.length > 0 ? (
                         <div className="space-y-2">
                         {levels.map((level, index) => (
-                            <div key={level.id} className={`flex items-center gap-2 p-2 rounded-md ${editingLevelId === level.id ? 'bg-primary/10' : ''}`}>
+                            <div key={level.id} className={`flex items-center gap-2 p-2 rounded-md text-foreground ${editingLevelId === level.id ? 'bg-white/20' : 'hover:bg-white/10'}`}>
                                 <span className="font-semibold flex-grow">Level {level.order}</span>
                                 <div className="flex items-center">
                                     <div className="flex flex-col mr-1">
-                                        <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => moveLevel(level.id, 'up')} disabled={index === 0}>
+                                        <Button variant="ghost" size="icon" className="h-6 w-6 text-foreground hover:bg-white/20" onClick={() => moveLevel(level.id, 'up')} disabled={index === 0}>
                                             <ArrowUp className="h-4 w-4" />
                                         </Button>
-                                        <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => moveLevel(level.id, 'down')} disabled={index === levels.length - 1}>
+                                        <Button variant="ghost" size="icon" className="h-6 w-6 text-foreground hover:bg-white/20" onClick={() => moveLevel(level.id, 'down')} disabled={index === levels.length - 1}>
                                             <ArrowDown className="h-4 w-4" />
                                         </Button>
                                     </div>
-                                    <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => startEditingLevel(level)}>
+                                    <Button variant="ghost" size="icon" className="h-8 w-8 text-foreground hover:bg-white/20" onClick={() => startEditingLevel(level)}>
                                         <Pencil className="h-4 w-4" />
                                     </Button>
-                                    <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive/80 hover:text-destructive" onClick={() => handleDelete(level.id)}>
+                                    <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive/80 hover:text-destructive hover:bg-destructive/20" onClick={() => handleDelete(level.id)}>
                                         <Trash2 className="h-4 w-4" />
                                     </Button>
                                 </div>
@@ -208,14 +213,14 @@ export default function LevelCreator() {
         onMouseLeave={() => setIsDrawing(false)}
       >
         <div 
-          className="grid bg-card p-2 rounded-lg shadow-inner" 
+          className="grid bg-card p-2 rounded-lg shadow-inner border-4 border-primary/50" 
           style={{ gridTemplateColumns: `repeat(${COLS}, 1fr)` }}
         >
           {grid.map((row, rowIndex) =>
             row.map((cell, colIndex) => (
               <div
                 key={`${rowIndex}-${colIndex}`}
-                className="w-8 h-8 md:w-9 md:h-9 border border-border/50"
+                className="w-8 h-8 md:w-9 md:h-9 border border-black/20"
                 style={{ backgroundColor: cell.type === 'empty' ? 'transparent' : cell.color, transition: 'background-color 0.2s' }}
                 onMouseDown={() => handleMouseDown(rowIndex, colIndex)}
                 onMouseEnter={() => handleMouseOver(rowIndex, colIndex)}
@@ -225,11 +230,11 @@ export default function LevelCreator() {
         </div>
       </div>
       
-      <Card className="flex-none w-full xl:w-80">
+      <Card className="flex-none w-full xl:w-80 bg-primary/30 border-primary/50">
         <CardHeader>
-          <CardTitle className="flex justify-between items-center">
+          <CardTitle className="flex justify-between items-center text-foreground">
             <span>Editor Tools</span>
-            <span className="text-sm font-medium text-muted-foreground">
+            <span className="text-sm font-medium text-foreground/80">
               {editingLevelId ? `Editing Level ${levels.find(l => l.id === editingLevelId)?.order || ''}` : 'New Level'}
             </span>
           </CardTitle>
@@ -244,7 +249,7 @@ export default function LevelCreator() {
                       <RadioGroupItem value={key} id={`tool-${key}`} className="sr-only" />
                       <Label
                         htmlFor={`tool-${key}`}
-                        className={`flex flex-col items-center justify-center gap-1.5 rounded-md border-2 p-3 text-center text-sm aspect-square cursor-pointer transition-colors ${selectedTool === key ? 'border-primary bg-primary/10' : 'border-border hover:bg-accent/50'}`}
+                        className={`flex flex-col items-center justify-center gap-1.5 rounded-md border-2 p-3 text-center text-sm aspect-square cursor-pointer transition-colors ${selectedTool === key ? 'border-accent bg-accent/20 text-accent-foreground' : 'border-border bg-white/5 text-foreground hover:bg-white/10'}`}
                       >
                         {icon}
                         <span className="text-xs">{name}</span>
@@ -261,14 +266,14 @@ export default function LevelCreator() {
           
           {selectedTool === 'block' && (
             <div className="space-y-3">
-              <Label>Block Color</Label>
+              <Label className="text-foreground">Block Color</Label>
               <div className="flex flex-wrap gap-2">
                 {BLOCK_COLORS.map(color => (
                   <Button
                     key={color}
                     aria-label={`Select color ${color}`}
                     onClick={() => setSelectedBlockColor(color)}
-                    className={`h-8 w-8 rounded-full border-2 ${selectedBlockColor === color ? 'border-primary' : 'border-transparent'}`}
+                    className={`h-8 w-8 rounded-full border-2 ${selectedBlockColor === color ? 'border-white' : 'border-transparent'}`}
                     style={{ backgroundColor: color }}
                   />
                 ))}
@@ -277,10 +282,10 @@ export default function LevelCreator() {
           )}
 
           <div className="flex flex-col gap-3 mt-4">
-            <Button onClick={handleSave} className="bg-primary hover:bg-primary/90">
+            <Button onClick={handleSave} className="bg-accent text-accent-foreground hover:bg-accent/90">
               <Save className="mr-2 h-4 w-4" /> Save Level
             </Button>
-            <Button onClick={handlePlaytest} variant="outline">
+            <Button onClick={handlePlaytest} variant="outline" className="bg-white/10 text-foreground hover:bg-white/20">
               <Play className="mr-2 h-4 w-4" /> Playtest
             </Button>
           </div>
