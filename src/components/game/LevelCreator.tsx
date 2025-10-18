@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
@@ -6,13 +7,14 @@ import { useLevels } from '@/hooks/useLevels';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { BlockType, GridCell, Level } from '@/lib/types';
-import { Home, Save, Eraser, Pipette, Frame, Apple, Trash2, Pencil, ArrowUp, ArrowDown, Play, PlusCircle } from 'lucide-react';
+import { Home, Save, Eraser, Pipette, Frame, Apple, Trash2, Pencil, ArrowUp, ArrowDown, Play, PlusCircle, Share2 } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 import { WormIcon } from '../icons/WormIcon';
 import { useToast } from '@/hooks/use-toast';
 import { ScrollArea } from '../ui/scroll-area';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Label } from '../ui/label';
+import { Skeleton } from '../ui/skeleton';
 
 const ROWS = 14;
 const COLS = 10;
@@ -42,10 +44,8 @@ export default function LevelCreator() {
   const { toast } = useToast();
 
   const router = useRouter();
-  const { levels, saveLevel, updateLevel, deleteLevel, moveLevel } = useLevels();
+  const { levels, saveLevel, updateLevel, deleteLevel, moveLevel, isLoading } = useLevels();
   
-  const sortedLevels = [...levels].sort((a, b) => a.order - b.order);
-
   const startNewLevel = useCallback(() => {
     setEditingLevelId(null);
     setGrid(initialGrid());
@@ -78,18 +78,18 @@ export default function LevelCreator() {
     return true;
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!validateGrid()) return;
     
-    const currentLevel = sortedLevels.find(l => l.id === editingLevelId);
-    const order = currentLevel ? currentLevel.order : -1;
-    const levelData = { rows: ROWS, cols: COLS, grid, order };
+    const levelData = { rows: ROWS, cols: COLS, grid };
 
     if (editingLevelId) {
-      updateLevel(editingLevelId, levelData);
+      await updateLevel(editingLevelId, levelData);
     } else {
-      const newLevel = saveLevel(levelData);
-      setEditingLevelId(newLevel.id);
+      const newLevel = await saveLevel(levelData);
+      if (newLevel) {
+        setEditingLevelId(newLevel.id);
+      }
     }
   };
 
@@ -140,6 +140,13 @@ export default function LevelCreator() {
     }
   }
 
+  const handleDelete = async (levelId: string) => {
+    await deleteLevel(levelId);
+    if (editingLevelId === levelId) {
+      startNewLevel();
+    }
+  }
+
   return (
     <TooltipProvider>
     <div className="flex flex-col xl:flex-row gap-4 max-w-screen-2xl mx-auto p-4 h-[calc(100vh-2rem)]">
@@ -158,9 +165,13 @@ export default function LevelCreator() {
                     <PlusCircle className="mr-2 h-4 w-4" /> Create New Level
                 </Button>
                 <ScrollArea className="h-[calc(100vh-16rem)] border rounded-lg p-2">
-                    {sortedLevels.length > 0 ? (
+                    {isLoading ? (
+                      <div className="space-y-2">
+                        {[...Array(5)].map((_, i) => <Skeleton key={i} className="h-12 w-full" />)}
+                      </div>
+                    ) : levels.length > 0 ? (
                         <div className="space-y-2">
-                        {sortedLevels.map((level, index) => (
+                        {levels.map((level, index) => (
                             <div key={level.id} className={`flex items-center gap-2 p-2 rounded-md ${editingLevelId === level.id ? 'bg-primary/10' : ''}`}>
                                 <span className="font-semibold flex-grow">Level {level.order}</span>
                                 <div className="flex items-center">
@@ -168,14 +179,14 @@ export default function LevelCreator() {
                                         <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => moveLevel(level.id, 'up')} disabled={index === 0}>
                                             <ArrowUp className="h-4 w-4" />
                                         </Button>
-                                        <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => moveLevel(level.id, 'down')} disabled={index === sortedLevels.length - 1}>
+                                        <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => moveLevel(level.id, 'down')} disabled={index === levels.length - 1}>
                                             <ArrowDown className="h-4 w-4" />
                                         </Button>
                                     </div>
                                     <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => startEditingLevel(level)}>
                                         <Pencil className="h-4 w-4" />
                                     </Button>
-                                    <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive/80 hover:text-destructive" onClick={() => deleteLevel(level.id)}>
+                                    <Button variant="ghost" size="icon" className="h-8 w-8 text-destructive/80 hover:text-destructive" onClick={() => handleDelete(level.id)}>
                                         <Trash2 className="h-4 w-4" />
                                     </Button>
                                 </div>
@@ -219,7 +230,7 @@ export default function LevelCreator() {
           <CardTitle className="flex justify-between items-center">
             <span>Editor Tools</span>
             <span className="text-sm font-medium text-muted-foreground">
-              {editingLevelId ? `Editing Level ${sortedLevels.find(l => l.id === editingLevelId)?.order || ''}` : 'New Level'}
+              {editingLevelId ? `Editing Level ${levels.find(l => l.id === editingLevelId)?.order || ''}` : 'New Level'}
             </span>
           </CardTitle>
         </CardHeader>

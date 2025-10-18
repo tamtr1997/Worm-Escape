@@ -1,3 +1,4 @@
+
 'use client';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -6,16 +7,15 @@ import { useLevels } from '@/hooks/useLevels';
 import { PlusCircle, Play, Trash2, Lock, Unlock } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { WormIcon } from '@/components/icons/WormIcon';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function Home() {
-  const { levels, highestLevelUnlocked, resetProgress } = useLevels();
+  const { levels, highestLevelUnlocked, resetProgress, isLoading } = useLevels();
   const router = useRouter();
 
   const handlePlay = (levelId: string) => {
     router.push(`/play/${levelId}`);
   };
-  
-  const sortedLevels = [...levels].sort((a, b) => a.order - b.order);
 
   return (
     <main className="flex min-h-screen flex-col items-center p-4 sm:p-8 md:p-12 bg-background font-body">
@@ -41,9 +41,25 @@ export default function Home() {
 
         <section>
           <h2 className="text-3xl font-semibold mb-6 text-center text-primary/90">Levels</h2>
-          {sortedLevels.length > 0 ? (
+          {isLoading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {sortedLevels.map((level) => {
+              {[...Array(3)].map((_, i) => (
+                <Card key={i}>
+                  <CardHeader>
+                    <Skeleton className="h-6 w-24" />
+                  </CardHeader>
+                  <CardContent>
+                    <Skeleton className="h-4 w-32" />
+                  </CardContent>
+                  <CardFooter>
+                    <Skeleton className="h-10 w-24" />
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
+          ) : levels.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {levels.map((level) => {
                 const isUnlocked = level.order <= highestLevelUnlocked;
                 return (
                 <Card key={level.id} className={`flex flex-col justify-between transition-all hover:shadow-xl hover:-translate-y-1 bg-card ${!isUnlocked ? 'bg-muted/50' : ''}`}>
