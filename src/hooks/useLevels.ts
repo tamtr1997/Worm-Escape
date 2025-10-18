@@ -95,7 +95,7 @@ export function useLevels() {
     
     const success = await saveLevelsToServer(updatedLevels);
     if (success) {
-      setLevels(updatedLevels);
+      setLevels(updatedLevels.sort((a, b) => a.order - b.order));
       toast({
         title: "Level Saved!",
         description: `New level has been saved as Level ${newLevel.order}.`,
@@ -123,7 +123,7 @@ export function useLevels() {
 
     const success = await saveLevelsToServer(updatedLevels);
     if (success) {
-        setLevels(updatedLevels);
+        setLevels(updatedLevels.sort((a, b) => a.order - b.order));
         toast({
           title: 'Level Updated!',
           description: `Level ${levelOrder} has been updated.`,
@@ -146,6 +146,10 @@ export function useLevels() {
       const success = await saveLevelsToServer(finalLevels);
       if(success) {
           setLevels(finalLevels);
+          toast({
+              title: "Order Saved",
+              description: "The new level order has been saved.",
+          });
       } else {
           toast({
               title: "Error",
