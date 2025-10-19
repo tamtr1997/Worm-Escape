@@ -1,189 +1,5 @@
 [
   {
-    "rows": 8,
-    "cols": 5,
-    "grid": [
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "apple",
-          "color": "hsl(0, 84%, 60%)"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "frame",
-          "color": "hsl(240, 10%, 40%)"
-        },
-        {
-          "type": "frame",
-          "color": "hsl(240, 10%, 40%)"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "frame",
-          "color": "hsl(240, 10%, 40%)"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "worm",
-          "color": "hsl(120, 60%, 50%)"
-        },
-        {
-          "type": "worm",
-          "color": "hsl(120, 60%, 50%)"
-        },
-        {
-          "type": "worm",
-          "color": "hsl(120, 60%, 50%)"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ]
-    ],
-    "id": "level-1760808919718",
-    "order": 1
-  },
-  {
     "rows": 16,
     "cols": 10,
     "grid": [
@@ -369,8 +185,92 @@
           "color": "transparent"
         },
         {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
           "type": "frame",
           "color": "hsl(240, 10%, 40%)"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        }
+      ],
+      [
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        }
+      ],
+      [
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
         },
         {
           "type": "empty",
@@ -407,8 +307,8 @@
           "color": "transparent"
         },
         {
-          "type": "empty",
-          "color": "transparent"
+          "type": "block",
+          "color": "#3b82f6"
         },
         {
           "type": "empty",
@@ -440,6 +340,14 @@
         }
       ],
       [
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
+        {
+          "type": "empty",
+          "color": "transparent"
+        },
         {
           "type": "empty",
           "color": "transparent"
@@ -471,14 +379,6 @@
         {
           "type": "empty",
           "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
         }
       ],
       [
@@ -572,99 +472,11 @@
         },
         {
           "type": "empty",
-          "color": "transparent",
-          "floorColor": "#3b82f6"
-        },
-        {
-          "type": "empty",
-          "color": "transparent",
-          "floorColor": "#3b82f6"
-        },
-        {
-          "type": "empty",
-          "color": "transparent",
-          "floorColor": "#3b82f6"
-        },
-        {
-          "type": "empty",
-          "color": "transparent",
-          "floorColor": "#3b82f6"
-        },
-        {
-          "type": "empty",
           "color": "transparent"
         },
         {
           "type": "empty",
           "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "block",
-          "color": "#eab308"
         },
         {
           "type": "empty",
@@ -743,20 +555,20 @@
           "color": "transparent"
         },
         {
-          "type": "block",
-          "color": "#f97316"
+          "type": "empty",
+          "color": "transparent"
         },
         {
-          "type": "block",
-          "color": "#f97316"
+          "type": "empty",
+          "color": "transparent"
         },
         {
-          "type": "block",
-          "color": "#f97316"
+          "type": "empty",
+          "color": "transparent"
         },
         {
-          "type": "block",
-          "color": "#f97316"
+          "type": "empty",
+          "color": "transparent"
         },
         {
           "type": "empty",
@@ -864,7 +676,8 @@
         }
       ]
     ],
-    "id": "level-1760813372531",
-    "order": 2
+    "maxTime": 70,
+    "id": "level-1760844313422",
+    "order": 1
   }
 ]

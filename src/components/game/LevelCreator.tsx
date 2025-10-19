@@ -39,9 +39,13 @@ const createEmptyGrid = (rows: number, cols: number): GridCell[][] =>
     Array(cols).fill(null).map(() => ({ type: 'empty', color: 'transparent' }))
   );
 
+
+
 export default function LevelCreator() {
   const [rows, setRows] = useState(16);
   const [cols, setCols] = useState(10);
+
+  const [maxTime, setTime] = useState(60);
   const [grid, setGrid] = useState<GridCell[][]>(createEmptyGrid(rows, cols));
   const [editingLevelId, setEditingLevelId] = useState<string | null>(null);
   const [selectedTool, setSelectedTool] = useState<ToolType>('frame');
@@ -55,6 +59,7 @@ export default function LevelCreator() {
   const sortedLevels = [...levels].sort((a, b) => a.order - b.order);
 
   const startNewLevel = useCallback(() => {
+    
     setEditingLevelId(null);
     setGrid(createEmptyGrid(rows, cols));
     toast({ title: "New Canvas", description: `Started a new ${rows}x${cols} level. Don't forget to save!` });
@@ -64,6 +69,8 @@ export default function LevelCreator() {
     setEditingLevelId(level.id);
     setRows(level.rows);
     setCols(level.cols);
+    setTime(level.maxTime)
+
     const gridCopy = level.grid.map(row => row.map(cell => ({ ...cell })));
     setGrid(gridCopy);
   }, []);
@@ -90,7 +97,7 @@ export default function LevelCreator() {
 
   const handleSave = async () => {
     if (!validateGrid()) return;
-    const levelData = { rows, cols, grid };
+    const levelData = { rows, cols, grid, maxTime };
     if (editingLevelId) {
       await updateLevel(editingLevelId, levelData);
     } else {
@@ -215,7 +222,13 @@ export default function LevelCreator() {
                 />
               </div>
             </div>
-
+            <div>
+              <Label htmlFor="cols">Max Time</Label>
+                <Input id="time" type="number" min={60} 
+                  value={maxTime}
+                  onChange={(e) => setTime(Number(e.target.value))}
+                />
+              </div>
             <Button onClick={startNewLevel} className="w-full">
               <PlusCircle className="mr-2 h-4 w-4" /> Create New Level
             </Button>

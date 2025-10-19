@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useLevels } from '@/hooks/useLevels';
 import type { Level, GridCell, GameObject } from '@/lib/types';
 import { Button } from '@/components/ui/button';
-import { Home, RotateCcw, ArrowBigUp, ArrowBigDown, ArrowBigLeft, ArrowBigRight } from 'lucide-react';
+import { Home, RotateCcw, ArrowBigUp, ArrowBigDown, ArrowBigLeft, ArrowBigRight, Clock } from 'lucide-react';
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '../ui/alert-dialog';
 import { WormIcon , Block} from '../icons/WormIcon';
 import { Apple } from 'lucide-react';
@@ -77,6 +77,8 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
   const [gameObjects, setGameObjects] = useState<GameObject[]>([]);
   const [selectedObjectId, setSelectedObjectId] = useState<string | null>(null);
   const [win, setWin] = useState(false);
+  const [timeUp, setTimeUp] = useState(false); // ✅ Thêm state cho hết giờ
+  const [timeLeft, setTimeLeft] = useState(0); // ✅ Thêm state thời gian còn lại
   const [nextLevelId, setNextLevelId] = useState<string | null>(null);
 
   // Thêm state cho kích thước ô
@@ -87,6 +89,9 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
   const dragStartPos = useRef<{ x: number, y: number }>({ x: 0, y: 0 });
   const lastMoveTimestamp = useRef(0);
 
+  // Timer ref
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
     const levelData = getLevel(levelId);
     if (levelData) {
@@ -96,6 +101,10 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
       setGameObjects(parseLevelToGameObjects(newRuntimeGrid));
       const nextLevel = getNextLevel(levelData.order);
       setNextLevelId(nextLevel ? nextLevel.id : null);
+
+      // ✅ Khởi tạo thời gian từ level data
+      const maxTime = levelData.maxTime || 60;
+      setTimeLeft(maxTime);
 
       // Tính toán kích thước ô dựa trên số hàng và cột
       const containerWidth = 375;
@@ -113,6 +122,36 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
     }
   }, [levelId, getLevel, getNextLevel]);
 
+  // ✅ Effect cho bộ đếm thời gian
+  useEffect(() => {
+    if (level && timeLeft > 0 && !win && !timeUp) {
+      timerRef.current = setInterval(() => {
+        setTimeLeft(prev => {
+          if (prev <= 1) {
+            setTimeUp(true);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    };
+  }, [level, timeLeft, win, timeUp]);
+
+  // ✅ Dừng timer khi win hoặc timeUp
+  useEffect(() => {
+    if (win || timeUp) {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    }
+  }, [win, timeUp]);
+
   const resetGame = useCallback(() => {
     if (level) {
         const newRuntimeGrid = createRuntimeGrid(level.grid);
@@ -120,6 +159,10 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
         setGameObjects(parseLevelToGameObjects(newRuntimeGrid));
         setSelectedObjectId(null);
         setWin(false);
+        setTimeUp(false);
+        // ✅ Reset thời gian
+        const maxTime = level.maxTime || 60;
+        setTimeLeft(maxTime);
     }
   }, [level]);
 
@@ -128,10 +171,14 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
         completeLevel(level.order);
     }
     setWin(true);
+    // ✅ Dừng timer khi thắng
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
   }, [level, isPlaytest, completeLevel]);
   
   const handleMove = useCallback((dr: number, dc: number) => {
-    if (!selectedObjectId || !level || runtimeGrid.length === 0) return;
+    if (!selectedObjectId || !level || runtimeGrid.length === 0 || timeUp) return;
 
     setGameObjects(prevObjects => {
         const newObjects = JSON.parse(JSON.stringify(prevObjects)) as GameObject[];
@@ -241,9 +288,10 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
         return prevObjects;
     });
-}, [selectedObjectId, level, runtimeGrid, handleWin]);
+}, [selectedObjectId, level, runtimeGrid, handleWin, timeUp]);
 
     const handleMouseDown = (e: React.MouseEvent, objectId: string) => {
+        if (timeUp) return; // ✅ Không cho tương tác khi hết giờ
         setSelectedObjectId(objectId);
         setIsDragging(true);
         dragStartPos.current = { x: e.clientX, y: e.clientY };
@@ -252,7 +300,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
     };
 
     const handleMouseMove = useCallback((e: MouseEvent) => {
-        if (!isDragging || !selectedObjectId) return;
+        if (!isDragging || !selectedObjectId || timeUp) return;
 
         const now = Date.now();
         if (now - lastMoveTimestamp.current < 150) { 
@@ -282,7 +330,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
             dragStartPos.current = { x: e.clientX, y: e.clientY };
             lastMoveTimestamp.current = now;
         }
-    }, [isDragging, selectedObjectId, handleMove, cellSize]);
+    }, [isDragging, selectedObjectId, handleMove, cellSize, timeUp]);
 
     const handleMouseUp = useCallback(() => {
         if (isDragging) {
@@ -335,6 +383,13 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
   const gridWidth = cellSize * level.cols;
   const gridHeight = cellSize * level.rows;
 
+  // ✅ Format thời gian thành MM:SS
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+  };
+
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-slate-900 p-6 select-none">
       {/* Khung điện thoại */}
@@ -343,6 +398,15 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
         <Button variant="outline" size="icon" onClick={() => router.push(isPlaytest ? '/create' : '/')}><Home className="h-4 w-4" /></Button>
         <Button variant="outline" size="icon" onClick={resetGame}><RotateCcw className="h-4 w-4" /></Button>
       </div>
+      
+      {/* ✅ Hiển thị bộ đếm thời gian */}
+      <div className="flex items-center gap-2 mt-2">
+        <Clock className={`h-5 w-5 ${timeLeft <= 10 ? 'text-red-500 animate-pulse' : 'text-white'}`} />
+        <span className={`text-xl font-bold ${timeLeft <= 10 ? 'text-red-500 animate-pulse' : 'text-white'}`}>
+          {formatTime(timeLeft)}
+        </span>
+      </div>
+
       <h1 className="text-3xl font-bold text-primary font-headline">Level {level.order} {isPlaytest && '(Playtest)'}</h1>
       <div 
         className="relative border-4 border-primary/20 bg-card p-1 rounded-lg shadow-2xl flex items-center justify-center" 
@@ -431,7 +495,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
                     <div className="absolute inset-0 pointer-events-none" style={{ zIndex: (selectedObjectId === obj.id ? 11 : 6) }}>
                       {obj.type === 'apple' && (
-                        <Apple className="w-full h-full p-1.5 text-white" fill="#fff" />
+                        <Apple className="w-full h-full p-1.5 text-white" fill="#ed0707ff" />
                       )}
                       
                       {obj.movement === 'horizontal' && (
@@ -470,6 +534,30 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
         </div>
       </div>
       
+      {/* ✅ Dialog khi hết giờ */}
+      <AlertDialog open={timeUp} onOpenChange={setTimeUp}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex flex-col items-center gap-4 text-2xl">
+                <Clock className="w-16 h-16 text-red-500" />
+                Time's Up!
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-center">
+              You ran out of time! Don't worry, you can try again.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter className="sm:justify-center gap-2">
+            <Button onClick={() => router.push('/')} variant="outline">
+              Back to Menu
+            </Button>
+            <Button onClick={resetGame} className="bg-primary hover:bg-primary/90">
+              Try Again
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Dialog khi thắng */}
       <AlertDialog open={win} onOpenChange={setWin}>
         <AlertDialogContent>
           <AlertDialogHeader>

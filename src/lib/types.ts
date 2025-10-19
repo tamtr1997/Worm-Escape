@@ -15,6 +15,7 @@ export interface Level {
   rows: number;
   cols: number;
   grid: GridCell[][];
+  maxTime: number;
 }
 
 export interface GameObject {
@@ -23,5 +24,5 @@ export interface GameObject {
     cells: { row: number, col: number }[];
     color: string;
     movement?: Movement;
-    maxTime: number;
+    
 }
