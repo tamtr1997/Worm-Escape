@@ -395,13 +395,14 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
   };
 
+  
+
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-slate-900 p-6 select-none">
       {/* Khung điện thoại */}
       <div className="relative bg-[#0f172a] w-[390px] h-[844px] rounded-[2rem] shadow-2xl overflow-hidden border border-gray-700 flex flex-col items-center gap-4 py-10">
         <div className="absolute top-4 left-4 flex gap-2">
         <Button variant="outline" size="icon" onClick={() => router.push(isPlaytest ? '/create' : '/')}><Home className="h-4 w-4" /></Button>
-        <Button variant="outline" size="icon" onClick={resetGame}><RotateCcw className="h-4 w-4" /></Button>
       </div>
       
       {/* ✅ Hiển thị bộ đếm thời gian */}
@@ -480,28 +481,29 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                     transition: 'top 0.15s ease-in-out, left 0.15s ease-in-out',
                   }}
                 >
+                  
                    {/* Render từng cell riêng */}
                    {/* Render từng cell riêng */}
-                {obj.cells.map((cell, i) => (
-                  <Block
-                    key={`${obj.id}-${i}`} // key cố định, không theo row/col
-                    color={obj.color}
-                    size={cellSize}
-                    className="absolute"
-                    style={{
-                      top: `${(cell.row - minRow) * cellSize}px`,
-                      left: `${(cell.col - minCol) * cellSize}px`,
-                      outline: selectedObjectId === obj.id ? '2px solid #00D8FF' : undefined,
-                      outlineOffset: selectedObjectId === obj.id ? '-2px' : undefined,
-                      zIndex: selectedObjectId === obj.id ? 10 : 5
-                    }}
-                  />
-                ))}
+              {obj.cells.map((cell, i) => (
+                <Block
+                  key={`${obj.id}-${i}`} // key cố định, không theo row/col
+                  color={obj.color}
+                  size={cellSize}
+                  className="absolute"
+                  style={{
+                    top: `${(cell.row - minRow) * cellSize}px`,
+                    left: `${(cell.col - minCol) * cellSize}px`,
+                    outline: selectedObjectId === obj.id ? '2px solid #00D8FF' : undefined,
+                    outlineOffset: selectedObjectId === obj.id ? '-2px' : undefined,
+                    zIndex: selectedObjectId === obj.id ? 10 : 5
+                  }}
+                />
+              ))}
 
 
                     <div className="absolute inset-0 pointer-events-none" style={{ zIndex: (selectedObjectId === obj.id ? 11 : 6) }}>
                       {obj.type === 'apple' && (
-                        <Apple className="w-full h-full p-1.5 text-white" fill="#ed0707ff" />
+                        <Apple className="w-full h-full p-1.5 text-white" fill="#faf8f8ff" />
                       )}
                       
                       {obj.movement === 'horizontal' && (
@@ -519,6 +521,8 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                           </div>
                       )}
                     </div>
+                {/* Nút Play — nằm ngay trên footer */}
+              
                 </div>
               )
           })}
@@ -537,7 +541,9 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
               <WormIcon className={`w-full h-full text-white ${selectedObjectId === wormObject.id ? 'drop-shadow-[0_0_8px_hsl(var(--accent))]' : ''}`} style={{color: wormObject.color}}/>
             </div>
           )}
+          
         </div>
+       
       </div>
       
       {/* ✅ Dialog khi hết giờ */}
@@ -598,6 +604,14 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
         </AlertDialogContent>
       </AlertDialog>
       
+
+      <div className="inline-block cursor-pointer" onClick={resetGame}>
+        <img
+          src="/reload.png"
+          alt="Game Reload"
+          className="w-[60px] h-[60px] object-contain"
+        />
+      </div>
       </div>
     </main>
 
