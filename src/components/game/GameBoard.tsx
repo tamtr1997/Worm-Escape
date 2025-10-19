@@ -177,8 +177,8 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
     }
   }, [level, isPlaytest, completeLevel]);
   
-  const handleMove = useCallback((dr: number, dc: number) => {
-    if (!selectedObjectId || !level || runtimeGrid.length === 0 || timeUp) return;
+ const handleMove = useCallback((dr: number, dc: number) => {
+    if (!selectedObjectId || !level || runtimeGrid.length === 0) return;
 
     setGameObjects(prevObjects => {
         const newObjects = JSON.parse(JSON.stringify(prevObjects)) as GameObject[];
@@ -190,6 +190,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
         // Check for movement restrictions
         if (objectToMove.movement === 'horizontal' && dr !== 0) return prevObjects;
         if (objectToMove.movement === 'vertical' && dc !== 0) return prevObjects;
+
 
         const objectsToMove = new Set<string>([selectedObjectId]);
         const objectsToCheck = [objectToMove];
@@ -237,6 +238,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                     canMove = false;
                     break;
                 }
+
 
                 const occupyingObject = newObjects.find(obj => 
                     !objectsToMove.has(obj.id) && obj.cells.some(c => c.row === newR && c.col === newC)
@@ -288,11 +290,13 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
         return prevObjects;
     });
-}, [selectedObjectId, level, runtimeGrid, handleWin, timeUp]);
+}, [selectedObjectId, level, runtimeGrid, handleWin]);
 
     const handleMouseDown = (e: React.MouseEvent, objectId: string) => {
         if (timeUp) return; // ✅ Không cho tương tác khi hết giờ
+        console.log(e.clientX,e.clientY)
         setSelectedObjectId(objectId);
+        
         setIsDragging(true);
         dragStartPos.current = { x: e.clientX, y: e.clientY };
         lastMoveTimestamp.current = 0;
@@ -301,7 +305,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
     const handleMouseMove = useCallback((e: MouseEvent) => {
         if (!isDragging || !selectedObjectId || timeUp) return;
-
+        
         const now = Date.now();
         if (now - lastMoveTimestamp.current < 150) { 
             return;
@@ -324,9 +328,10 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                 dr = dy > 0 ? 1 : -1;
             }
         }
-
+        
         if (dr !== 0 || dc !== 0) {
             handleMove(dr, dc);
+
             dragStartPos.current = { x: e.clientX, y: e.clientY };
             lastMoveTimestamp.current = now;
         }
@@ -475,22 +480,23 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                     transition: 'top 0.15s ease-in-out, left 0.15s ease-in-out',
                   }}
                 >
-                    {["block"].includes(obj.type) && (
-                      <div className="relative w-full h-full">
-                        {obj.cells.map((cell, i) => (
-                          <Block
-                            key={`${obj.id}-${i}`} // giữ key cố định theo object, không phụ thuộc vị trí
-                            color={obj.color}
-                            size={cellSize}
-                            className="absolute"
-                            style={{
-                              top: `${(cell.row - minRow) * cellSize}px`,
-                              left: `${(cell.col - minCol) * cellSize}px`,
-                            }}
-                          />
-                        ))}
-                      </div>
-                    )}
+                   {/* Render từng cell riêng */}
+                   {/* Render từng cell riêng */}
+                {obj.cells.map((cell, i) => (
+                  <Block
+                    key={`${obj.id}-${i}`} // key cố định, không theo row/col
+                    color={obj.color}
+                    size={cellSize}
+                    className="absolute"
+                    style={{
+                      top: `${(cell.row - minRow) * cellSize}px`,
+                      left: `${(cell.col - minCol) * cellSize}px`,
+                      outline: selectedObjectId === obj.id ? '2px solid #00D8FF' : undefined,
+                      outlineOffset: selectedObjectId === obj.id ? '-2px' : undefined,
+                      zIndex: selectedObjectId === obj.id ? 10 : 5
+                    }}
+                  />
+                ))}
 
 
                     <div className="absolute inset-0 pointer-events-none" style={{ zIndex: (selectedObjectId === obj.id ? 11 : 6) }}>
