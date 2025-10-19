@@ -7,7 +7,7 @@ import type { Level, GridCell, GameObject } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Home, RotateCcw, ArrowBigUp, ArrowBigDown, ArrowBigLeft, ArrowBigRight } from 'lucide-react';
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '../ui/alert-dialog';
-import { WormIcon } from '../icons/WormIcon';
+import { WormIcon , Block} from '../icons/WormIcon';
 import { Apple } from 'lucide-react';
 
 function createRuntimeGrid(levelGrid: GridCell[][]): GridCell[][] {
@@ -355,19 +355,37 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
           height: `${gridHeight}px`
         }}>
           {runtimeGrid.map((row, r) => row.map((cell, c) => (
-            <div 
-              key={`${r}-${c}`} 
-              className="flex items-center justify-center" 
-              style={{ 
-                width: cellSize, 
-                height: cellSize, 
-                backgroundColor: cell.type === 'space' ? cell.color : 'transparent',
-                boxShadow: 'inset 0 0 0 1px hsl(231, 68%, 10%)' 
+          <div
+              key={`${r}-${c}`}
+              className="relative flex items-center justify-center"
+              style={{
+                width: cellSize,
+                height: cellSize,
+                backgroundColor: cell.type === "space" ? cell.color : "transparent",
+                boxShadow: "inset 0 0 0 1px hsl(231, 68%, 10%)",
               }}
             >
-              {cell.type === 'frame' && <div className="w-full h-full" style={{backgroundColor: cell.color}}/>}
-              {cell.floorColor && <div className="w-full h-full" style={{backgroundColor: cell.floorColor, opacity: 0.3}}/>}
+              {/* Block & Frame cells */}
+              {[ "frame"].includes(cell.type) && (
+                <Block
+                  color={cell.color}
+                  size={cellSize}
+                  className="absolute inset-0"
+                />
+              )}
+
+              {/* Floor overlay */}
+              {cell.floorColor && (
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    backgroundColor: cell.floorColor,
+                    opacity: 0.3,
+                  }}
+                />
+              )}
             </div>
+
           )))}
           
           {gameObjects.map(obj => {
@@ -393,22 +411,23 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                     transition: 'top 0.15s ease-in-out, left 0.15s ease-in-out',
                   }}
                 >
-                    {obj.cells.map(cell => (
-                      <div
-                        key={`${cell.row}-${cell.col}`}
-                        className={`absolute border-2 ${selectedObjectId === obj.id ? 'border-accent ring-4 ring-accent/50' : 'border-black/20'} ${getCellClasses(obj, cell)}`}
-                        style={{
-                          top: `${(cell.row - minRow) * cellSize}px`,
-                          left: `${(cell.col - minCol) * cellSize}px`,
-                          width: cellSize,
-                          height: cellSize,
-                          backgroundColor: obj.color,
-                          boxShadow: 'inset 3px 3px 6px rgba(255,255,255,0.25), inset -3px -3px 6px rgba(0,0,0,0.4)',
-                          transition: 'background-color 0.2s',
-                          zIndex: selectedObjectId === obj.id ? 10 : 5
-                        }}
-                      />
-                    ))}
+                    {["block"].includes(obj.type) && (
+                      <div className="relative w-full h-full">
+                        {obj.cells.map((cell, i) => (
+                          <Block
+                            key={`${obj.id}-${i}`} // giữ key cố định theo object, không phụ thuộc vị trí
+                            color={obj.color}
+                            size={cellSize}
+                            className="absolute"
+                            style={{
+                              top: `${(cell.row - minRow) * cellSize}px`,
+                              left: `${(cell.col - minCol) * cellSize}px`,
+                            }}
+                          />
+                        ))}
+                      </div>
+                    )}
+
 
                     <div className="absolute inset-0 pointer-events-none" style={{ zIndex: (selectedObjectId === obj.id ? 11 : 6) }}>
                       {obj.type === 'apple' && (

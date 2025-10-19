@@ -23,4 +23,5 @@ export interface GameObject {
     cells: { row: number, col: number }[];
     color: string;
     movement?: Movement;
+    maxTime: number;
 }

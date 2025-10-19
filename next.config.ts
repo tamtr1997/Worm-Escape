@@ -2,6 +2,14 @@ import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
+  webpack(config) {
+    // Xử lý SVG bằng SVGR để import thành React component
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    });
+    return config;
+  },
   typescript: {
     ignoreBuildErrors: true,
   },

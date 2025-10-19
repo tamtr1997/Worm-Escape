@@ -12,6 +12,7 @@ import { Settings, Heart, Coins, Store, HomeIcon} from 'lucide-react';
 import Image from 'next/image';
 
 
+
 export default function Home() {
   const { levels, highestLevelUnlocked, resetProgress, isLoading } = useLevels();
   const router = useRouter();
@@ -33,29 +34,16 @@ export default function Home() {
             backgroundPosition: 'center',
           }}
     >
+
+      <div className="absolute top-0 left-0 w-full flex justify-center mt-4">
+        <img
+          src="/header.png"
+          alt="Game Header"
+          className="w-[358px] h-[54px] object-contain"
+        />
+      </div>
+    
       
-      <header className="flex items-center justify-between p-4">
-        {/* App Icon */}
-        {/* <div className="w-10 h-10 rounded-xl overflow-hidden border-2 border-white/50">
-          <Image src="/backgroup.png" alt="App Icon" width={40} height={40} />
-        </div> */}
-
-        {/* Stats */}
-        <div className="absolute top-2 right-2 flex items-center gap-3 text-gray-700">
-          <div className="flex items-center bg-white/60 rounded-full px-2 py-1 gap-1 text-sm font-medium">
-            <Coins className="w-4 h-4" />
-            123
-          </div>
-          <div className="flex items-center bg-white/60 rounded-full px-2 py-1 gap-1 text-sm font-medium">
-            <Heart className="w-4 h-4" />
-            12
-          </div>
-          <button className="p-2 rounded-full hover:bg-white/40 transition">
-            <Settings className="w-5 h-5" />
-          </button>
-        </div>
-      </header>
-
 
      <section className="flex flex-col items-center justify-center flex-1 pb-24">
   {isLoading ? (
@@ -107,39 +95,26 @@ export default function Home() {
         });
       })()}
 
-      {/* Nút Play */}
+      {/* Nút Play — nằm ngay trên footer */}
       <Button
         onClick={() => handlePlay(levels[highestLevelUnlocked - 1]?.id)}
-        className="mt-4 bg-green-600 text-white px-10 py-6 text-lg rounded-xl hover:bg-green-700 transition-all"
+        className="absolute bottom-[150px] left-1/2 -translate-x-1/2 bg-green-600 text-white px-10 py-6 text-lg rounded-xl hover:bg-green-700 transition-all"
       >
         Play
       </Button>
+
     </div>
   )}
 </section>
 
         
-        {/* Bottom Navigation */}
-        <nav className="absolute bottom-0 left-0 right-0 flex justify-around bg-green-900/90 text-white py-3 rounded-t-2xl">
-          <Link href="/create" className="flex flex-col items-center text-sm opacity-80 hover:opacity-100 transition">
-            <Store className="w-6 h-6" />
-            <span>Store</span>
-          </Link>
-
-          <Link href="/" className="flex flex-col items-center text-sm opacity-100">
-            <div className="bg-green-700 p-2 rounded-full shadow-lg">
-              <HomeIcon className="w-6 h-6" />
-            </div>
-            <span className="mt-1 font-semibold">Home</span>
-          </Link>
-
-          <Link href="/create" className="flex flex-col items-center text-sm opacity-80 hover:opacity-100 transition">
-            <Store className="w-6 h-6" />
-            <span>Shop</span>
-          </Link>
-        </nav>
-
-
+      <div className="absolute bottom-0 left-0 w-full flex justify-center">
+        <img
+          src="/footer.png"
+          alt="Game Footer"
+          className="w-[390px] h-[110px] object-contain"
+        />
+      </div>
       </div>
       
     </main>
