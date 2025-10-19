@@ -107,8 +107,8 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
       setTimeLeft(maxTime);
 
       // Tính toán kích thước ô dựa trên số hàng và cột
-      const containerWidth = 375;
-      const containerHeight = 600;
+      const containerWidth = 330;
+      const containerHeight = 528;
       
       // Tính kích thước ô tối đa có thể mà không vượt quá container
       const maxCellWidth = containerWidth / levelData.cols;
@@ -605,13 +605,31 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
       </AlertDialog>
       
 
-      <div className="inline-block cursor-pointer" onClick={resetGame}>
-        <img
-          src="/reload.png"
-          alt="Game Reload"
-          className="w-[60px] h-[60px] object-contain"
-        />
-      </div>
+     <div className="flex items-center justify-center gap-6 mt-6">
+  {/* Nút Reload */}
+  <div
+    className="inline-block cursor-pointer hover:scale-110 transition-transform"
+    onClick={resetGame}
+  >
+    <img
+      src="/reload.png"
+      alt="Reload Game"
+      className="w-[60px] h-[60px] object-contain"
+    />
+  </div>
+
+  {/* Nút Next Level */}
+  <div
+    className="inline-block cursor-pointer hover:scale-110 transition-transform"
+    onClick={goToNextLevel}
+  >
+    <img
+      src="/skip.png"
+      alt="Next Level"
+      className="w-[60px] h-[60px] object-contain"
+    />
+  </div>
+</div>
       </div>
     </main>
 
