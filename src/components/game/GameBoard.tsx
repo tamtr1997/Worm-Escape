@@ -463,13 +463,14 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
                 {cell.floorColor && (
                     <div
-                        className="absolute inset-0 transition-all duration-300"
+                        className="absolute inset-0"
                         style={{
                             backgroundColor: cell.floorColor,
                             opacity: 0.5,
-                            boxShadow: (selectedObject && selectedObject.color === cell.floorColor) 
-                                ? `inset 0 0 10px 2px ${selectedObject.color}` 
+                            filter: (selectedObject && selectedObject.color === cell.floorColor) 
+                                ? `drop-shadow(0 0 8px ${selectedObject.color})` 
                                 : 'none',
+                            transition: 'filter 0.3s ease-in-out',
                         }}
                     />
                 )}
