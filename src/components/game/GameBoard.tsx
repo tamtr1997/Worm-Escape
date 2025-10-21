@@ -435,11 +435,12 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
             className="relative border-4 border-primary/20 bg-card p-1 rounded-lg shadow-2xl flex items-center justify-center my-auto" 
             style={{ width: '375px', maxHeight: '440px' }}
         >
-            <div className="relative grid" style={{ 
+            <div className="relative grid border-b border-r" style={{ 
             gridTemplateColumns: `repeat(${level.cols}, ${cellSize}px)`, 
             gridTemplateRows: `repeat(${level.rows}, ${cellSize}px)`,
             width: `${gridWidth}px`,
-            height: `${gridHeight}px`
+            height: `${gridHeight}px`,
+            borderColor: 'hsl(var(--border) / 0.5)'
             }}>
             {runtimeGrid.map((row, r) => row.map((cell, c) => {
                 const isFloorSelected = selectedObject && cell.floorColor === selectedObject.color;
@@ -626,6 +627,8 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
   );
 }
+
+    
 
     
 
