@@ -330,7 +330,7 @@ export function Block({ color = "#828282", size = 44, ...props }: BlockProps) {
     >
       <g clipPath="url(#clip0_77_58)">
         {/* Mặt chính */}
-        <rect width="44" height="44" rx="4" fill={color} />
+        <rect width="44" height="44" rx="8" fill={color} />
 
         {/* Viền đậm */}
         <rect
@@ -338,7 +338,7 @@ export function Block({ color = "#828282", size = 44, ...props }: BlockProps) {
           y="1"
           width="42"
           height="42"
-          rx="3"
+          rx="7"
           fill="none"
           stroke="rgba(0,0,0,0.2)"
           strokeWidth="2"
@@ -371,7 +371,7 @@ export function Block({ color = "#828282", size = 44, ...props }: BlockProps) {
 
       <defs>
         <clipPath id="clip0_77_58">
-          <rect width="44" height="44" rx="4" fill="white" />
+          <rect width="44" height="44" rx="8" fill="white" />
         </clipPath>
       </defs>
     </svg>
