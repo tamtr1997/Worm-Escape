@@ -13,7 +13,7 @@ import { Apple } from 'lucide-react';
 function createRuntimeGrid(levelGrid: GridCell[][]): GridCell[][] {
     return levelGrid.map(row => row.map(cell => {
         if (cell.type === 'empty') {
-            return  { type: 'space', color: 'transparent' ,floorColor: cell.floorColor };;
+            return { type: 'space', color: 'transparent', floorColor: cell.floorColor };
         }
         return cell;
     }));
@@ -368,6 +368,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
   }
   
   const wormObject = gameObjects.find(o => o.type === 'worm');
+  const selectedObject = gameObjects.find(o => o.id === selectedObjectId);
 
   const goToNextLevel = () => {
     if (nextLevelId) {
@@ -448,7 +449,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                 style={{
                     width: cellSize,
                     height: cellSize,
-                    backgroundColor: cell.type === "space" ? "transparent" : "transparent",
+                    backgroundColor: "transparent",
                     boxShadow: "inset 0 0 0 1px #D4A276",
                 }}
                 >
@@ -462,11 +463,14 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
                 {cell.floorColor && (
                     <div
-                    className="absolute inset-0"
-                    style={{
-                        backgroundColor: cell.floorColor,
-                        opacity: 0.5,
-                    }}
+                        className="absolute inset-0 transition-all duration-300"
+                        style={{
+                            backgroundColor: cell.floorColor,
+                            opacity: 0.5,
+                            boxShadow: selectedObject?.color === cell.floorColor 
+                                ? `inset 0 0 10px 2px ${selectedObject.color}` 
+                                : 'none',
+                        }}
                     />
                 )}
                 </div>
