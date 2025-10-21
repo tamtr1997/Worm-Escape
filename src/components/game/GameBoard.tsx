@@ -493,7 +493,6 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                 const width = (maxCol - minCol + 1) * cellSize;
                 const height = (maxRow - minRow + 1) * cellSize;
 
-                const BlockComponent = obj.type === 'block' ? FlatBlock : Block;
                 const isSelected = selectedObjectId === obj.id;
 
                 return (
@@ -532,7 +531,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                                     zIndex: 2,
                                 }}
                             >
-                                <BlockComponent
+                                <Block
                                 key={`${obj.id}-${i}`}
                                 color={obj.color}
                                 width={cellSize + 1}
@@ -658,3 +657,5 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
   );
 }
+
+    
