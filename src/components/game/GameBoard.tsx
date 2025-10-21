@@ -175,8 +175,6 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
         const objectToMove = newObjects.find(o => o.id === selectedObjectId);
         if (!objectToMove) return prevObjects;
         
-        if (objectToMove.type === 'apple') return prevObjects;
-
         if (objectToMove.movement === 'horizontal' && dr !== 0) return prevObjects;
         if (objectToMove.movement === 'vertical' && dc !== 0) return prevObjects;
 
@@ -230,11 +228,6 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                 );
                 
                 if (occupyingObject) {
-                    if (occupyingObject.type === 'apple') {
-                        canMove = false;
-                        break;
-                    }
-
                     if (occupyingObject.movement === 'horizontal' && dr !== 0) {
                         canMove = false;
                         break;
