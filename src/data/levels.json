@@ -1363,8 +1363,8 @@
           "color": "hsl(240, 10%, 40%)"
         },
         {
-          "type": "block",
-          "color": "#8b5cf6"
+          "type": "empty",
+          "color": "transparent"
         },
         {
           "type": "block",

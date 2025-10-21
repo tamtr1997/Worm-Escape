@@ -9,10 +9,17 @@ import { WormIcon } from '@/components/icons/WormIcon';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Settings, Heart, Coins, Store, HomeIcon} from 'lucide-react';
 import Image from 'next/image';
+import { useState } from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogTrigger } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 export default function Home() {
   const { levels, highestLevelUnlocked, resetProgress, isLoading } = useLevels();
   const router = useRouter();
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   
   // Xử lý an toàn cho currentLevel
   const currentLevel = levels?.find(level => level.order === highestLevelUnlocked);
@@ -24,6 +31,17 @@ export default function Home() {
     const targetLevel = levels.find(level => level.order === highestLevelUnlocked);
     if (targetLevel) {
       router.push(`/play/${targetLevel.id}`);
+    }
+  };
+
+  const handlePasswordSubmit = () => {
+    if (password === 'luna') {
+      router.push('/create');
+      setIsDialogOpen(false);
+      setPassword('');
+      setError('');
+    } else {
+      setError('Mật khẩu không đúng. Vui lòng thử lại.');
     }
   };
 
@@ -83,11 +101,40 @@ export default function Home() {
             alt="Game Header"
             className="w-[358px] h-[54px] object-contain"
           />
-          <Link href="/create" passHref>
+           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <DialogTrigger asChild>
               <Button variant="outline" size="icon" className='bg-blue-500/80 border-2 border-white/50 text-white rounded-full w-10 h-10'>
                 <Settings />
               </Button>
-            </Link>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Truy cập Khu vực Editor</DialogTitle>
+                <DialogDescription>
+                  Vui lòng nhập mật khẩu để vào trình chỉnh sửa level.
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="password-input" className="text-right">
+                    Mật khẩu
+                  </Label>
+                  <Input
+                    id="password-input"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="col-span-3"
+                    onKeyDown={(e) => e.key === 'Enter' && handlePasswordSubmit()}
+                  />
+                </div>
+                {error && <p className="text-sm text-destructive text-center col-span-4">{error}</p>}
+              </div>
+              <DialogFooter>
+                <Button type="submit" onClick={handlePasswordSubmit}>Xác nhận</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
         
         <section className="flex flex-col items-center justify-center flex-1 pb-24">
