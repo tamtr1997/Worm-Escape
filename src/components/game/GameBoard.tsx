@@ -499,6 +499,9 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                         width: `${width}px`,
                         height: `${height}px`,
                         transition: 'top 0.15s ease-in-out, left 0.15s ease-in-out',
+                        outline: selectedObjectId === obj.id ? '2px solid #00D8FF' : undefined,
+                        outlineOffset: selectedObjectId === obj.id ? '-2px' : undefined,
+                        zIndex: selectedObjectId === obj.id ? 10 : 5
                     }}
                     >
                     
@@ -511,8 +514,6 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                         style={{
                             top: `${(cell.row - minRow) * cellSize}px`,
                             left: `${(cell.col - minCol) * cellSize}px`,
-                            outline: selectedObjectId === obj.id ? '2px solid #00D8FF' : undefined,
-                            outlineOffset: selectedObjectId === obj.id ? '-2px' : undefined,
                             zIndex: selectedObjectId === obj.id ? 10 : 5
                         }}
                         />
