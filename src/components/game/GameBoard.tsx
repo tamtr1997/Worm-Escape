@@ -410,22 +410,22 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
       >
         
       <div className="w-full px-4 flex justify-between items-center">
-        <div className="flex gap-2">
-            <Button variant="outline" size="icon" onClick={() => router.push(isPlaytest ? '/create' : '/')}><Home className="h-4 w-4" /></Button>
-            <Button variant="outline" size="icon" onClick={resetGame}><RotateCcw className="h-4 w-4" /></Button>
-        </div>
-
-        <div className="flex items-center gap-2">
-            <Clock className={`h-5 w-5 ${timeLeft <= 10 ? 'text-red-500 animate-pulse' : 'text-white'}`} />
-            <span className={`text-xl font-bold ${timeLeft <= 10 ? 'text-red-500 animate-pulse' : 'text-white'}`}>
-            {formatTime(timeLeft)}
-            </span>
-        </div>
-        
-        <div className="flex gap-2">
-            <Button variant="outline" size="icon" onClick={goToNextLevel}><SkipForward className="h-4 w-4" /></Button>
-        </div>
-    </div>
+          <div className="flex gap-2">
+              <Button variant="outline" size="icon" onClick={() => router.push(isPlaytest ? '/create' : '/')}><Home className="h-4 w-4" /></Button>
+              <Button variant="outline" size="icon" onClick={resetGame}><RotateCcw className="h-4 w-4" /></Button>
+          </div>
+          <div className="flex-1 flex justify-center items-center">
+            <div className="flex items-center gap-2">
+                <Clock className={`h-5 w-5 ${timeLeft <= 10 ? 'text-red-500 animate-pulse' : 'text-white'}`} />
+                <span className={`text-xl font-bold ${timeLeft <= 10 ? 'text-red-500 animate-pulse' : 'text-white'}`}>
+                {formatTime(timeLeft)}
+                </span>
+            </div>
+          </div>
+          <div className="flex gap-2">
+              <Button variant="outline" size="icon" onClick={goToNextLevel}><SkipForward className="h-4 w-4" /></Button>
+          </div>
+      </div>
 
 
       <h1 className="text-3xl font-bold text-primary font-headline">Level {level.order} {isPlaytest && '(Playtest)'}</h1>
@@ -451,7 +451,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                             width: cellSize,
                             height: cellSize,
                             backgroundColor: "transparent",
-                            borderColor: isFloorSelected ? selectedObject.color : 'hsl(var(--border) / 0.5)',
+                            borderColor: isFloorSelected ? selectedObject.color : 'hsl(var(--border))',
                         }}
                     >
                         {[ "frame"].includes(cell.type) && (
@@ -663,3 +663,4 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
     
 
     
+
