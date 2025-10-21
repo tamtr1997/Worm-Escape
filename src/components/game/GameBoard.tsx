@@ -414,15 +414,14 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
               <Button variant="outline" size="icon" onClick={() => router.push(isPlaytest ? '/create' : '/')}><Home className="h-4 w-4" /></Button>
               <Button variant="outline" size="icon" onClick={resetGame}><RotateCcw className="h-4 w-4" /></Button>
           </div>
-          <div className="flex-1 flex justify-center items-center">
-            <div className="flex items-center gap-2">
-                <Clock className={`h-5 w-5 ${timeLeft <= 10 ? 'text-red-500 animate-pulse' : 'text-white'}`} />
-                <span className={`text-xl font-bold ${timeLeft <= 10 ? 'text-red-500 animate-pulse' : 'text-white'}`}>
-                {formatTime(timeLeft)}
-                </span>
-            </div>
+          <div className="flex items-center gap-2">
+            <Clock className={`h-5 w-5 ${timeLeft <= 10 ? 'text-red-500 animate-pulse' : 'text-white'}`} />
+            <span className={`text-xl font-bold ${timeLeft <= 10 ? 'text-red-500 animate-pulse' : 'text-white'}`}>
+              {formatTime(timeLeft)}
+            </span>
           </div>
           <div className="flex gap-2">
+              <div className="w-10 h-10"></div>
               <Button variant="outline" size="icon" onClick={goToNextLevel}><SkipForward className="h-4 w-4" /></Button>
           </div>
       </div>
@@ -439,7 +438,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
             gridTemplateRows: `repeat(${level.rows}, ${cellSize}px)`,
             width: `${gridWidth}px`,
             height: `${gridHeight}px`,
-            borderColor: 'hsl(var(--border) / 0.5)'
+            borderColor: 'hsl(var(--border))'
             }}>
             {runtimeGrid.map((row, r) => row.map((cell, c) => {
                 const isFloorSelected = selectedObject && cell.floorColor === selectedObject.color;
@@ -663,4 +662,5 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
     
 
     
+
 
