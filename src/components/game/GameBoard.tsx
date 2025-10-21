@@ -79,8 +79,8 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
   const [gameObjects, setGameObjects] = useState<GameObject[]>([]);
   const [selectedObjectId, setSelectedObjectId] = useState<string | null>(null);
   const [win, setWin] = useState(false);
-  const [timeUp, setTimeUp] = useState(false); // ✅ Thêm state cho hết giờ
-  const [timeLeft, setTimeLeft] = useState(0); // ✅ Thêm state thời gian còn lại
+  const [timeUp, setTimeUp] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(0);
   const [nextLevelId, setNextLevelId] = useState<string | null>(null);
 
   const [cellSize, setCellSize] = useState(0);
@@ -386,6 +386,23 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
     const secs = seconds % 60;
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
   };
+  
+  const isEdge = (cell: {row: number, col: number}, object: GameObject, side: 'top' | 'bottom' | 'left' | 'right') => {
+    const { row, col } = cell;
+    switch (side) {
+        case 'top':
+            return !object.cells.some(c => c.row === row - 1 && c.col === col);
+        case 'bottom':
+            return !object.cells.some(c => c.row === row + 1 && c.col === col);
+        case 'left':
+            return !object.cells.some(c => c.row === row && c.col === col - 1);
+        case 'right':
+            return !object.cells.some(c => c.row === row && c.col === col + 1);
+        default:
+            return false;
+    }
+  };
+
 
   return (
     <main className="flex flex-col items-center min-h-screen bg-black p-6 select-none">
@@ -489,23 +506,28 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                         height: `${height}px`,
                         transition: 'top 0.15s ease-in-out, left 0.15s ease-in-out',
                         zIndex: isSelected ? 20 : 5,
-                        boxShadow: isSelected ? '0 0 0 4px #38bdf8' : 'none',
-                        borderRadius: '0.25rem',
                     }}
                     >
                     
                     {obj.cells.map((cell, i) => {
+                        const borderClasses = isSelected ? cn(
+                            isEdge(cell, obj, 'top') && 'border-t-4 border-sky-400',
+                            isEdge(cell, obj, 'bottom') && 'border-b-4 border-sky-400',
+                            isEdge(cell, obj, 'left') && 'border-l-4 border-sky-400',
+                            isEdge(cell, obj, 'right') && 'border-r-4 border-sky-400',
+                        ) : '';
 
                         return (
                             <div
                                 key={`${obj.id}-cell-${i}`}
-                                className='absolute'
+                                className={cn('absolute', borderClasses)}
                                 style={{
                                     top: `${(cell.row - minRow) * cellSize}px`,
                                     left: `${(cell.col - minCol) * cellSize}px`,
                                     width: `${cellSize}px`,
                                     height: `${cellSize}px`,
                                     zIndex: 2,
+                                    borderColor: isSelected ? '#38bdf8' : undefined,
                                 }}
                             >
                                 <Block
@@ -549,25 +571,41 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                 )
             })}
 
-            {wormObject && (
-                <div key={wormObject.id} 
-                onMouseDown={(e) => handleMouseDown(e, wormObject.id)}
-                onTouchStart={(e) => handleTouchStart(e, wormObject.id)}
-                className={`absolute cursor-pointer transition-all duration-150 ease-in-out group`}
-                style={{
-                    top: `${wormObject.cells[0].row * cellSize}px`,
-                    left: `${Math.min(...wormObject.cells.map(c => c.col)) * cellSize}px`,
-                    width: `${wormObject.cells.length * cellSize}px`,
-                    height: `${cellSize}px`,
-                    zIndex: selectedObjectId === wormObject.id ? 20 : 5,
-                    boxShadow: selectedObjectId === wormObject.id ? '0 0 0 4px #38bdf8' : 'none',
-                    borderRadius: '0.5rem'
-                }}
-                >
-                <WormIcon className={`w-full h-full text-white`} style={{color: wormObject.color}}/>
-                </div>
-            )}
-            
+            {wormObject && (() => {
+                 const isSelected = selectedObjectId === wormObject.id;
+                 const minRow = Math.min(...wormObject.cells.map(c => c.row));
+                 const minCol = Math.min(...wormObject.cells.map(c => c.col));
+                 const maxCol = Math.max(...wormObject.cells.map(c => c.col));
+                 const width = (maxCol - minCol + 1) * cellSize;
+                 const height = cellSize;
+                 
+                 const borderClasses = isSelected ? cn(
+                    'border-y-4 border-x-4 border-sky-400'
+                 ) : '';
+
+                return (
+                    <div key={wormObject.id} 
+                        onMouseDown={(e) => handleMouseDown(e, wormObject.id)}
+                        onTouchStart={(e) => handleTouchStart(e, wormObject.id)}
+                        className={cn(
+                            `absolute cursor-pointer transition-all duration-150 ease-in-out group`,
+                            borderClasses
+                        )}
+                        style={{
+                            top: `${minRow * cellSize}px`,
+                            left: `${minCol * cellSize}px`,
+                            width: `${width}px`,
+                            height: `${height}px`,
+                            zIndex: isSelected ? 20 : 5,
+                            borderRadius: '0.5rem',
+                            borderColor: isSelected ? '#38bdf8' : 'transparent',
+                        }}
+                    >
+                        <WormIcon className={`w-full h-full text-white`} style={{color: wormObject.color}}/>
+                    </div>
+                )
+            })()}
+
             </div>
        
         </div>
@@ -634,5 +672,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
   );
 }
+
+    
 
     
