@@ -20,7 +20,7 @@ import { Label } from '../ui/label';
 import { Input } from '../ui/input'; // ✅ thêm Input
 import { cn } from '@/lib/utils';
 
-const BLOCK_COLORS = ['#3b82f6', '#ef4444', '#22c55e', '#eab308', '#8b5cf6', '#f97316'];
+const BLOCK_COLORS = ['#3b82f6', '#ef4444', '#22c55e', '#eab308', '#8b5cf6', '#f97316', '#ec4899', '#14b8a6', '#06b6d4', '#6366f1', '#6b7280', '#84cc16'];
 
 type ToolType = BlockType | 'direction';
 
