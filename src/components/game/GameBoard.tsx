@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useLevels } from '@/hooks/useLevels';
 import type { Level, GridCell, GameObject } from '@/lib/types';
 import { Button } from '@/components/ui/button';
-import { Home, RotateCcw, ArrowBigUp, ArrowBigDown, ArrowBigLeft, ArrowBigRight, Clock } from 'lucide-react';
+import { Home, RotateCcw, ArrowBigUp, ArrowBigDown, ArrowBigLeft, ArrowBigRight, Clock, SkipForward } from 'lucide-react';
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '../ui/alert-dialog';
 import { WormIcon , Block} from '../icons/WormIcon';
 import { Apple } from 'lucide-react';
@@ -403,22 +403,31 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-slate-900 p-6 select-none">
       <div className="relative bg-[#0f172a] w-[390px] h-[640px] rounded-[2rem] shadow-2xl overflow-hidden border border-gray-700 flex flex-col items-center gap-2 py-4">
-        <div className="absolute top-4 left-4 flex gap-2">
-        <Button variant="outline" size="icon" onClick={() => router.push(isPlaytest ? '/create' : '/')}><Home className="h-4 w-4" /></Button>
-      </div>
-      
-      <div className="flex items-center gap-2 mt-2">
-        <Clock className={`h-5 w-5 ${timeLeft <= 10 ? 'text-red-500 animate-pulse' : 'text-white'}`} />
-        <span className={`text-xl font-bold ${timeLeft <= 10 ? 'text-red-500 animate-pulse' : 'text-white'}`}>
-          {formatTime(timeLeft)}
-        </span>
-      </div>
+        
+      <div className="w-full px-4 flex justify-between items-center">
+        <div className="flex gap-2">
+            <Button variant="outline" size="icon" onClick={() => router.push(isPlaytest ? '/create' : '/')}><Home className="h-4 w-4" /></Button>
+            <Button variant="outline" size="icon" onClick={resetGame}><RotateCcw className="h-4 w-4" /></Button>
+        </div>
+
+        <div className="flex items-center gap-2">
+            <Clock className={`h-5 w-5 ${timeLeft <= 10 ? 'text-red-500 animate-pulse' : 'text-white'}`} />
+            <span className={`text-xl font-bold ${timeLeft <= 10 ? 'text-red-500 animate-pulse' : 'text-white'}`}>
+            {formatTime(timeLeft)}
+            </span>
+        </div>
+        
+        <div className="flex gap-2">
+            <Button variant="outline" size="icon" onClick={goToNextLevel}><SkipForward className="h-4 w-4" /></Button>
+        </div>
+    </div>
+
 
       <h1 className="text-3xl font-bold text-primary font-headline">Level {level.order} {isPlaytest && '(Playtest)'}</h1>
       
         <div 
             className="relative border-4 border-primary/20 bg-card p-1 rounded-lg shadow-2xl flex items-center justify-center my-auto" 
-            style={{ width: '375px', height: '360px' }}
+            style={{ width: '375px', maxHeight: '360px' }}
         >
             <div className="relative grid" style={{ 
             gridTemplateColumns: `repeat(${level.cols}, ${cellSize}px)`, 
@@ -545,6 +554,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
             </div>
        
         </div>
+        <div className='flex-grow' />
       
       <AlertDialog open={timeUp} onOpenChange={setTimeUp}>
         <AlertDialogContent>
@@ -602,30 +612,6 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
         </AlertDialogContent>
       </AlertDialog>
       
-
-     <div className="flex items-center justify-center gap-6 mt-6">
-  <div
-    className="inline-block cursor-pointer hover:scale-110 transition-transform"
-    onClick={resetGame}
-  >
-    <img
-      src="/reload.png"
-      alt="Reload Game"
-      className="w-[60px] h-[60px] object-contain"
-    />
-  </div>
-
-  <div
-    className="inline-block cursor-pointer hover:scale-110 transition-transform"
-    onClick={goToNextLevel}
-  >
-    <img
-      src="/skip.png"
-      alt="Next Level"
-      className="w-[60px] h-[60px] object-contain"
-    />
-  </div>
-</div>
       </div>
     </main>
 
