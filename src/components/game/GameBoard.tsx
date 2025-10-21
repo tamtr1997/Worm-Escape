@@ -177,7 +177,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
         
         if (objectToMove.movement === 'horizontal' && dr !== 0) return prevObjects;
         if (objectToMove.movement === 'vertical' && dc !== 0) return prevObjects;
-        if (objectToMove.type === 'apple') return prevObjects;
+        
 
         const objectsToMove = new Set<string>([selectedObjectId]);
         const objectsToCheck = [objectToMove];
@@ -225,7 +225,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                 }
 
                 const occupyingObject = newObjects.find(obj => 
-                    obj.type !== 'apple' && !objectsToMove.has(obj.id) && obj.cells.some(c => c.row === newR && c.col === newC)
+                    !objectsToMove.has(obj.id) && obj.cells.some(c => c.row === newR && c.col === newC)
                 );
                 
                 if (occupyingObject) {
@@ -295,7 +295,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
         if (!isDragging || !selectedObjectId || timeUp) return;
         
         const now = Date.now();
-        if (now - lastMoveTimestamp.current < 250) { 
+        if (now - lastMoveTimestamp.current < 10) { 
             return;
         }
 
@@ -671,6 +671,8 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
   );
 }
+
+    
 
     
 
