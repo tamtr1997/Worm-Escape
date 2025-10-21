@@ -4025,90 +4025,6 @@
           "color": "transparent"
         },
         {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        }
-      ],
-      [
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
-          "type": "empty",
-          "color": "transparent"
-        },
-        {
           "type": "block",
           "color": "#8b5cf6"
         },
@@ -4567,7 +4483,7 @@
       ]
     ],
     "maxTime": 120,
-    "id": "level-1760847530166",
+    "id": "level-1761043005053",
     "order": 8
   },
   {
