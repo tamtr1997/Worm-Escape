@@ -1,6 +1,6 @@
 export type BlockType = 'frame' | 'block' | 'worm' | 'apple' | 'empty' | 'floor';
 
-export type Movement = 'horizontal' | 'vertical';
+export type Movement = 'horizontal' | 'vertical' | 'any';
 
 export type GridCell = {
   type: BlockType | 'space';
@@ -26,3 +26,5 @@ export interface GameObject {
     movement?: Movement;
     
 }
+
+    

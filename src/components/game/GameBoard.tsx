@@ -62,6 +62,9 @@ function parseLevelToGameObjects(grid: GridCell[][]): GameObject[] {
             if (movement) {
                 gameObject.movement = movement;
             }
+            if (type === 'apple') {
+                gameObject.movement = 'any';
+            }
             gameObjects.push(gameObject);
         }
       }
@@ -174,27 +177,26 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
         const newObjects = JSON.parse(JSON.stringify(prevObjects)) as GameObject[];
         const objectToMove = newObjects.find(o => o.id === selectedObjectId);
         if (!objectToMove) return prevObjects;
-        
+
         if (objectToMove.movement === 'horizontal' && dr !== 0) return prevObjects;
         if (objectToMove.movement === 'vertical' && dc !== 0) return prevObjects;
-        
 
         const objectsToMove = new Set<string>([selectedObjectId]);
         const objectsToCheck = [objectToMove];
         let canMove = true;
         let hasWon = false;
 
-        const appleObject = newObjects.find(o => o.type === 'apple');
+        const appleObject = newObjects.find(o => o.type === 'apple' && o.id !== selectedObjectId);
         const applePos = appleObject?.cells[0];
 
         while (objectsToCheck.length > 0) {
             const currentObject = objectsToCheck.shift()!;
             
-            if (objectToMove.movement === 'horizontal' && dr !== 0) {
+            if (currentObject.movement === 'horizontal' && dr !== 0) {
                 canMove = false;
                 break;
             }
-            if (objectToMove.movement === 'vertical' && dc !== 0) {
+            if (currentObject.movement === 'vertical' && dc !== 0) {
                 canMove = false;
                 break;
             }
@@ -475,96 +477,78 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
             }))}
             
             {gameObjects.map(obj => {
-                if (obj.type === 'worm') return null;
-
-                const minRow = Math.min(...obj.cells.map(c => c.row));
-                const maxRow = Math.max(...obj.cells.map(c => c.row));
-                const minCol = Math.min(...obj.cells.map(c => c.col));
-                const maxCol = Math.max(...obj.cells.map(c => c.col));
-                
-                const width = (maxCol - minCol + 1) * cellSize;
-                const height = (maxRow - minRow + 1) * cellSize;
-
                 const isSelected = selectedObjectId === obj.id;
-
+                
                 return (
-                    <div key={obj.id} 
-                    className='absolute cursor-pointer group transition-all duration-300 ease-in-out'
-                    onMouseDown={(e) => handleMouseDown(e, obj.id)}
-                    onTouchStart={(e) => handleTouchStart(e, obj.id)}
-                    style={{
-                        top: `${minRow * cellSize}px`,
-                        left: `${minCol * cellSize}px`,
-                        width: `${width}px`,
-                        height: `${height}px`,
-                        zIndex: isSelected ? 20 : 5,
-                    }}
-                    >
-                    
-                    {obj.cells.map((cell, i) => {
-                        let borderClasses = '';
-                        if (isSelected && obj.type === 'block') {
-                            const BORDER_STYLE = 'absolute border-sky-400';
-                            if (isEdge(cell, obj, 'top')) borderClasses += ` ${BORDER_STYLE} border-t-4`;
-                            if (isEdge(cell, obj, 'bottom')) borderClasses += ` ${BORDER_STYLE} border-b-4`;
-                            if (isEdge(cell, obj, 'left')) borderClasses += ` ${BORDER_STYLE} border-l-4`;
-                            if (isEdge(cell, obj, 'right')) borderClasses += ` ${BORDER_STYLE} border-r-4`;
-                        }
+                    <div key={obj.id} className="absolute top-0 left-0 w-full h-full pointer-events-none">
+                        {obj.cells.map((cell, i) => {
+                            let borderClasses = '';
+                            if (isSelected && obj.type === 'block') {
+                                const BORDER_STYLE = 'absolute border-sky-400';
+                                if (isEdge(cell, obj, 'top')) borderClasses += ` ${BORDER_STYLE} border-t-4`;
+                                if (isEdge(cell, obj, 'bottom')) borderClasses += ` ${BORDER_STYLE} border-b-4`;
+                                if (isEdge(cell, obj, 'left')) borderClasses += ` ${BORDER_STYLE} border-l-4`;
+                                if (isEdge(cell, obj, 'right')) borderClasses += ` ${BORDER_STYLE} border-r-4`;
+                            }
+                            const isWorm = obj.type === 'worm';
 
-                        return (
-                        <div
-                            key={`${obj.id}-cell-${i}`}
-                            className="absolute"
-                            style={{
-                                top: `${(cell.row - minRow) * cellSize}px`,
-                                left: `${(cell.col - minCol) * cellSize}px`,
-                                width: `${cellSize}px`,
-                                height: `${cellSize}px`,
-                            }}
-                        >
-                            <Block
-                                color={obj.color}
-                                size={cellSize}
-                                className="absolute inset-0"
-                            />
-                             {isSelected && obj.type === 'block' && <div className={cn('absolute inset-0 pointer-events-none', borderClasses)} style={{zIndex: 25}} />}
-                        </div>
-                    )})}
+                            return (
+                                <div
+                                    key={`${obj.id}-cell-${i}`}
+                                    className="absolute cursor-pointer group transition-all duration-300 ease-in-out"
+                                    onMouseDown={(e) => !isWorm && handleMouseDown(e, obj.id)}
+                                    onTouchStart={(e) => !isWorm && handleTouchStart(e, obj.id)}
+                                    style={{
+                                        top: `${cell.row * cellSize}px`,
+                                        left: `${cell.col * cellSize}px`,
+                                        width: `${cellSize}px`,
+                                        height: `${cellSize}px`,
+                                        zIndex: isSelected ? 20 : 5,
+                                        pointerEvents: isWorm ? 'none' : 'auto'
+                                    }}
+                                >
+                                    {!isWorm && obj.type === 'block' && (
+                                        <>
+                                            <Block color={obj.color} size={cellSize} className="absolute inset-0" />
+                                            {isSelected && <div className={cn('absolute inset-0 pointer-events-none', borderClasses)} style={{zIndex: 25}} />}
+                                        </>
+                                    )}
 
-                        <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 3 }}>
-                        {obj.type === 'apple' && (
-                           <>
-                             <Apple className="w-full h-full p-1.5 text-white" fill="#faf8f8ff" />
-                             {isSelected && (
-                               <div
-                                 className="absolute -inset-1 rounded-lg"
-                                 style={{
-                                   boxShadow: '0 0 12px 4px #38bdf8', // sky-400
-                                   zIndex: 25,
-                                 }}
-                               />
-                             )}
-                           </>
-                        )}
-                        
-                        {obj.movement === 'horizontal' && (
-                            <div className="absolute inset-0 flex items-center justify-between px-2 text-white/90">
-                                <ArrowBigLeft fill="white" className="w-6 h-6"/>
-                                <div className="flex-grow h-1 bg-white/90 rounded-full mx-1"></div>
-                                <ArrowBigRight fill="white" className="w-6 h-6"/>
-                            </div>
-                        )}
-                        {obj.movement === 'vertical' && (
-                            <div className="absolute inset-0 flex flex-col items-center justify-between py-2 text-white/90">
-                                <ArrowBigUp fill="white" className="w-6 h-6"/>
-                                <div className="flex-grow w-1 bg-white/90 rounded-full my-1"></div>
-                                <ArrowBigDown fill="white" className="w-6 h-6"/>
-                            </div>
-                        )}
-                        </div>
-                    
+                                    {!isWorm && obj.type === 'apple' && (
+                                        <>
+                                            <Apple className="w-full h-full p-1.5 text-white" fill="#faf8f8ff" />
+                                            {isSelected && (
+                                              <div
+                                                className="absolute -inset-1 rounded-lg"
+                                                style={{
+                                                  boxShadow: '0 0 12px 4px #38bdf8', // sky-400
+                                                  zIndex: 25,
+                                                }}
+                                              />
+                                            )}
+                                        </>
+                                    )}
+                                    
+                                    {/* Movement indicators for non-worm objects */}
+                                    {!isWorm && obj.movement === 'horizontal' && (
+                                        <div className="absolute inset-0 flex items-center justify-between px-2 text-white/90 pointer-events-none">
+                                            <ArrowBigLeft fill="white" className="w-6 h-6"/>
+                                            <div className="flex-grow h-1 bg-white/90 rounded-full mx-1"></div>
+                                            <ArrowBigRight fill="white" className="w-6 h-6"/>
+                                        </div>
+                                    )}
+                                    {!isWorm && obj.movement === 'vertical' && (
+                                        <div className="absolute inset-0 flex flex-col items-center justify-between py-2 text-white/90 pointer-events-none">
+                                            <ArrowBigUp fill="white" className="w-6 h-6"/>
+                                            <div className="flex-grow w-1 bg-white/90 rounded-full my-1"></div>
+                                            <ArrowBigDown fill="white" className="w-6 h-6"/>
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                        })}
                     </div>
-                )
+                );
             })}
 
             {wormObject && (() => {
@@ -671,11 +655,5 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
   );
 }
-
-    
-
-    
-
-    
 
     
