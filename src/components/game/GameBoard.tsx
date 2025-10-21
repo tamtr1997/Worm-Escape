@@ -13,7 +13,7 @@ import { Apple } from 'lucide-react';
 function createRuntimeGrid(levelGrid: GridCell[][]): GridCell[][] {
     return levelGrid.map(row => row.map(cell => {
         if (cell.type === 'empty') {
-            return  { type: 'space', color: 'hsl(231, 68%, 15%)' ,floorColor: cell.floorColor };;
+            return  { type: 'space', color: 'transparent' ,floorColor: cell.floorColor };;
         }
         return cell;
     }));
