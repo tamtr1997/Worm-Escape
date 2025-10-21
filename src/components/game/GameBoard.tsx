@@ -107,8 +107,8 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
       setTimeLeft(maxTime);
 
       // Tính toán kích thước ô dựa trên số hàng và cột
-      const containerWidth = 330;
-      const containerHeight = 440;
+      const containerWidth = 375;
+      const containerHeight = 600;
       
       // Tính kích thước ô tối đa có thể mà không vượt quá container
       const maxCellWidth = containerWidth / levelData.cols;
