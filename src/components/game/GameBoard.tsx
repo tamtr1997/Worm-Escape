@@ -104,7 +104,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
       setTimeLeft(maxTime);
 
       const containerWidth = 375 - 16;
-      const containerHeight = 360 - 8;
+      const containerHeight = 440 - 8;
       const cellWidth = containerWidth / levelData.cols;
       const cellHeight = containerHeight / levelData.rows;
       const calculatedCellSize = Math.min(cellWidth, cellHeight);
@@ -433,7 +433,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
       
         <div 
             className="relative border-4 border-primary/20 bg-card p-1 rounded-lg shadow-2xl flex items-center justify-center my-auto" 
-            style={{ width: '375px', maxHeight: '360px' }}
+            style={{ width: '375px', maxHeight: '440px' }}
         >
             <div className="relative grid" style={{ 
             gridTemplateColumns: `repeat(${level.cols}, ${cellSize}px)`, 
@@ -626,5 +626,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
   );
 }
+
+    
 
     
