@@ -8,7 +8,7 @@ import type { Level, GridCell, GameObject } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Home, RotateCcw, ArrowBigUp, ArrowBigDown, ArrowBigLeft, ArrowBigRight, Clock, SkipForward } from 'lucide-react';
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '../ui/alert-dialog';
-import { WormIcon , Block} from '../icons/WormIcon';
+import { WormIcon , Block, FlatBlock} from '../icons/WormIcon';
 import { Apple } from 'lucide-react';
 
 function createRuntimeGrid(levelGrid: GridCell[][]): GridCell[][] {
@@ -488,6 +488,8 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                 const width = (maxCol - minCol + 1) * cellSize;
                 const height = (maxRow - minRow + 1) * cellSize;
 
+                const BlockComponent = obj.type === 'block' ? FlatBlock : Block;
+
                 return (
                     <div key={obj.id} 
                     className="absolute cursor-pointer group"
@@ -504,7 +506,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                     >
                     
                     {obj.cells.map((cell, i) => (
-                        <Block
+                        <BlockComponent
                         key={`${obj.id}-${i}`}
                         color={obj.color}
                         size={cellSize}
@@ -627,9 +629,3 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
   );
 }
-
-    
-
-    
-
-    
