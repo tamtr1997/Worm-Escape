@@ -442,40 +442,40 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
             width: `${gridWidth}px`,
             height: `${gridHeight}px`
             }}>
-            {runtimeGrid.map((row, r) => row.map((cell, c) => (
-            <div
-                key={`${r}-${c}`}
-                className="relative flex items-center justify-center"
-                style={{
-                    width: cellSize,
-                    height: cellSize,
-                    backgroundColor: "transparent",
-                    boxShadow: "inset 0 0 0 1px #D4A276",
-                }}
-                >
-                {[ "frame"].includes(cell.type) && (
-                    <Block
-                    color={cell.color}
-                    size={cellSize}
-                    className="absolute inset-0"
-                    />
-                )}
-
-                {cell.floorColor && (
+            {runtimeGrid.map((row, r) => row.map((cell, c) => {
+                const isFloorSelected = selectedObject && cell.floorColor === selectedObject.color;
+                return (
                     <div
-                        className="absolute inset-0"
+                        key={`${r}-${c}`}
+                        className="relative flex items-center justify-center"
                         style={{
-                            backgroundColor: cell.floorColor,
-                            opacity: 0.5,
-                            filter: (selectedObject && selectedObject.color === cell.floorColor) 
-                                ? `drop-shadow(0 0 12px ${selectedObject.color})` 
-                                : 'none',
+                            width: cellSize,
+                            height: cellSize,
+                            backgroundColor: "transparent",
+                            boxShadow: `inset 0 0 0 1px ${isFloorSelected ? selectedObject.color : '#D4A276'}`,
                         }}
-                    />
-                )}
-                </div>
+                    >
+                        {[ "frame"].includes(cell.type) && (
+                            <Block
+                            color={cell.color}
+                            size={cellSize}
+                            className="absolute inset-0"
+                            />
+                        )}
 
-            )))}
+                        {cell.floorColor && (
+                            <div
+                                className="absolute inset-0"
+                                style={{
+                                    backgroundColor: cell.floorColor,
+                                    opacity: 0.5,
+                                    filter: isFloorSelected ? `drop-shadow(0 0 12px ${selectedObject.color})` : 'none',
+                                }}
+                            />
+                        )}
+                    </div>
+                );
+            }))}
             
             {gameObjects.map(obj => {
                 if (obj.type === 'worm') return null;
