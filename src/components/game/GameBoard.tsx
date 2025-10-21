@@ -294,7 +294,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
         if (!isDragging || !selectedObjectId || timeUp) return;
         
         const now = Date.now();
-        if (now - lastMoveTimestamp.current < 150) { 
+        if (now - lastMoveTimestamp.current < 250) { 
             return;
         }
 
@@ -670,5 +670,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
   );
 }
+
+    
 
     
