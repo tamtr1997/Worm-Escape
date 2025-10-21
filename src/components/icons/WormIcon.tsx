@@ -378,16 +378,17 @@ export function Block({ color = "#828282", size = 44, ...props }: BlockProps) {
   );
 }
 
-export function FlatBlock({ color = "#828282", size = 44, ...props }: BlockProps) {
+export function FlatBlock({ color = "#828282", width = 44, height = 44, ...props }: BlockProps & {width?: number | string, height?: number | string}) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 44 44"
-      width={size}
-      height={size}
+      width={width}
+      height={height}
+      preserveAspectRatio="none"
       {...props}
     >
-      <rect width="44" height="44" rx="8" fill={color} />
+      <rect width="44" height="44" fill={color} />
     </svg>
   );
 }

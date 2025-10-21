@@ -509,7 +509,8 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                         <BlockComponent
                         key={`${obj.id}-${i}`}
                         color={obj.color}
-                        size={cellSize}
+                        width={cellSize + 1}
+                        height={cellSize + 1}
                         className={`absolute ${getCellClasses(obj, cell)}`}
                         style={{
                             top: `${(cell.row - minRow) * cellSize}px`,
