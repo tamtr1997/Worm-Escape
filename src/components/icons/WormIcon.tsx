@@ -332,6 +332,18 @@ export function Block({ color = "#828282", size = 44, ...props }: BlockProps) {
         {/* Mặt chính */}
         <rect width="44" height="44" rx="4" fill={color} />
 
+        {/* Viền đậm */}
+        <rect
+          x="1"
+          y="1"
+          width="42"
+          height="42"
+          rx="3"
+          fill="none"
+          stroke="rgba(0,0,0,0.2)"
+          strokeWidth="2"
+        />
+
         {/* Mặt trái - sáng hơn */}
         <path 
           d="M0 0L7 7V37L0 44V0Z" 
