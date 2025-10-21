@@ -108,7 +108,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
       // Tính toán kích thước ô dựa trên số hàng và cột
       const containerWidth = 375;
-      const containerHeight = 600;
+      const containerHeight = 440; // Adjusted for 640px main container
       
       // Tính kích thước ô tối đa có thể mà không vượt quá container
       const maxCellWidth = containerWidth / levelData.cols;
@@ -423,7 +423,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-slate-900 p-6 select-none">
       {/* Khung điện thoại */}
-      <div className="relative bg-[#0f172a] w-[390px] h-[844px] rounded-[2rem] shadow-2xl overflow-hidden border border-gray-700 flex flex-col items-center gap-4 py-10">
+      <div className="relative bg-[#0f172a] w-[390px] h-[640px] rounded-[2rem] shadow-2xl overflow-hidden border border-gray-700 flex flex-col items-center gap-2 py-4">
         <div className="absolute top-4 left-4 flex gap-2">
         <Button variant="outline" size="icon" onClick={() => router.push(isPlaytest ? '/create' : '/')}><Home className="h-4 w-4" /></Button>
       </div>
@@ -439,7 +439,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
       <h1 className="text-3xl font-bold text-primary font-headline">Level {level.order} {isPlaytest && '(Playtest)'}</h1>
       <div 
         className="relative border-4 border-primary/20 bg-card p-1 rounded-lg shadow-2xl flex items-center justify-center" 
-        style={{ width: '375px', height: '600px' }}
+        style={{ width: '375px', height: '440px' }}
       >
         <div className="relative grid" style={{ 
           gridTemplateColumns: `repeat(${level.cols}, ${cellSize}px)`, 
