@@ -76,12 +76,18 @@ export default function Home() {
           backgroundPosition: 'center',
         }}
       >
-        <div className="absolute top-0 left-0 w-full flex justify-center mt-4">
+        <div className="absolute top-0 left-0 w-full flex justify-between items-center mt-4 px-4 z-10">
+           <div className="w-10 h-10"></div>
           <img
             src="/header.png"
             alt="Game Header"
             className="w-[358px] h-[54px] object-contain"
           />
+          <Link href="/create" passHref>
+              <Button variant="outline" size="icon" className='bg-blue-500/80 border-2 border-white/50 text-white rounded-full w-10 h-10'>
+                <Settings />
+              </Button>
+            </Link>
         </div>
         
         <section className="flex flex-col items-center justify-center flex-1 pb-24">
