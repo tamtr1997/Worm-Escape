@@ -401,7 +401,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
   };
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen bg-slate-900 p-6 select-none">
+    <main className="flex flex-col items-center min-h-screen bg-slate-900 p-6 select-none">
       <div className="relative bg-[#0f172a] w-[390px] h-[640px] rounded-[2rem] shadow-2xl overflow-hidden border border-gray-700 flex flex-col items-center gap-2 py-4">
         
       <div className="w-full px-4 flex justify-between items-center">
