@@ -106,16 +106,9 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
       const maxTime = levelData.maxTime || 60;
       setTimeLeft(maxTime);
 
-      // Tính toán kích thước ô dựa trên số hàng và cột
-      const containerWidth = 375;
-      const containerHeight = 380; // Adjusted for 640px main container
-      
-      // Tính kích thước ô tối đa có thể mà không vượt quá container
-      const maxCellWidth = containerWidth / levelData.cols;
-      const maxCellHeight = containerHeight / levelData.rows;
-      
-      // Chọn kích thước nhỏ hơn để đảm bảo vừa khít cả hai chiều
-      const calculatedCellSize = Math.min(maxCellWidth, maxCellHeight);
+      // Tính toán kích thước ô dựa trên số cột
+      const containerWidth = 375 - 16; // 375px container width minus some padding
+      const calculatedCellSize = containerWidth / levelData.cols;
       setCellSize(calculatedCellSize);
     } else if (levelId) {
       // Handle case where level not found
@@ -438,8 +431,8 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
       <h1 className="text-3xl font-bold text-primary font-headline">Level {level.order} {isPlaytest && '(Playtest)'}</h1>
       <div 
-        className="relative border-4 border-primary/20 bg-card p-1 rounded-lg shadow-2xl flex items-center justify-center" 
-        style={{ width: '375px', height: '380px' }}
+        className="relative border-4 border-primary/20 bg-card p-1 rounded-lg shadow-2xl flex items-center justify-center my-auto" 
+        style={{ width: '375px' }}
       >
         <div className="relative grid" style={{ 
           gridTemplateColumns: `repeat(${level.cols}, ${cellSize}px)`, 
