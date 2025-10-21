@@ -81,15 +81,12 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
   const [timeLeft, setTimeLeft] = useState(0); // ✅ Thêm state thời gian còn lại
   const [nextLevelId, setNextLevelId] = useState<string | null>(null);
 
-  // Thêm state cho kích thước ô
   const [cellSize, setCellSize] = useState(0);
 
-  // State for drag and drop
   const [isDragging, setIsDragging] = useState(false);
   const dragStartPos = useRef<{ x: number, y: number }>({ x: 0, y: 0 });
   const lastMoveTimestamp = useRef(0);
 
-  // Timer ref
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -102,20 +99,23 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
       const nextLevel = getNextLevel(levelData.order);
       setNextLevelId(nextLevel ? nextLevel.id : null);
 
-      // ✅ Khởi tạo thời gian từ level data
       const maxTime = levelData.maxTime || 60;
       setTimeLeft(maxTime);
 
-      // Tính toán kích thước ô dựa trên số cột
+      // --- NEW CELL SIZE LOGIC ---
       const containerWidth = 375 - 16; // 375px container width minus some padding
-      const calculatedCellSize = containerWidth / levelData.cols;
+      const containerHeight = 360; // Max height for the game area
+      const cellWidth = containerWidth / levelData.cols;
+      const cellHeight = containerHeight / levelData.rows;
+      const calculatedCellSize = Math.min(cellWidth, cellHeight);
       setCellSize(calculatedCellSize);
+      // --- END NEW CELL SIZE LOGIC ---
+
     } else if (levelId) {
       // Handle case where level not found
     }
   }, [levelId, getLevel, getNextLevel]);
 
-  // ✅ Effect cho bộ đếm thời gian
   useEffect(() => {
     if (level && timeLeft > 0 && !win && !timeUp) {
       timerRef.current = setInterval(() => {
@@ -136,7 +136,6 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
     };
   }, [level, timeLeft, win, timeUp]);
 
-  // ✅ Dừng timer khi win hoặc timeUp
   useEffect(() => {
     if (win || timeUp) {
       if (timerRef.current) {
@@ -153,7 +152,6 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
         setSelectedObjectId(null);
         setWin(false);
         setTimeUp(false);
-        // ✅ Reset thời gian
         const maxTime = level.maxTime || 60;
         setTimeLeft(maxTime);
     }
@@ -164,7 +162,6 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
         completeLevel(level.order);
     }
     setWin(true);
-    // ✅ Dừng timer khi thắng
     if (timerRef.current) {
       clearInterval(timerRef.current);
     }
@@ -180,10 +177,8 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
         
         if (objectToMove.type === 'apple') return prevObjects;
 
-        // Check for movement restrictions
         if (objectToMove.movement === 'horizontal' && dr !== 0) return prevObjects;
         if (objectToMove.movement === 'vertical' && dc !== 0) return prevObjects;
-
 
         const objectsToMove = new Set<string>([selectedObjectId]);
         const objectsToCheck = [objectToMove];
@@ -196,7 +191,6 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
         while (objectsToCheck.length > 0) {
             const currentObject = objectsToCheck.shift()!;
             
-            // A group of blocks can only move if the initial block's direction allows it
             if (objectToMove.movement === 'horizontal' && dr !== 0) {
                 canMove = false;
                 break;
@@ -226,12 +220,10 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                     break;
                 }
                 
-                // Floor color check
                 if (gridCell.floorColor && gridCell.floorColor !== currentObject.color) {
                     canMove = false;
                     break;
                 }
-
 
                 const occupyingObject = newObjects.find(obj => 
                     !objectsToMove.has(obj.id) && obj.cells.some(c => c.row === newR && c.col === newC)
@@ -243,7 +235,6 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                         break;
                     }
 
-                    // Check movement restriction of the next object in the push chain
                     if (occupyingObject.movement === 'horizontal' && dr !== 0) {
                         canMove = false;
                         break;
@@ -400,28 +391,22 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
     return classes;
   };
 
-  // Tính toán kích thước thực tế của lưới
   const gridWidth = cellSize * level.cols;
   const gridHeight = cellSize * level.rows;
 
-  // ✅ Format thời gian thành MM:SS
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
   };
 
-  
-
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-slate-900 p-6 select-none">
-      {/* Khung điện thoại */}
       <div className="relative bg-[#0f172a] w-[390px] h-[640px] rounded-[2rem] shadow-2xl overflow-hidden border border-gray-700 flex flex-col items-center gap-2 py-4">
         <div className="absolute top-4 left-4 flex gap-2">
         <Button variant="outline" size="icon" onClick={() => router.push(isPlaytest ? '/create' : '/')}><Home className="h-4 w-4" /></Button>
       </div>
       
-      {/* ✅ Hiển thị bộ đếm thời gian */}
       <div className="flex items-center gap-2 mt-2">
         <Clock className={`h-5 w-5 ${timeLeft <= 10 ? 'text-red-500 animate-pulse' : 'text-white'}`} />
         <span className={`text-xl font-bold ${timeLeft <= 10 ? 'text-red-500 animate-pulse' : 'text-white'}`}>
@@ -430,142 +415,137 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
       </div>
 
       <h1 className="text-3xl font-bold text-primary font-headline">Level {level.order} {isPlaytest && '(Playtest)'}</h1>
-      <div 
-        className="relative border-4 border-primary/20 bg-card p-1 rounded-lg shadow-2xl flex items-center justify-center my-auto" 
-        style={{ width: '375px' }}
-      >
-        <div className="relative grid" style={{ 
-          gridTemplateColumns: `repeat(${level.cols}, ${cellSize}px)`, 
-          gridTemplateRows: `repeat(${level.rows}, ${cellSize}px)`,
-          width: `${gridWidth}px`,
-          height: `${gridHeight}px`
-        }}>
-          {runtimeGrid.map((row, r) => row.map((cell, c) => (
-          <div
-              key={`${r}-${c}`}
-              className="relative flex items-center justify-center"
-              style={{
-                width: cellSize,
-                height: cellSize,
-                backgroundColor: cell.type === "space" ? cell.color : "transparent",
-                boxShadow: "inset 0 0 0 1px hsl(231, 68%, 10%)",
-              }}
-            >
-              {/* Block & Frame cells */}
-              {[ "frame"].includes(cell.type) && (
-                <Block
-                  color={cell.color}
-                  size={cellSize}
-                  className="absolute inset-0"
-                />
-              )}
-
-              {/* Floor overlay */}
-              {cell.floorColor && (
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    backgroundColor: cell.floorColor,
-                    opacity: 0.3,
-                  }}
-                />
-              )}
-            </div>
-
-          )))}
-          
-          {gameObjects.map(obj => {
-              if (obj.type === 'worm') return null;
-
-              const minRow = Math.min(...obj.cells.map(c => c.row));
-              const maxRow = Math.max(...obj.cells.map(c => c.row));
-              const minCol = Math.min(...obj.cells.map(c => c.col));
-              const maxCol = Math.max(...obj.cells.map(c => c.col));
-              
-              const width = (maxCol - minCol + 1) * cellSize;
-              const height = (maxRow - minRow + 1) * cellSize;
-
-              return (
-                <div key={obj.id} 
-                  className="absolute cursor-pointer group"
-                  onMouseDown={(e) => handleMouseDown(e, obj.id)}
-                  onTouchStart={(e) => handleTouchStart(e, obj.id)}
-                  style={{
-                    top: `${minRow * cellSize}px`,
-                    left: `${minCol * cellSize}px`,
-                    width: `${width}px`,
-                    height: `${height}px`,
-                    transition: 'top 0.15s ease-in-out, left 0.15s ease-in-out',
-                  }}
-                >
-                  
-                   {/* Render từng cell riêng */}
-                   {/* Render từng cell riêng */}
-              {obj.cells.map((cell, i) => (
-                <Block
-                  key={`${obj.id}-${i}`} // key cố định, không theo row/col
-                  color={obj.color}
-                  size={cellSize}
-                  className="absolute"
-                  style={{
-                    top: `${(cell.row - minRow) * cellSize}px`,
-                    left: `${(cell.col - minCol) * cellSize}px`,
-                    outline: selectedObjectId === obj.id ? '2px solid #00D8FF' : undefined,
-                    outlineOffset: selectedObjectId === obj.id ? '-2px' : undefined,
-                    zIndex: selectedObjectId === obj.id ? 10 : 5
-                  }}
-                />
-              ))}
-
-
-                    <div className="absolute inset-0 pointer-events-none" style={{ zIndex: (selectedObjectId === obj.id ? 11 : 6) }}>
-                      {obj.type === 'apple' && (
-                        <Apple className="w-full h-full p-1.5 text-white" fill="#faf8f8ff" />
-                      )}
-                      
-                      {obj.movement === 'horizontal' && (
-                          <div className="absolute inset-0 flex items-center justify-between px-2 text-white/90">
-                              <ArrowBigLeft fill="white" className="w-6 h-6"/>
-                              <div className="flex-grow h-1 bg-white/90 rounded-full mx-1"></div>
-                              <ArrowBigRight fill="white" className="w-6 h-6"/>
-                          </div>
-                      )}
-                      {obj.movement === 'vertical' && (
-                          <div className="absolute inset-0 flex flex-col items-center justify-between py-2 text-white/90">
-                              <ArrowBigUp fill="white" className="w-6 h-6"/>
-                              <div className="flex-grow w-1 bg-white/90 rounded-full my-1"></div>
-                              <ArrowBigDown fill="white" className="w-6 h-6"/>
-                          </div>
-                      )}
-                    </div>
-                {/* Nút Play — nằm ngay trên footer */}
-              
-                </div>
-              )
-          })}
-
-          {wormObject && (
-            <div key={wormObject.id} 
-              onMouseDown={(e) => handleMouseDown(e, wormObject.id)}
-              onTouchStart={(e) => handleTouchStart(e, wormObject.id)}
-              className={`absolute cursor-pointer transition-all duration-150 ease-in-out group`}
-              style={{
-                top: `${wormObject.cells[0].row * cellSize}px`,
-                left: `${Math.min(...wormObject.cells.map(c => c.col)) * cellSize}px`,
-                width: `${wormObject.cells.length * cellSize}px`,
-                height: `${cellSize}px`,
-                zIndex: selectedObjectId === wormObject.id ? 10 : 5,
-              }}
-            >
-              <WormIcon className={`w-full h-full text-white ${selectedObjectId === wormObject.id ? 'drop-shadow-[0_0_8px_hsl(var(--accent))]' : ''}`} style={{color: wormObject.color}}/>
-            </div>
-          )}
-          
-        </div>
-       
-      </div>
       
-      {/* ✅ Dialog khi hết giờ */}
+        <div 
+            className="relative border-4 border-primary/20 bg-card p-1 rounded-lg shadow-2xl flex items-center justify-center my-auto" 
+            style={{ width: '375px', height: '360px' }}
+        >
+            <div className="relative grid" style={{ 
+            gridTemplateColumns: `repeat(${level.cols}, ${cellSize}px)`, 
+            gridTemplateRows: `repeat(${level.rows}, ${cellSize}px)`,
+            width: `${gridWidth}px`,
+            height: `${gridHeight}px`
+            }}>
+            {runtimeGrid.map((row, r) => row.map((cell, c) => (
+            <div
+                key={`${r}-${c}`}
+                className="relative flex items-center justify-center"
+                style={{
+                    width: cellSize,
+                    height: cellSize,
+                    backgroundColor: cell.type === "space" ? cell.color : "transparent",
+                    boxShadow: "inset 0 0 0 1px hsl(231, 68%, 10%)",
+                }}
+                >
+                {[ "frame"].includes(cell.type) && (
+                    <Block
+                    color={cell.color}
+                    size={cellSize}
+                    className="absolute inset-0"
+                    />
+                )}
+
+                {cell.floorColor && (
+                    <div
+                    className="absolute inset-0"
+                    style={{
+                        backgroundColor: cell.floorColor,
+                        opacity: 0.3,
+                    }}
+                    />
+                )}
+                </div>
+
+            )))}
+            
+            {gameObjects.map(obj => {
+                if (obj.type === 'worm') return null;
+
+                const minRow = Math.min(...obj.cells.map(c => c.row));
+                const maxRow = Math.max(...obj.cells.map(c => c.row));
+                const minCol = Math.min(...obj.cells.map(c => c.col));
+                const maxCol = Math.max(...obj.cells.map(c => c.col));
+                
+                const width = (maxCol - minCol + 1) * cellSize;
+                const height = (maxRow - minRow + 1) * cellSize;
+
+                return (
+                    <div key={obj.id} 
+                    className="absolute cursor-pointer group"
+                    onMouseDown={(e) => handleMouseDown(e, obj.id)}
+                    onTouchStart={(e) => handleTouchStart(e, obj.id)}
+                    style={{
+                        top: `${minRow * cellSize}px`,
+                        left: `${minCol * cellSize}px`,
+                        width: `${width}px`,
+                        height: `${height}px`,
+                        transition: 'top 0.15s ease-in-out, left 0.15s ease-in-out',
+                    }}
+                    >
+                    
+                {obj.cells.map((cell, i) => (
+                    <Block
+                    key={`${obj.id}-${i}`}
+                    color={obj.color}
+                    size={cellSize}
+                    className="absolute"
+                    style={{
+                        top: `${(cell.row - minRow) * cellSize}px`,
+                        left: `${(cell.col - minCol) * cellSize}px`,
+                        outline: selectedObjectId === obj.id ? '2px solid #00D8FF' : undefined,
+                        outlineOffset: selectedObjectId === obj.id ? '-2px' : undefined,
+                        zIndex: selectedObjectId === obj.id ? 10 : 5
+                    }}
+                    />
+                ))}
+
+
+                        <div className="absolute inset-0 pointer-events-none" style={{ zIndex: (selectedObjectId === obj.id ? 11 : 6) }}>
+                        {obj.type === 'apple' && (
+                            <Apple className="w-full h-full p-1.5 text-white" fill="#faf8f8ff" />
+                        )}
+                        
+                        {obj.movement === 'horizontal' && (
+                            <div className="absolute inset-0 flex items-center justify-between px-2 text-white/90">
+                                <ArrowBigLeft fill="white" className="w-6 h-6"/>
+                                <div className="flex-grow h-1 bg-white/90 rounded-full mx-1"></div>
+                                <ArrowBigRight fill="white" className="w-6 h-6"/>
+                            </div>
+                        )}
+                        {obj.movement === 'vertical' && (
+                            <div className="absolute inset-0 flex flex-col items-center justify-between py-2 text-white/90">
+                                <ArrowBigUp fill="white" className="w-6 h-6"/>
+                                <div className="flex-grow w-1 bg-white/90 rounded-full my-1"></div>
+                                <ArrowBigDown fill="white" className="w-6 h-6"/>
+                            </div>
+                        )}
+                        </div>
+                    
+                    </div>
+                )
+            })}
+
+            {wormObject && (
+                <div key={wormObject.id} 
+                onMouseDown={(e) => handleMouseDown(e, wormObject.id)}
+                onTouchStart={(e) => handleTouchStart(e, wormObject.id)}
+                className={`absolute cursor-pointer transition-all duration-150 ease-in-out group`}
+                style={{
+                    top: `${wormObject.cells[0].row * cellSize}px`,
+                    left: `${Math.min(...wormObject.cells.map(c => c.col)) * cellSize}px`,
+                    width: `${wormObject.cells.length * cellSize}px`,
+                    height: `${cellSize}px`,
+                    zIndex: selectedObjectId === wormObject.id ? 10 : 5,
+                }}
+                >
+                <WormIcon className={`w-full h-full text-white ${selectedObjectId === wormObject.id ? 'drop-shadow-[0_0_8px_hsl(var(--accent))]' : ''}`} style={{color: wormObject.color}}/>
+                </div>
+            )}
+            
+            </div>
+       
+        </div>
+      
       <AlertDialog open={timeUp} onOpenChange={setTimeUp}>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -588,7 +568,6 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
         </AlertDialogContent>
       </AlertDialog>
 
-      {/* Dialog khi thắng */}
       <AlertDialog open={win} onOpenChange={setWin}>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -625,7 +604,6 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
       
 
      <div className="flex items-center justify-center gap-6 mt-6">
-  {/* Nút Reload */}
   <div
     className="inline-block cursor-pointer hover:scale-110 transition-transform"
     onClick={resetGame}
@@ -637,7 +615,6 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
     />
   </div>
 
-  {/* Nút Next Level */}
   <div
     className="inline-block cursor-pointer hover:scale-110 transition-transform"
     onClick={goToNextLevel}
