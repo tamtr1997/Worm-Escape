@@ -295,7 +295,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
         if (!isDragging || !selectedObjectId || timeUp) return;
         
         const now = Date.now();
-        if (now - lastMoveTimestamp.current < 10) { 
+        if (now - lastMoveTimestamp.current < 100) { 
             return;
         }
 
