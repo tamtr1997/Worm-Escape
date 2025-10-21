@@ -10,6 +10,7 @@ import { Home, RotateCcw, ArrowBigUp, ArrowBigDown, ArrowBigLeft, ArrowBigRight,
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '../ui/alert-dialog';
 import { WormIcon , Block, FlatBlock} from '../icons/WormIcon';
 import { Apple } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 function createRuntimeGrid(levelGrid: GridCell[][]): GridCell[][] {
     return levelGrid.map(row => row.map(cell => {
@@ -362,6 +363,24 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
     }, [isDragging, handleMouseMove, handleTouchMove, handleInteractionEnd]);
 
 
+    const isEdge = (
+      cell: { row: number, col: number }, 
+      objectCells: { row: number, col: number }[],
+      direction: 'top' | 'bottom' | 'left' | 'right'
+    ) => {
+      const { row, col } = cell;
+      switch (direction) {
+        case 'top':
+          return !objectCells.some(c => c.row === row - 1 && c.col === col);
+        case 'bottom':
+          return !objectCells.some(c => c.row === row + 1 && c.col === col);
+        case 'left':
+          return !objectCells.some(c => c.row === row && c.col === col - 1);
+        case 'right':
+          return !objectCells.some(c => c.row === row && c.col === col + 1);
+      }
+    };
+
   if (!level || runtimeGrid.length === 0 || cellSize === 0) {
     return <main className="flex items-center justify-center min-h-screen"><p>Level not found or still loading...</p></main>;
   }
@@ -475,6 +494,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                 const height = (maxRow - minRow + 1) * cellSize;
 
                 const BlockComponent = obj.type === 'block' ? FlatBlock : Block;
+                const isSelected = selectedObjectId === obj.id;
 
                 return (
                     <div key={obj.id} 
@@ -487,29 +507,48 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                         width: `${width}px`,
                         height: `${height}px`,
                         transition: 'top 0.15s ease-in-out, left 0.15s ease-in-out',
-                        zIndex: selectedObjectId === obj.id ? 10 : 5,
-                        boxShadow: selectedObjectId === obj.id ? '0 0 0 3px hsl(var(--accent))' : 'none',
-                        borderRadius: '0.5rem'
+                        zIndex: isSelected ? 10 : 5,
                     }}
                     >
                     
-                    {obj.cells.map((cell, i) => (
-                        <BlockComponent
-                        key={`${obj.id}-${i}`}
-                        color={obj.color}
-                        width={cellSize + 1}
-                        height={cellSize + 1}
-                        className={`absolute`}
-                        style={{
-                            top: `${(cell.row - minRow) * cellSize}px`,
-                            left: `${(cell.col - minCol) * cellSize}px`,
-                            zIndex: 1,
-                        }}
-                        />
-                    ))}
+                    {obj.cells.map((cell, i) => {
+                        const borderClasses = isSelected ? cn(
+                            'absolute border-accent',
+                             isEdge(cell, obj.cells, 'top') && 'border-t-2',
+                             isEdge(cell, obj.cells, 'bottom') && 'border-b-2',
+                             isEdge(cell, obj.cells, 'left') && 'border-l-2',
+                             isEdge(cell, obj.cells, 'right') && 'border-r-2',
+                        ) : '';
 
+                        return (
+                            <div
+                                key={`${obj.id}-cell-${i}`}
+                                className={cn('absolute', borderClasses)}
+                                style={{
+                                    top: `${(cell.row - minRow) * cellSize}px`,
+                                    left: `${(cell.col - minCol) * cellSize}px`,
+                                    width: `${cellSize}px`,
+                                    height: `${cellSize}px`,
+                                    zIndex: 2,
+                                }}
+                            >
+                                <BlockComponent
+                                key={`${obj.id}-${i}`}
+                                color={obj.color}
+                                width={cellSize + 1}
+                                height={cellSize + 1}
+                                className={`absolute`}
+                                style={{
+                                    top: 0,
+                                    left: 0,
+                                    zIndex: 1,
+                                }}
+                                />
+                            </div>
+                        )
+                    })}
 
-                        <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 2 }}>
+                        <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 3 }}>
                         {obj.type === 'apple' && (
                             <Apple className="w-full h-full p-1.5 text-white" fill="#faf8f8ff" />
                         )}
