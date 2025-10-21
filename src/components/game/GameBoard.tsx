@@ -44,7 +44,7 @@ function parseLevelToGameObjects(grid: GridCell[][]): GameObject[] {
           for (const [dr, dc] of neighbors) {
             const newR = curR + dr;
             const newC = curC + dc;
-            if (newR >= 0 && newR < rows && newC < cols && !visited[newR][newC] && grid[newR][newC].type === type && grid[newR][newC].color === color) {
+            if (newR >= 0 && newR < rows && newC >= 0 && newC < cols && !visited[newR][newC] && grid[newR][newC].type === type && grid[newR][newC].color === color) {
               visited[newR][newC] = true;
               stack.push([newR, newC]);
             }
@@ -377,20 +377,6 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
     }
   };
 
-  const getCellClasses = (obj: GameObject, cell: { row: number; col: number; }) => {
-    const isTop = !obj.cells.some(c => c.row === cell.row - 1 && c.col === cell.col);
-    const isBottom = !obj.cells.some(c => c.row === cell.row + 1 && c.col === cell.col);
-    const isLeft = !obj.cells.some(c => c.row === cell.row && c.col === cell.col - 1);
-    const isRight = !obj.cells.some(c => c.row === cell.row && c.col === cell.col + 1);
-
-    let classes = '';
-    if (isTop && isLeft) classes += ' rounded-tl-lg';
-    if (isTop && isRight) classes += ' rounded-tr-lg';
-    if (isBottom && isLeft) classes += ' rounded-bl-lg';
-    if (isBottom && isRight) classes += ' rounded-br-lg';
-    return classes;
-  };
-
   const gridWidth = cellSize * level.cols;
   const gridHeight = cellSize * level.rows;
 
@@ -501,7 +487,9 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                         width: `${width}px`,
                         height: `${height}px`,
                         transition: 'top 0.15s ease-in-out, left 0.15s ease-in-out',
-                        zIndex: selectedObjectId === obj.id ? 10 : 5
+                        zIndex: selectedObjectId === obj.id ? 10 : 5,
+                        boxShadow: selectedObjectId === obj.id ? '0 0 0 3px hsl(var(--accent))' : 'none',
+                        borderRadius: '0.5rem'
                     }}
                     >
                     
@@ -511,18 +499,17 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                         color={obj.color}
                         width={cellSize + 1}
                         height={cellSize + 1}
-                        className={`absolute ${getCellClasses(obj, cell)}`}
+                        className={`absolute`}
                         style={{
                             top: `${(cell.row - minRow) * cellSize}px`,
                             left: `${(cell.col - minCol) * cellSize}px`,
-                            zIndex: selectedObjectId === obj.id ? 10 : 5,
-                            boxShadow: selectedObjectId === obj.id ? '0 0 0 2px #00D8FF' : 'none'
+                            zIndex: 1,
                         }}
                         />
                     ))}
 
 
-                        <div className="absolute inset-0 pointer-events-none" style={{ zIndex: (selectedObjectId === obj.id ? 11 : 6) }}>
+                        <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 2 }}>
                         {obj.type === 'apple' && (
                             <Apple className="w-full h-full p-1.5 text-white" fill="#faf8f8ff" />
                         )}
@@ -558,9 +545,11 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                     width: `${wormObject.cells.length * cellSize}px`,
                     height: `${cellSize}px`,
                     zIndex: selectedObjectId === wormObject.id ? 10 : 5,
+                    boxShadow: selectedObjectId === wormObject.id ? '0 0 0 3px hsl(var(--accent))' : 'none',
+                    borderRadius: '0.5rem'
                 }}
                 >
-                <WormIcon className={`w-full h-full text-white ${selectedObjectId === wormObject.id ? 'drop-shadow-[0_0_8px_hsl(var(--accent))]' : ''}`} style={{color: wormObject.color}}/>
+                <WormIcon className={`w-full h-full text-white`} style={{color: wormObject.color}}/>
                 </div>
             )}
             
