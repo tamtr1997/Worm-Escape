@@ -30,7 +30,7 @@ export default function Home() {
   // Hiển thị loading nếu đang tải
   if (isLoading) {
     return (
-      <main className="flex min-h-screen flex-col items-center justify-center p-4 sm:p-8 md:p-12 font-body">
+      <main className="flex min-h-screen flex-col items-center justify-center bg-black font-body">
         <div className="relative bg-[#0f172a] w-[390px] h-[640px] rounded-[2rem] shadow-2xl overflow-hidden border border-gray-700 flex flex-col"
           style={{
             backgroundImage: "url('/Background fd.png')",
@@ -67,7 +67,7 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-4 sm:p-8 md:p-12 font-body">
+    <main className="flex min-h-screen flex-col items-center justify-center bg-black font-body">
       {/* Khung điện thoại */}
       <div className="relative bg-[#0f172a] w-[390px] h-[640px] rounded-[2rem] shadow-2xl overflow-hidden border border-gray-700 flex flex-col"
         style={{

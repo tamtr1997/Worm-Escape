@@ -64,12 +64,9 @@
   }
   html, body {
     overflow: hidden;
+    background-color: #000;
   }
   body {
     @apply bg-background text-foreground;
-    background: linear-gradient(to bottom, hsl(231, 56%, 54%), hsl(232, 51%, 49%));
-  }
-  .dark body {
-    background: linear-gradient(to bottom, hsl(231, 30%, 23%), hsl(231, 70%, 12%));
   }
 }
