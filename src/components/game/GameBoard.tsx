@@ -507,7 +507,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                     key={`${obj.id}-${i}`}
                     color={obj.color}
                     size={cellSize}
-                    className="absolute"
+                    className={`absolute ${getCellClasses(obj, cell)}`}
                     style={{
                         top: `${(cell.row - minRow) * cellSize}px`,
                         left: `${(cell.col - minCol) * cellSize}px`,
