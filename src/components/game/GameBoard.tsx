@@ -387,6 +387,22 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
   };
 
+  const isEdge = (cell: {row: number, col: number}, object: GameObject, side: 'top' | 'bottom' | 'left' | 'right') => {
+      const { row, col } = cell;
+      switch (side) {
+          case 'top':
+              return !object.cells.some(c => c.row === row - 1 && c.col === col);
+          case 'bottom':
+              return !object.cells.some(c => c.row === row + 1 && c.col === col);
+          case 'left':
+              return !object.cells.some(c => c.row === row && c.col === col - 1);
+          case 'right':
+              return !object.cells.some(c => c.row === row && c.col === col + 1);
+          default:
+              return false;
+      }
+  };
+
   return (
     <main className="flex flex-col items-center min-h-screen bg-black p-6 select-none">
       <div className="relative bg-[#0f172a] w-[390px] h-[640px] rounded-[2rem] shadow-2xl overflow-hidden border border-gray-700 flex flex-col items-center gap-2 py-4"
@@ -479,10 +495,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
                 return (
                     <div key={obj.id} 
-                    className={cn(
-                        'absolute cursor-pointer group transition-all duration-150',
-                        isSelected && 'border-4 border-sky-400'
-                    )}
+                    className='absolute cursor-pointer group'
                     onMouseDown={(e) => handleMouseDown(e, obj.id)}
                     onTouchStart={(e) => handleTouchStart(e, obj.id)}
                     style={{
@@ -491,11 +504,20 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                         width: `${width}px`,
                         height: `${height}px`,
                         zIndex: isSelected ? 20 : 5,
-                        borderRadius: '0.25rem', // To match the inner block radius
                     }}
                     >
                     
-                    {obj.cells.map((cell, i) => (
+                    {obj.cells.map((cell, i) => {
+                        let borderClasses = '';
+                        if (isSelected) {
+                            const BORDER_STYLE = 'absolute border-sky-400';
+                            if (isEdge(cell, obj, 'top')) borderClasses += ` ${BORDER_STYLE} border-t-4`;
+                            if (isEdge(cell, obj, 'bottom')) borderClasses += ` ${BORDER_STYLE} border-b-4`;
+                            if (isEdge(cell, obj, 'left')) borderClasses += ` ${BORDER_STYLE} border-l-4`;
+                            if (isEdge(cell, obj, 'right')) borderClasses += ` ${BORDER_STYLE} border-r-4`;
+                        }
+
+                        return (
                         <div
                             key={`${obj.id}-cell-${i}`}
                             className="absolute"
@@ -507,15 +529,13 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                             }}
                         >
                             <Block
-                            key={`${obj.id}-${i}`}
-                            color={obj.color}
-                            width={cellSize + 1}
-                            height={cellSize + 1}
-                            className="absolute"
-                            style={{ top: 0, left: 0, zIndex: 1 }}
+                                color={obj.color}
+                                size={cellSize}
+                                className="absolute inset-0"
                             />
+                            {isSelected && <div className={cn('absolute inset-0 pointer-events-none', borderClasses)} style={{zIndex: 25}} />}
                         </div>
-                    ))}
+                    )})}
 
                         <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 3 }}>
                         {obj.type === 'apple' && (
@@ -555,8 +575,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                         onMouseDown={(e) => handleMouseDown(e, wormObject.id)}
                         onTouchStart={(e) => handleTouchStart(e, wormObject.id)}
                         className={cn(
-                            `absolute cursor-pointer transition-all duration-150 ease-in-out group`,
-                            isSelected && 'border-4 border-sky-400'
+                            `absolute cursor-pointer transition-all duration-150 ease-in-out group`
                         )}
                         style={{
                             top: `${minRow * cellSize}px`,
@@ -567,6 +586,12 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                             borderRadius: '0.5rem',
                         }}
                     >
+                         {isSelected && (
+                          <div
+                            className="absolute -inset-1 border-4 border-sky-400 rounded-lg"
+                            style={{ zIndex: 25 }}
+                          />
+                        )}
                         <WormIcon className={`w-full h-full text-white`} style={{color: wormObject.color}}/>
                     </div>
                 )
@@ -638,6 +663,8 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
   );
 }
+
+    
 
     
 
