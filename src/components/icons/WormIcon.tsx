@@ -313,7 +313,7 @@ interface BlockProps extends SVGProps<SVGSVGElement> {
   size?: number | string;
 }
 
-export function Block({ color = "#828282", size = 44, ...props }: BlockProps) {
+export function Block({ color = "#828282", size = 44, children, ...props }: BlockProps & {children?: React.ReactNode}) {
   // Tạo màu sáng hơn và tối hơn từ màu cơ sở
   const lightColor = `color-mix(in srgb, ${color}, white 20%)`;
   const darkColor = `color-mix(in srgb, ${color}, black 20%)`;
@@ -328,52 +328,69 @@ export function Block({ color = "#828282", size = 44, ...props }: BlockProps) {
       height={size}
       {...props}
     >
-      <g clipPath="url(#clip0_77_58)">
-        {/* Mặt chính */}
-        <rect width="44" height="44" rx="8" fill={color} />
+      <foreignObject width="44" height="44">
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            <svg viewBox="0 0 44 44" width="100%" height="100%">
+                <g clipPath="url(#clip0_77_58)">
+                    {/* Mặt chính */}
+                    <rect width="44" height="44" rx="8" fill={color} />
 
-        {/* Viền đậm */}
-        <rect
-          x="1"
-          y="1"
-          width="42"
-          height="42"
-          rx="7"
-          fill="none"
-          stroke="rgba(0,0,0,0.2)"
-          strokeWidth="2"
-        />
+                    {/* Viền đậm */}
+                    <rect
+                    x="1"
+                    y="1"
+                    width="42"
+                    height="42"
+                    rx="7"
+                    fill="none"
+                    stroke="rgba(0,0,0,0.2)"
+                    strokeWidth="2"
+                    />
 
-        {/* Mặt trái - sáng hơn */}
-        <path 
-          d="M0 0L7 7V37L0 44V0Z" 
-          fill={lighterColor}
-        />
+                    {/* Mặt trái - sáng hơn */}
+                    <path 
+                    d="M0 0L7 7V37L0 44V0Z" 
+                    fill={lighterColor}
+                    />
 
-        {/* Mặt phải - tối hơn */}
-        <path 
-          d="M44 0L37 7V37L44 44V0Z" 
-          fill={darkerColor}
-        />
+                    {/* Mặt phải - tối hơn */}
+                    <path 
+                    d="M44 0L37 7V37L44 44V0Z" 
+                    fill={darkerColor}
+                    />
 
-        {/* Mặt trên - sáng nhất */}
-        <path 
-          d="M0 0L7 7L37 7L44 0L0 0Z" 
-          fill={lightColor}
-        />
+                    {/* Mặt trên - sáng nhất */}
+                    <path 
+                    d="M0 0L7 7L37 7L44 0L0 0Z" 
+                    fill={lightColor}
+                    />
 
-        {/* Mặt dưới - tối nhất */}
-        <path 
-          d="M44 44L37 37L7 37L0 44L44 44Z" 
-          fill={darkColor}
-        />
-      </g>
-
-      <defs>
-        <clipPath id="clip0_77_58">
-          <rect width="44" height="44" rx="8" fill="white" />
-        </clipPath>
-      </defs>
+                    {/* Mặt dưới - tối nhất */}
+                    <path 
+                    d="M44 44L37 37L7 37L0 44L44 44Z" 
+                    fill={darkColor}
+                    />
+                </g>
+                 <defs>
+                    <clipPath id="clip0_77_58">
+                        <rect width="44" height="44" rx="8" fill="white" />
+                    </clipPath>
+                </defs>
+            </svg>
+            <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}>
+                {children}
+            </div>
+        </div>
+      </foreignObject>
     </svg>
   );
 }

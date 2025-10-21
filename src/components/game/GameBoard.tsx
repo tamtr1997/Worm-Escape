@@ -516,7 +516,11 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
                                     {!isWorm && obj.type === 'apple' && (
                                         <>
-                                            <Apple className="w-full h-full p-1.5 text-red-500" fill="#ef4444" />
+                                           <Block color="#ef4444" size={cellSize} className="absolute inset-0" >
+                                                <div className="relative w-full h-full flex items-center justify-center">
+                                                    <Apple className="w-[70%] h-[70%]" fill="#FFFFFF" color="#FFFFFF" />
+                                                </div>
+                                            </Block>
                                             {isSelected && (
                                               <div
                                                 className="absolute -inset-1 rounded-lg"
