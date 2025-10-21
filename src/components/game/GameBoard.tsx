@@ -468,9 +468,9 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                             backgroundColor: cell.floorColor,
                             opacity: 0.5,
                             filter: (selectedObject && selectedObject.color === cell.floorColor) 
-                                ? `drop-shadow(0 0 8px ${selectedObject.color})` 
+                                ? `drop-shadow(0 0 12px ${selectedObject.color})` 
                                 : 'none',
-                            transition: 'filter 0.3s ease-in-out',
+                            transition: 'filter 0.15s ease-in-out',
                         }}
                     />
                 )}
