@@ -363,24 +363,6 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
     }, [isDragging, handleMouseMove, handleTouchMove, handleInteractionEnd]);
 
 
-    const isEdge = (
-      cell: { row: number, col: number }, 
-      objectCells: { row: number, col: number }[],
-      direction: 'top' | 'bottom' | 'left' | 'right'
-    ) => {
-      const { row, col } = cell;
-      switch (direction) {
-        case 'top':
-          return !objectCells.some(c => c.row === row - 1 && c.col === col);
-        case 'bottom':
-          return !objectCells.some(c => c.row === row + 1 && c.col === col);
-        case 'left':
-          return !objectCells.some(c => c.row === row && c.col === col - 1);
-        case 'right':
-          return !objectCells.some(c => c.row === row && c.col === col + 1);
-      }
-    };
-
   if (!level || runtimeGrid.length === 0 || cellSize === 0) {
     return <main className="flex items-center justify-center min-h-screen"><p>Level not found or still loading...</p></main>;
   }
@@ -506,23 +488,18 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                         width: `${width}px`,
                         height: `${height}px`,
                         transition: 'top 0.15s ease-in-out, left 0.15s ease-in-out',
-                        zIndex: isSelected ? 10 : 5,
+                        zIndex: isSelected ? 20 : 5,
+                        boxShadow: isSelected ? '0 0 0 4px #38bdf8' : 'none',
+                        borderRadius: '0.25rem',
                     }}
                     >
                     
                     {obj.cells.map((cell, i) => {
-                        const borderClasses = isSelected ? cn(
-                            'absolute border-accent',
-                             isEdge(cell, obj.cells, 'top') && 'border-t-2',
-                             isEdge(cell, obj.cells, 'bottom') && 'border-b-2',
-                             isEdge(cell, obj.cells, 'left') && 'border-l-2',
-                             isEdge(cell, obj.cells, 'right') && 'border-r-2',
-                        ) : '';
 
                         return (
                             <div
                                 key={`${obj.id}-cell-${i}`}
-                                className={cn('absolute', borderClasses)}
+                                className='absolute'
                                 style={{
                                     top: `${(cell.row - minRow) * cellSize}px`,
                                     left: `${(cell.col - minCol) * cellSize}px`,
@@ -582,8 +559,8 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                     left: `${Math.min(...wormObject.cells.map(c => c.col)) * cellSize}px`,
                     width: `${wormObject.cells.length * cellSize}px`,
                     height: `${cellSize}px`,
-                    zIndex: selectedObjectId === wormObject.id ? 10 : 5,
-                    boxShadow: selectedObjectId === wormObject.id ? '0 0 0 3px hsl(var(--accent))' : 'none',
+                    zIndex: selectedObjectId === wormObject.id ? 20 : 5,
+                    boxShadow: selectedObjectId === wormObject.id ? '0 0 0 4px #38bdf8' : 'none',
                     borderRadius: '0.5rem'
                 }}
                 >
