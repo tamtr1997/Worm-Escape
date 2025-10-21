@@ -509,7 +509,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                     
                     {obj.cells.map((cell, i) => {
                         let borderClasses = '';
-                        if (isSelected) {
+                        if (isSelected && obj.type === 'block') {
                             const BORDER_STYLE = 'absolute border-sky-400';
                             if (isEdge(cell, obj, 'top')) borderClasses += ` ${BORDER_STYLE} border-t-4`;
                             if (isEdge(cell, obj, 'bottom')) borderClasses += ` ${BORDER_STYLE} border-b-4`;
@@ -533,13 +533,24 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                                 size={cellSize}
                                 className="absolute inset-0"
                             />
-                            {isSelected && <div className={cn('absolute inset-0 pointer-events-none', borderClasses)} style={{zIndex: 25}} />}
+                             {isSelected && obj.type === 'block' && <div className={cn('absolute inset-0 pointer-events-none', borderClasses)} style={{zIndex: 25}} />}
                         </div>
                     )})}
 
                         <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 3 }}>
                         {obj.type === 'apple' && (
-                            <Apple className="w-full h-full p-1.5 text-white" fill="#faf8f8ff" />
+                           <>
+                             <Apple className="w-full h-full p-1.5 text-white" fill="#faf8f8ff" />
+                             {isSelected && (
+                               <div
+                                 className="absolute inset-0 rounded-lg"
+                                 style={{
+                                   boxShadow: '0 0 12px 4px #38bdf8', // sky-400
+                                   zIndex: 25,
+                                 }}
+                               />
+                             )}
+                           </>
                         )}
                         
                         {obj.movement === 'horizontal' && (
@@ -588,8 +599,11 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                     >
                          {isSelected && (
                           <div
-                            className="absolute -inset-1 border-4 border-sky-400 rounded-lg"
-                            style={{ zIndex: 25 }}
+                            className="absolute -inset-1 rounded-lg"
+                            style={{ 
+                                zIndex: 25,
+                                boxShadow: '0 0 12px 4px #38bdf8' // sky-400
+                            }}
                           />
                         )}
                         <WormIcon className={`w-full h-full text-white`} style={{color: wormObject.color}}/>
