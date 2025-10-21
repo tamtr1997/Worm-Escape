@@ -195,7 +195,7 @@ export default function LevelCreator() {
     <TooltipProvider>
       <div className="flex flex-col xl:flex-row gap-4 max-w-screen-2xl mx-auto p-4 h-[calc(100vh-2rem)]">
         {/* Sidebar: Level Management */}
-        <Card className="w-full xl:w-96 flex-shrink-0">
+        <Card className="w-full xl:w-96 flex-shrink-0 flex flex-col">
           <CardHeader>
             <CardTitle className='flex justify-between items-center'>
               <span>Level Management</span>
@@ -204,7 +204,7 @@ export default function LevelCreator() {
               </Button>
             </CardTitle>
           </CardHeader>
-          <CardContent className="flex flex-col gap-4">
+          <CardContent className="flex flex-col gap-4 flex-grow min-h-0">
             {/* 🧱 Input Rows & Cols */}
             <div className="grid grid-cols-2 gap-3">
               <div>
@@ -233,7 +233,7 @@ export default function LevelCreator() {
               <PlusCircle className="mr-2 h-4 w-4" /> Create New Level
             </Button>
 
-            <ScrollArea className="h-[calc(100vh-16rem)] border rounded-lg p-2">
+            <ScrollArea className="border rounded-lg p-2">
               {sortedLevels.length > 0 ? (
                 <div className="space-y-2">
                   {sortedLevels.map((level, index) => (
