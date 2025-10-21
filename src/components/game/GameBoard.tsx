@@ -386,23 +386,6 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
     const secs = seconds % 60;
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
   };
-  
-  const isEdge = (cell: {row: number, col: number}, object: GameObject, side: 'top' | 'bottom' | 'left' | 'right') => {
-    const { row, col } = cell;
-    switch (side) {
-        case 'top':
-            return !object.cells.some(c => c.row === row - 1 && c.col === col);
-        case 'bottom':
-            return !object.cells.some(c => c.row === row + 1 && c.col === col);
-        case 'left':
-            return !object.cells.some(c => c.row === row && c.col === col - 1);
-        case 'right':
-            return !object.cells.some(c => c.row === row && c.col === col + 1);
-        default:
-            return false;
-    }
-  };
-
 
   return (
     <main className="flex flex-col items-center min-h-screen bg-black p-6 select-none">
@@ -496,7 +479,10 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
                 return (
                     <div key={obj.id} 
-                    className="absolute cursor-pointer group"
+                    className={cn(
+                        'absolute cursor-pointer group transition-all duration-150',
+                        isSelected && 'border-4 border-sky-400'
+                    )}
                     onMouseDown={(e) => handleMouseDown(e, obj.id)}
                     onTouchStart={(e) => handleTouchStart(e, obj.id)}
                     style={{
@@ -504,47 +490,32 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                         left: `${minCol * cellSize}px`,
                         width: `${width}px`,
                         height: `${height}px`,
-                        transition: 'top 0.15s ease-in-out, left 0.15s ease-in-out',
                         zIndex: isSelected ? 20 : 5,
+                        borderRadius: '0.25rem', // To match the inner block radius
                     }}
                     >
                     
-                    {obj.cells.map((cell, i) => {
-                        const borderClasses = isSelected ? cn(
-                            isEdge(cell, obj, 'top') && 'border-t-4 border-sky-400',
-                            isEdge(cell, obj, 'bottom') && 'border-b-4 border-sky-400',
-                            isEdge(cell, obj, 'left') && 'border-l-4 border-sky-400',
-                            isEdge(cell, obj, 'right') && 'border-r-4 border-sky-400',
-                        ) : '';
-
-                        return (
-                            <div
-                                key={`${obj.id}-cell-${i}`}
-                                className={cn('absolute', borderClasses)}
-                                style={{
-                                    top: `${(cell.row - minRow) * cellSize}px`,
-                                    left: `${(cell.col - minCol) * cellSize}px`,
-                                    width: `${cellSize}px`,
-                                    height: `${cellSize}px`,
-                                    zIndex: 2,
-                                    borderColor: isSelected ? '#38bdf8' : undefined,
-                                }}
-                            >
-                                <Block
-                                key={`${obj.id}-${i}`}
-                                color={obj.color}
-                                width={cellSize + 1}
-                                height={cellSize + 1}
-                                className={`absolute`}
-                                style={{
-                                    top: 0,
-                                    left: 0,
-                                    zIndex: 1,
-                                }}
-                                />
-                            </div>
-                        )
-                    })}
+                    {obj.cells.map((cell, i) => (
+                        <div
+                            key={`${obj.id}-cell-${i}`}
+                            className="absolute"
+                            style={{
+                                top: `${(cell.row - minRow) * cellSize}px`,
+                                left: `${(cell.col - minCol) * cellSize}px`,
+                                width: `${cellSize}px`,
+                                height: `${cellSize}px`,
+                            }}
+                        >
+                            <Block
+                            key={`${obj.id}-${i}`}
+                            color={obj.color}
+                            width={cellSize + 1}
+                            height={cellSize + 1}
+                            className="absolute"
+                            style={{ top: 0, left: 0, zIndex: 1 }}
+                            />
+                        </div>
+                    ))}
 
                         <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 3 }}>
                         {obj.type === 'apple' && (
@@ -579,17 +550,13 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                  const width = (maxCol - minCol + 1) * cellSize;
                  const height = cellSize;
                  
-                 const borderClasses = isSelected ? cn(
-                    'border-y-4 border-x-4 border-sky-400'
-                 ) : '';
-
                 return (
                     <div key={wormObject.id} 
                         onMouseDown={(e) => handleMouseDown(e, wormObject.id)}
                         onTouchStart={(e) => handleTouchStart(e, wormObject.id)}
                         className={cn(
                             `absolute cursor-pointer transition-all duration-150 ease-in-out group`,
-                            borderClasses
+                            isSelected && 'border-4 border-sky-400'
                         )}
                         style={{
                             top: `${minRow * cellSize}px`,
@@ -598,7 +565,6 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                             height: `${height}px`,
                             zIndex: isSelected ? 20 : 5,
                             borderRadius: '0.5rem',
-                            borderColor: isSelected ? '#38bdf8' : 'transparent',
                         }}
                     >
                         <WormIcon className={`w-full h-full text-white`} style={{color: wormObject.color}}/>
@@ -672,6 +638,8 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
   );
 }
+
+    
 
     
 
