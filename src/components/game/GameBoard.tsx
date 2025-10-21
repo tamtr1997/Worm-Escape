@@ -385,10 +385,10 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
     const isRight = !obj.cells.some(c => c.row === cell.row && c.col === cell.col + 1);
 
     let classes = '';
-    if (isTop && isLeft) classes += ' rounded-tl-md';
-    if (isTop && isRight) classes += ' rounded-tr-md';
-    if (isBottom && isLeft) classes += ' rounded-bl-md';
-    if (isBottom && isRight) classes += ' rounded-br-md';
+    if (isTop && isLeft) classes += ' rounded-tl-lg';
+    if (isTop && isRight) classes += ' rounded-tr-lg';
+    if (isBottom && isLeft) classes += ' rounded-bl-lg';
+    if (isBottom && isRight) classes += ' rounded-br-lg';
     return classes;
   };
 
@@ -502,21 +502,21 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                     }}
                     >
                     
-                {obj.cells.map((cell, i) => (
-                    <Block
-                    key={`${obj.id}-${i}`}
-                    color={obj.color}
-                    size={cellSize}
-                    className={`absolute ${getCellClasses(obj, cell)}`}
-                    style={{
-                        top: `${(cell.row - minRow) * cellSize}px`,
-                        left: `${(cell.col - minCol) * cellSize}px`,
-                        outline: selectedObjectId === obj.id ? '2px solid #00D8FF' : undefined,
-                        outlineOffset: selectedObjectId === obj.id ? '-2px' : undefined,
-                        zIndex: selectedObjectId === obj.id ? 10 : 5
-                    }}
-                    />
-                ))}
+                    {obj.cells.map((cell, i) => (
+                        <Block
+                        key={`${obj.id}-${i}`}
+                        color={obj.color}
+                        size={cellSize}
+                        className={`absolute ${getCellClasses(obj, cell)}`}
+                        style={{
+                            top: `${(cell.row - minRow) * cellSize}px`,
+                            left: `${(cell.col - minCol) * cellSize}px`,
+                            outline: selectedObjectId === obj.id ? '2px solid #00D8FF' : undefined,
+                            outlineOffset: selectedObjectId === obj.id ? '-2px' : undefined,
+                            zIndex: selectedObjectId === obj.id ? 10 : 5
+                        }}
+                        />
+                    ))}
 
 
                         <div className="absolute inset-0 pointer-events-none" style={{ zIndex: (selectedObjectId === obj.id ? 11 : 6) }}>
