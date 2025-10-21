@@ -543,7 +543,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                              <Apple className="w-full h-full p-1.5 text-white" fill="#faf8f8ff" />
                              {isSelected && (
                                <div
-                                 className="absolute inset-0 rounded-lg"
+                                 className="absolute -inset-1 rounded-lg"
                                  style={{
                                    boxShadow: '0 0 12px 4px #38bdf8', // sky-400
                                    zIndex: 25,
@@ -677,11 +677,5 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
   );
 }
-
-    
-
-    
-
-    
 
     
