@@ -465,7 +465,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                     className="absolute inset-0"
                     style={{
                         backgroundColor: cell.floorColor,
-                        opacity: 0.3,
+                        opacity: 0.5,
                     }}
                     />
                 )}
