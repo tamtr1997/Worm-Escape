@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useEffect, useState, useRef, useCallback } from 'react';
@@ -43,7 +44,7 @@ function parseLevelToGameObjects(grid: GridCell[][]): GameObject[] {
           for (const [dr, dc] of neighbors) {
             const newR = curR + dr;
             const newC = curC + dc;
-            if (newR >= 0 && newR < rows && newC >= 0 && newC < cols && !visited[newR][newC] && grid[newR][newC].type === type && grid[newR][newC].color === color) {
+            if (newR >= 0 && newR < rows && newC < cols && !visited[newR][newC] && grid[newR][newC].type === type && grid[newR][newC].color === color) {
               visited[newR][newC] = true;
               stack.push([newR, newC]);
             }
@@ -102,14 +103,12 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
       const maxTime = levelData.maxTime || 60;
       setTimeLeft(maxTime);
 
-      // --- NEW CELL SIZE LOGIC ---
-      const containerWidth = 375 - 16; // 375px container width minus some padding
-      const containerHeight = 360; // Max height for the game area
+      const containerWidth = 375 - 16;
+      const containerHeight = 360 - 8;
       const cellWidth = containerWidth / levelData.cols;
       const cellHeight = containerHeight / levelData.rows;
       const calculatedCellSize = Math.min(cellWidth, cellHeight);
       setCellSize(calculatedCellSize);
-      // --- END NEW CELL SIZE LOGIC ---
 
     } else if (levelId) {
       // Handle case where level not found
@@ -447,12 +446,12 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                 return (
                     <div
                         key={`${r}-${c}`}
-                        className="relative flex items-center justify-center"
+                        className="relative flex items-center justify-center border-t border-l"
                         style={{
                             width: cellSize,
                             height: cellSize,
                             backgroundColor: "transparent",
-                            boxShadow: `inset 0 0 0 1px ${isFloorSelected ? selectedObject.color : '#D4A276'}`,
+                            borderColor: isFloorSelected ? selectedObject.color : 'hsl(var(--border) / 0.5)',
                         }}
                     >
                         {[ "frame"].includes(cell.type) && (
@@ -627,3 +626,5 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
 
   );
 }
+
+    
