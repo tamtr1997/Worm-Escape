@@ -467,7 +467,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                         style={{
                             backgroundColor: cell.floorColor,
                             opacity: 0.5,
-                            boxShadow: selectedObject?.color === cell.floorColor 
+                            boxShadow: (selectedObject && selectedObject.color === cell.floorColor) 
                                 ? `inset 0 0 10px 2px ${selectedObject.color}` 
                                 : 'none',
                         }}
