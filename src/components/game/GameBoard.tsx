@@ -448,8 +448,8 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                 style={{
                     width: cellSize,
                     height: cellSize,
-                    backgroundColor: cell.type === "space" ? cell.color : "transparent",
-                    boxShadow: "inset 0 0 0 1px hsl(231, 68%, 10%)",
+                    backgroundColor: cell.type === "space" ? "transparent" : "transparent",
+                    boxShadow: "inset 0 0 0 1px hsl(var(--accent-foreground))",
                 }}
                 >
                 {[ "frame"].includes(cell.type) && (
