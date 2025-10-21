@@ -23,7 +23,7 @@ function HomePageContent() {
       setPassword('');
       setError('');
     } else {
-      setError('Mật khẩu không đúng. Vui lòng thử lại.');
+      setError('Incorrect password. Please try again.');
     }
   };
   
@@ -51,15 +51,15 @@ function HomePageContent() {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
               <DialogHeader>
-                <DialogTitle>Truy cập Khu vực Editor</DialogTitle>
+                <DialogTitle>Access Editor Area</DialogTitle>
                 <DialogDescription>
-                  Vui lòng nhập mật khẩu để vào trình chỉnh sửa level.
+                  Please enter the password to access the level editor.
                 </DialogDescription>
               </DialogHeader>
               <div className="grid gap-4 py-4">
                 <div className="grid grid-cols-4 items-center gap-4">
                   <Label htmlFor="password-input" className="text-right">
-                    Mật khẩu
+                    Password
                   </Label>
                   <Input
                     id="password-input"
@@ -73,7 +73,7 @@ function HomePageContent() {
                 {error && <p className="text-sm text-destructive text-center col-span-4">{error}</p>}
               </div>
               <DialogFooter>
-                <Button type="submit" onClick={handlePasswordSubmit}>Xác nhận</Button>
+                <Button type="submit" onClick={handlePasswordSubmit}>Confirm</Button>
               </DialogFooter>
             </DialogContent>
           </Dialog>
