@@ -292,18 +292,28 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
     });
 }, [selectedObjectId, level, runtimeGrid, handleWin]);
 
-    const handleMouseDown = (e: React.MouseEvent, objectId: string) => {
-        if (timeUp) return; // ✅ Không cho tương tác khi hết giờ
-        console.log(e.clientX,e.clientY)
+    const handleInteractionStart = (clientX: number, clientY: number, objectId: string) => {
+        if (timeUp) return;
         setSelectedObjectId(objectId);
-        
         setIsDragging(true);
-        dragStartPos.current = { x: e.clientX, y: e.clientY };
+        dragStartPos.current = { x: clientX, y: clientY };
         lastMoveTimestamp.current = 0;
+    };
+
+    const handleMouseDown = (e: React.MouseEvent, objectId: string) => {
+        handleInteractionStart(e.clientX, e.clientY, objectId);
         e.stopPropagation();
     };
 
-    const handleMouseMove = useCallback((e: MouseEvent) => {
+    const handleTouchStart = (e: React.TouchEvent, objectId: string) => {
+        if (e.touches[0]) {
+            handleInteractionStart(e.touches[0].clientX, e.touches[0].clientY, objectId);
+        }
+        e.stopPropagation();
+    };
+
+
+    const handleInteractionMove = useCallback((clientX: number, clientY: number) => {
         if (!isDragging || !selectedObjectId || timeUp) return;
         
         const now = Date.now();
@@ -311,13 +321,12 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
             return;
         }
 
-        const dx = e.clientX - dragStartPos.current.x;
-        const dy = e.clientY - dragStartPos.current.y;
+        const dx = clientX - dragStartPos.current.x;
+        const dy = clientY - dragStartPos.current.y;
         
         let dr = 0;
         let dc = 0;
 
-        // Sử dụng cellSize thay vì CELL_SIZE cố định
         const threshold = cellSize / 2;
         if (Math.abs(dx) > Math.abs(dy)) {
             if (Math.abs(dx) > threshold) {
@@ -331,13 +340,22 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
         
         if (dr !== 0 || dc !== 0) {
             handleMove(dr, dc);
-
-            dragStartPos.current = { x: e.clientX, y: e.clientY };
+            dragStartPos.current = { x: clientX, y: clientY };
             lastMoveTimestamp.current = now;
         }
     }, [isDragging, selectedObjectId, handleMove, cellSize, timeUp]);
 
-    const handleMouseUp = useCallback(() => {
+    const handleMouseMove = useCallback((e: MouseEvent) => {
+        handleInteractionMove(e.clientX, e.clientY);
+    }, [handleInteractionMove]);
+
+    const handleTouchMove = useCallback((e: TouchEvent) => {
+        if (e.touches[0]) {
+            handleInteractionMove(e.touches[0].clientX, e.touches[0].clientY);
+        }
+    }, [handleInteractionMove]);
+
+    const handleInteractionEnd = useCallback(() => {
         if (isDragging) {
             setIsDragging(false);
             setSelectedObjectId(null);
@@ -347,14 +365,19 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
     useEffect(() => {
         if (isDragging) {
             window.addEventListener('mousemove', handleMouseMove);
-            window.addEventListener('mouseup', handleMouseUp);
+            window.addEventListener('mouseup', handleInteractionEnd);
+            window.addEventListener('touchmove', handleTouchMove);
+            window.addEventListener('touchend', handleInteractionEnd);
         }
 
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('mouseup', handleMouseUp);
+            window.removeEventListener('mouseup', handleInteractionEnd);
+            window.removeEventListener('touchmove', handleTouchMove);
+            window.removeEventListener('touchend', handleInteractionEnd);
         };
-    }, [isDragging, handleMouseMove, handleMouseUp]);
+    }, [isDragging, handleMouseMove, handleTouchMove, handleInteractionEnd]);
+
 
   if (!level || runtimeGrid.length === 0 || cellSize === 0) {
     return <main className="flex items-center justify-center min-h-screen"><p>Level not found or still loading...</p></main>;
@@ -473,6 +496,7 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
                 <div key={obj.id} 
                   className="absolute cursor-pointer group"
                   onMouseDown={(e) => handleMouseDown(e, obj.id)}
+                  onTouchStart={(e) => handleTouchStart(e, obj.id)}
                   style={{
                     top: `${minRow * cellSize}px`,
                     left: `${minCol * cellSize}px`,
@@ -528,7 +552,9 @@ export default function GameBoard({ levelId, isPlaytest = false }: { levelId: st
           })}
 
           {wormObject && (
-            <div key={wormObject.id} onMouseDown={(e) => handleMouseDown(e, wormObject.id)}
+            <div key={wormObject.id} 
+              onMouseDown={(e) => handleMouseDown(e, wormObject.id)}
+              onTouchStart={(e) => handleTouchStart(e, wormObject.id)}
               className={`absolute cursor-pointer transition-all duration-150 ease-in-out group`}
               style={{
                 top: `${wormObject.cells[0].row * cellSize}px`,
